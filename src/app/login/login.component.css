@@ -1,0 +1,20 @@
+section {
+    background-image: url("../../assets/media/bg-login.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+section::before {
+content: "";
+display: block;
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+}
+
+.box-login{
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+  

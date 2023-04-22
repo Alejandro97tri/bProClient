@@ -1,0 +1,42 @@
+<div class="m-4">
+  <app-menu-calendar></app-menu-calendar>
+  <div class="row h-100 prueba">
+      <div class="col-lg-10">
+          <div class="row">
+              <div class="calendar-days">
+                  <div class="calendar-header d-flex">
+                      <div class="calendar-cell calendar-day">Lunes</div>
+                      <div class="calendar-cell calendar-day">Martes</div>
+                      <div class="calendar-cell calendar-day">Miércoles</div>
+                      <div class="calendar-cell calendar-day">Jueves</div>
+                      <div class="calendar-cell calendar-day">Viernes</div>
+                      <div class="calendar-cell calendar-day">Sábado</div>
+                      <div class="calendar-cell calendar-day">Domingo</div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="calendar-body h-100">
+                  <ng-container *ngFor="let week of weeks; let i=index">
+                      <div class="calendar-row" [ngStyle]="{'max-width': i === 0 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
+                          <ng-container *ngIf="i === 0 && firstDayOfWeek !== 1">
+                              <ng-container *ngFor="let day of emptyDays">
+                                  <div class="calendar-cell calendar-cell-empty"></div>
+                              </ng-container>
+                          </ng-container>
+                          <ng-container *ngFor="let day of week">
+                              <div class="calendar-cell" [ngClass]="{'calendar-cell-empty': day === null}">
+                                  <div class="calendar-day-number">{{day}}</div>
+                                  <!-- Aquí puedes agregar más contenido para cada día del calendario -->
+                              </div>
+                          </ng-container>
+                      </div>
+                  </ng-container>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-2 bg-light">
+          <p>contenido secundario</p>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.calendar-row {
+    max-width: 100%;
+    display: flex;
+  }
+  
+  .calendar-cell {
+    width: 14.28%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .calendar-cell-empty {
+    visibility: hidden;
+  }
+  
+  .prueba{
+    height: 100vh;
+  }

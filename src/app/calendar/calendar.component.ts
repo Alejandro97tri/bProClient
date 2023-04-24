@@ -1,18 +1,22 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent  implements OnInit, OnChanges{
+export class CalendarComponent implements OnInit, OnChanges {
+
+  constructor(private router: Router){
+
+  }
   
   selectedDate = new Date();
   date = new Date();
   weeks: Array<Array<number | null>> = [];
-  firstDayOfWeek:number  = 1;
+  firstDayOfWeek = 1;
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
-
 
   ngOnChanges(changes: SimpleChanges): void {
     this.generateCalendar();
@@ -61,5 +65,9 @@ export class CalendarComponent  implements OnInit, OnChanges{
     }
 
     this.weeks = weeks;
+  }
+
+  goToDay(){
+  this.router.navigate(['']);
   }
 }

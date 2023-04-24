@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-calendar',
@@ -7,11 +7,14 @@ import { Component } from '@angular/core';
 })
 export class MenuCalendarComponent {
 
+  @Output() dateChanged = new EventEmitter<Date>();
+
   date = new Date();
   month: string | undefined;
 
   get_Month() {
     this.month = this.date.toLocaleString('es', { month: 'long' }).toUpperCase();
+    this.dateChanged.emit(this.date);
     return this.month;
   }
 

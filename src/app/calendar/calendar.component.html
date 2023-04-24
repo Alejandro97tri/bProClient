@@ -1,5 +1,5 @@
 <div class="m-4">
-  <app-menu-calendar></app-menu-calendar>
+  <app-menu-calendar  (dateChanged)="onDateChanged($event)"></app-menu-calendar>
   <div class="row h-100 prueba">
       <div class="col-lg-10">
           <div class="row">
@@ -18,12 +18,12 @@
           <div class="row">
               <div class="calendar-body h-100">
                   <ng-container *ngFor="let week of weeks; let i=index">
-                      <div class="calendar-row" [ngStyle]="{'max-width': i === 0 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
-                          <ng-container *ngIf="i === 0 && firstDayOfWeek !== 1">
+                      <div class="calendar-row prueba" [ngStyle]="{'max-width': i === 0 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
+                          <!-- <ng-container *ngIf="i === 0 && firstDayOfWeek !== 1">
                               <ng-container *ngFor="let day of emptyDays">
                                   <div class="calendar-cell calendar-cell-empty"></div>
                               </ng-container>
-                          </ng-container>
+                          </ng-container> -->
                           <ng-container *ngFor="let day of week">
                               <div class="calendar-cell" [ngClass]="{'calendar-cell-empty': day === null}">
                                   <div class="calendar-day-number">{{day}}</div>

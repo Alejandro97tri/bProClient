@@ -1,24 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
-
+export class CalendarComponent  implements OnInit, OnChanges{
+  
+  selectedDate = new Date();
   date = new Date();
   weeks: Array<Array<number | null>> = [];
   firstDayOfWeek:number  = 1;
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
 
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.generateCalendar();
+  }
+  
   ngOnInit() {
     this.generateCalendar();
   }
 
+  onDateChanged(date: Date) {
+    this.selectedDate = date;
+    this.generateCalendar();
+  }
+
   generateCalendar() {
-    const month = this.date.getMonth();
-    const year = this.date.getFullYear();
+    const month = this.selectedDate.getMonth();
+    const year = this.selectedDate.getFullYear();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const weeks: Array<Array<number | null>> = [[]];

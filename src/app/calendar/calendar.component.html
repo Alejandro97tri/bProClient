@@ -15,15 +15,15 @@
                     </div>
                 </div>
             </div>
-            {{year}}
-            {{mes}}
             <div class="row mt-3">
                 <div class="calendar-body h-100">
                     <ng-container *ngFor="let week of weeks; let i=index">
-                        <div class="calendar-row prueba" [ngStyle]="{'max-width': i === 0 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
-                            <!-- <ng-container *ngIf="i === 0 && firstDayOfWeek !== 1">
+                        <div class="calendar-row prueba" [ngStyle]="{'max-width': i === 1 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
+                            <!-- <ng-container *ngIf="i === 0">
                                 <ng-container *ngFor="let day of emptyDays">
-                                    <div class="calendar-cell calendar-cell-empty"></div>
+                                    <div class="card border-dark calendar-cell calendar-cell-empty">
+                                        <div class="calendar-day-number">{{day}}</div>
+                                    </div>
                                 </ng-container>
                             </ng-container> -->
                             <ng-container *ngFor="let day of week">
@@ -41,5 +41,4 @@
             <p> contenido secundario</p>
         </div> -->
     </div>
-  </div>
-  
+</div>

@@ -8,9 +8,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class MenuCalendarComponent {
 
   @Output() dateChanged = new EventEmitter<Date>();
+  @Output() mes = new EventEmitter<string>();
+  @Output() year = new EventEmitter<number>();
 
   date = new Date();
   month: string | undefined;
+
+  ngOnInit() {
+    this.mes.emit(this.get_Month());
+    this.year.emit(this.get_Year());
+  }
 
   get_Month() {
     this.month = this.date.toLocaleString('es', { month: 'long' }).toUpperCase();
@@ -25,15 +32,21 @@ export class MenuCalendarComponent {
   goToPreviousMonth() {
     this.date.setMonth(this.date.getMonth() - 1);
     this.get_Month();
+    this.mes.emit(this.get_Month());
+    this.year.emit(this.get_Year());
   }
 
   goToNextMonth() {
     this.date.setMonth(this.date.getMonth() + 1);
     this.get_Month();
+    this.mes.emit(this.get_Month());
+    this.year.emit(this.get_Year());
   }
 
   goToToday() {
     this.date = new Date();
     this.get_Month();
+    this.mes.emit(this.get_Month());
+    this.year.emit(this.get_Year());
   }
 }

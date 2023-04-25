@@ -19,7 +19,8 @@ import { MenuCalendarComponent } from './menu-calendar/menu-calendar.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  
+  { path: 'entrenamiento/:dia/:mes/:year', component: HomeComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'login', component: LoginComponent },
 ];

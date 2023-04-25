@@ -17,6 +17,8 @@ export class CalendarComponent implements OnInit, OnChanges {
   weeks: Array<Array<number | null>> = [];
   firstDayOfWeek = 1;
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
+  year:number = 0;
+  mes:string = '';
 
   ngOnChanges(changes: SimpleChanges): void {
     this.generateCalendar();
@@ -67,7 +69,15 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.weeks = weeks;
   }
 
-  goToDay(){
-  this.router.navigate(['']);
+  goToDay(day:number|null){
+  this.router.navigate(['entrenamiento',day,this.mes,this.year]);
+  }
+
+  setYear(e:any){
+    this.year = e;
+  }
+
+  setMes(e:any){
+    this.mes = e;
   }
 }

@@ -5,15 +5,23 @@
   
   .calendar-cell {
     width: 14.28%;
-    box-sizing: border-box;
     padding: 10px;
-    border: 1px solid #ccc;
   }
   
+  .border-days{
+    border: 1px solid rgb(194, 194, 194);
+  }
   .calendar-cell-empty {
-    visibility: hidden;
+    /* visibility: hidden; */
+    border: none;
+    background-color: rgb(194, 194, 194);
   }
   
   .prueba{
     height: 12vh;
+  }
+
+  .bg-calendar-days{
+    background-color: #325D88;
+    width: 3vw;
   }

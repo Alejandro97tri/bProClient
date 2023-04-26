@@ -12,6 +12,15 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
 
   }
   
+  daysOfWeek: Array<string> = [
+    "LUNES",
+    "MARTES",
+    "MIÉRCOLES",
+    "JUEVES",
+    "VIERNES",
+    "SÁBADO",
+    "DOMINGO",
+  ]
   selectedDate = new Date();
   date = new Date();
   weeks: Array<Array<number | null>> = [];
@@ -58,12 +67,6 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
         weeks.push([]);
       }
       weeks[weeks.length - 1].push(i);
-    }
-
-    // Add empty cells after the last day of the month if necessary
-    const lastWeek = weeks[weeks.length - 1];
-    for (let i = lastWeek.length; i < 7; i++) {
-      lastWeek.push(null);
     }
 
     this.weeks = weeks;

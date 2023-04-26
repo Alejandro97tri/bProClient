@@ -13,14 +13,14 @@ import { LoginComponent } from './login/login.component';
 import { MenuUsersComponent } from './menu-users/menu-users.component';
 import { HomeCoachComponent } from './home-coach/home-coach.component';
 import { HomeNutritionistComponent } from './home-nutritionist/home-nutritionist.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { HomeAthleteComponent } from './home-athlete/home-athlete.component';
 import { MenuCalendarComponent } from './menu-calendar/menu-calendar.component';
 
 
 
 const appRoutes: Routes = [
   { path: 'entrenamiento/:dia/:mes/:year', component: HomeComponent },
-  { path: '', component: CalendarComponent },
+  { path: '', component: HomeAthleteComponent },
   { path: 'login', component: LoginComponent },
 ];
 
@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     MenuUsersComponent,
     HomeCoachComponent,
     HomeNutritionistComponent,
-    CalendarComponent,
+    HomeAthleteComponent,
     MenuCalendarComponent,
   ],
   imports: [

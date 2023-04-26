@@ -2,3 +2,35 @@
     right: 0;
     left: auto;
 }
+
+.tamano-menu {
+    width: 100vw;
+    height: auto;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+p{
+    margin-bottom: 0px;
+}
+
+path {
+    fill: white;
+}
+
+svg {
+    width: 3vw;
+    height: 3vh;
+}
+
+.user-box{
+    width: 3vw;
+    height: 5vh;
+    background-color: #6F6F6F;
+}
+
+.user-box .dropdown-toggle::after {
+    display: none;
+  }

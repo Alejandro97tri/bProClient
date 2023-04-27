@@ -4,7 +4,7 @@
 }
 
 .tamano-menu {
-    width: 100vw;
+    width: 100%;
     height: auto;
 }
 
@@ -21,12 +21,11 @@ path {
 }
 
 svg {
-    width: 3vw;
-    height: 3vh;
+    width: 60%;
 }
 
 .user-box{
-    width: 3vw;
+    width: 5vh;
     height: 5vh;
     background-color: #6F6F6F;
     border: 1px solid white;

@@ -28,7 +28,7 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
   year:number = 0;
   mes:string = '';
-
+  offset: number = 0;
   ngOnChanges(changes: SimpleChanges): void {
     this.generateCalendar();
   }
@@ -53,10 +53,10 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.firstDayOfWeek = 1;
 
     // Determine the offset from the first day of the month to the first day of the week
-    const offset = (firstDay - this.firstDayOfWeek + 7) % 7;
+    this.offset = (firstDay - this.firstDayOfWeek + 7) % 7;
 
     // Add empty cells before the first day of the month if necessary
-    for (let i = 0; i < offset; i++) {
+    for (let i = 0; i < this.offset; i++) {
       weeks[0].push(null);
     }
 

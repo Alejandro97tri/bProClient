@@ -23,7 +23,7 @@
     width: 5vh;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
     .calendar-row {
       flex-wrap: wrap;
       height: auto;

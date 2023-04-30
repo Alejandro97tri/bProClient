@@ -1,12 +1,3 @@
-<div class="m-4">
-    <app-menu-users></app-menu-users>
-    <div class="row">
-        <div class="col-lg-6 ">
-            <app-home-coach></app-home-coach>
-        </div>
-        <div class="col-lg-6">
-            <app-home-nutritionist></app-home-nutritionist>
-        </div>
-
-    </div>
-</div>
+<app-home-athlete *ngIf=" rol === 'athlete'"></app-home-athlete>
+<app-home-coach *ngIf=" rol === 'coach'"></app-home-coach>
+<app-home-nutritionist *ngIf=" rol === 'nutritionist'"></app-home-nutritionist>

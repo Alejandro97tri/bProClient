@@ -8,32 +8,34 @@ import { AppComponent } from './app.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api.services';
-import { HomeComponent } from './home/home.component';
+import { DetalleDiaComponent } from './detalle-dia/detalle-dia.component';
 import { LoginComponent } from './login/login.component';
 import { MenuUsersComponent } from './menu-users/menu-users.component';
 import { HomeCoachComponent } from './home-coach/home-coach.component';
 import { HomeNutritionistComponent } from './home-nutritionist/home-nutritionist.component';
 import { HomeAthleteComponent } from './home-athlete/home-athlete.component';
 import { MenuCalendarComponent } from './menu-calendar/menu-calendar.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 const appRoutes: Routes = [
-  { path: 'entrenamiento/:dia/:mes/:year', component: HomeComponent },
-  { path: '', component: HomeAthleteComponent },
+  { path: 'entrenamiento/:dia/:mes/:year', component: DetalleDiaComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    DetalleDiaComponent,
     LoginComponent,
     MenuUsersComponent,
     HomeCoachComponent,
     HomeNutritionistComponent,
     HomeAthleteComponent,
     MenuCalendarComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

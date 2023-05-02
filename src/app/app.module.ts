@@ -16,6 +16,8 @@ import { HomeNutritionistComponent } from './home-nutritionist/home-nutritionist
 import { HomeAthleteComponent } from './home-athlete/home-athlete.component';
 import { MenuCalendarComponent } from './menu-calendar/menu-calendar.component';
 import { HomeComponent } from './home/home.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { FormEntrenoComponent } from './form-entreno/form-entreno.component';
 
 
 
@@ -23,6 +25,12 @@ const appRoutes: Routes = [
   { path: 'entrenamiento/:dia/:mes/:year', component: DetalleDiaComponent },
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'userinfo', component: UserInfoComponent
+  },
+  {
+    path: 'formentreno', component: FormEntrenoComponent
+  }
 ];
 
 @NgModule({
@@ -36,6 +44,8 @@ const appRoutes: Routes = [
     HomeAthleteComponent,
     MenuCalendarComponent,
     HomeComponent,
+    UserInfoComponent,
+    FormEntrenoComponent,
   ],
   imports: [
     BrowserModule,

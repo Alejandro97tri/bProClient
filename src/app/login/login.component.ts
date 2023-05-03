@@ -12,7 +12,15 @@ export class LoginComponent {
   username: string = "";
   password: string = "";
   
-  constructor(private router: Router, private apiService: ApiService){
+  constructor(private router: Router, private apiService: ApiService){}
 
+  login = async() => {
+    const response = await fetch('https://btop.es/server/login.php', { method: 'POST', body: JSON.stringify({ 'username': this.username, 'password': this.password})});
+    const data = await response.json()
+    if(data){
+      console.log(data)
+      localStorage.setItem("user", data[0])
+      this.router.navigate(['']);
+    }
   }
 }

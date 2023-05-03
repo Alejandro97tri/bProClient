@@ -11,8 +11,17 @@ p{
 
 path {
     fill: white;
+
 }
 
 .svg-icono {
     width: 60%;
+}
+
+.button-actividad {
+    width: 15%;
+    height: 100%;
+}
+svg {
+    width: 100%;
 }

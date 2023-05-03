@@ -20,17 +20,6 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { FormEntrenoComponent } from './form-entreno/form-entreno.component';
 import { FormNutritionComponent } from './form-nutrition/form-nutrition.component';
 
-
-
-const appRoutes: Routes = [
-  { path: 'entrenamiento/:dia/:mes/:year', component: DetalleDiaComponent },
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'userinfo', component: UserInfoComponent },
-  { path: 'formentreno', component: FormEntrenoComponent },
-  { path: 'formenutri', component: FormNutritionComponent }
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +39,6 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     FormsModule
   ],
   providers: [ApiService],

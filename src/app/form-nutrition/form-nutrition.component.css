@@ -1,0 +1,22 @@
+p, label{
+    font-weight: 700;
+    font-size: larger;
+}
+
+.icono-cliente{
+    width: 25vh;
+    height: 25vh;
+    background-color: #6F6F6F;
+}
+
+path {
+    fill: white;
+}
+
+.svg-icono {
+    width: 60%;
+}
+
+textarea{
+    height: 3vh;
+}

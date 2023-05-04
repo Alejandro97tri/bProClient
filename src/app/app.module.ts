@@ -10,7 +10,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api.services';
 import { DetalleDiaComponent } from './detalle-dia/detalle-dia.component';
 import { LoginComponent } from './login/login.component';
-import { MenuUsersComponent } from './menu-users/menu-users.component';
 import { HomeCoachComponent } from './home-coach/home-coach.component';
 import { HomeNutritionistComponent } from './home-nutritionist/home-nutritionist.component';
 import { HomeAthleteComponent } from './home-athlete/home-athlete.component';
@@ -25,7 +24,6 @@ import { FormNutritionComponent } from './form-nutrition/form-nutrition.componen
     AppComponent,
     DetalleDiaComponent,
     LoginComponent,
-    MenuUsersComponent,
     HomeCoachComponent,
     HomeNutritionistComponent,
     HomeAthleteComponent,

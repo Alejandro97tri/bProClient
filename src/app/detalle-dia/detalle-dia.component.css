@@ -1,0 +1,33 @@
+p{
+    font-weight: 700;
+    font-size: larger;
+    margin-bottom: 1vh;
+}
+
+.icono-cliente{
+    width: 7vh;
+    height: 7vh;
+    background-color: #39ABDA;
+}
+
+path {
+    fill: white;
+
+}
+
+.svg-icono {
+    width: 60%;
+}
+
+.button-actividad {
+    width: 15%;
+    height: 100%;
+}
+
+.tam-icono-entreno{
+    width: 5vh;
+}
+
+.row-datos-entreno{
+    padding-left: 0;
+}

@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'userinfo', component: UserInfoComponent },
   { path: 'formentreno', component: FormEntrenoComponent },
-  { path: 'formenutri', component: FormNutritionComponent }
+  { path: 'formnutri', component: FormNutritionComponent }
 ];
 
 @NgModule({

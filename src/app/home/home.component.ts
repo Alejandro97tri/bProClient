@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  rol: string= 'coach';
+  rol: string= 'athlete';
 
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.services';
+import { ApiService } from 'src/app/services/api.services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoginComponent]
 })
 export class LoginComponent {
 
@@ -19,8 +20,13 @@ export class LoginComponent {
     const data = await response.json()
     if(data){
       console.log(data)
-      localStorage.setItem("user", data[0])
+      sessionStorage.setItem("auth", data[0])
       this.router.navigate(['']);
     }
   }
+
+  estaLogueado(){
+    return sessionStorage.getItem('auth');
+  }
+
 }

@@ -6,18 +6,18 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { RouterModule, Routes } from '@angular/router';
 import { ApiService } from './services/api.services';
-import { DetalleDiaComponent } from './detalle-dia/detalle-dia.component';
-import { LoginComponent } from './login/login.component';
-import { HomeCoachComponent } from './home-coach/home-coach.component';
-import { HomeNutritionistComponent } from './home-nutritionist/home-nutritionist.component';
-import { HomeAthleteComponent } from './home-athlete/home-athlete.component';
-import { MenuCalendarComponent } from './menu-calendar/menu-calendar.component';
-import { HomeComponent } from './home/home.component';
-import { UserInfoComponent } from './user-info/user-info.component';
-import { FormEntrenoComponent } from './form-entreno/form-entreno.component';
-import { FormNutritionComponent } from './form-nutrition/form-nutrition.component';
+import { FormNutritionComponent } from './components/form-nutrition/form-nutrition.component';
+import { DetalleDiaComponent } from './components/detalle-dia/detalle-dia.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeCoachComponent } from './components/home-coach/home-coach.component';
+import { HomeNutritionistComponent } from './components/home-nutritionist/home-nutritionist.component';
+import { HomeAthleteComponent } from './components/home-athlete/home-athlete.component';
+import { MenuCalendarComponent } from './components/menu-calendar/menu-calendar.component';
+import { HomeComponent } from './components/home/home.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
+import { LoginGuardian } from './guards/login-guardian';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { FormNutritionComponent } from './form-nutrition/form-nutrition.componen
     HttpClientModule,
     FormsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService,LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

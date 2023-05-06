@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormNutritionComponent } from './form-nutrition/form-nutrition.component';
-import { FormEntrenoComponent } from './form-entreno/form-entreno.component';
-import { UserInfoComponent } from './user-info/user-info.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { DetalleDiaComponent } from './detalle-dia/detalle-dia.component';
+import { FormNutritionComponent } from './components/form-nutrition/form-nutrition.component';
+import { DetalleDiaComponent } from './components/detalle-dia/detalle-dia.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
+import { LoginGuardian } from './guards/login-guardian';
+
 
 const appRoutes: Routes = [
   { path: 'entrenamiento/:dia/:mes/:year', component: DetalleDiaComponent },
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'userinfo', component: UserInfoComponent },
-  { path: 'formentreno', component: FormEntrenoComponent },
-  { path: 'formnutri', component: FormNutritionComponent }
+  { path: '', component: HomeComponent, canActivate:[LoginGuardian] },
+  { path: 'login', component: LoginComponent},
+  { path: 'userinfo', component: UserInfoComponent, canActivate:[LoginGuardian] },
+  { path: 'formentreno', component: FormEntrenoComponent, canActivate:[LoginGuardian] },
+  { path: 'formnutri', component: FormNutritionComponent, canActivate:[LoginGuardian] }
 ];
 
 @NgModule({
+  providers: [LoginGuardian],
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })

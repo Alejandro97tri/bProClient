@@ -16,5 +16,5 @@ $resultado = $consulta->execute([
 ]);
 
 $Usuario = $consulta->fetchAll();
-
+echo json_encode($Usuario);
 ?>

@@ -10,11 +10,11 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consultaRol = $conexion->prepare('SELECT Rol FROM User WHERE Username = ?');
-$resultado = $consultaRol->execute([
-    $datos['username'],
+$consulta = $conexion->prepare('SELECT * FROM User WHERE Trainer = ?');
+$resultado = $consulta->execute([
+    $datos['id'],
 ]);
 
-$rolUsuario = $consultaRol->fetchAll();
+$Usuario = $consulta->fetchAll();
 
 ?>

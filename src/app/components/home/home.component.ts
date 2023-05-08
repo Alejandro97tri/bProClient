@@ -7,6 +7,13 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  rol: string= 'athlete';
+  userLoged: any;
 
+  constructor() {
+    let session = sessionStorage.getItem('auth');
+    if (session !== null) {
+      this.userLoged = JSON.parse(session);
+    }
+  }
 }
+

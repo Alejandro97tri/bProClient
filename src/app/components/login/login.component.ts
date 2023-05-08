@@ -19,8 +19,7 @@ export class LoginComponent {
     const response = await fetch('https://btop.es/server/login.php', { method: 'POST', body: JSON.stringify({ 'username': this.username, 'password': this.password})});
     const data = await response.json()
     if(data){
-      console.log(data)
-      sessionStorage.setItem("auth", data[0])
+      sessionStorage.setItem("auth", JSON.stringify(data))
       this.router.navigate(['']);
     }
   }

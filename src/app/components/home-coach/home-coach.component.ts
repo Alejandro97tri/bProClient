@@ -10,18 +10,46 @@ export class HomeCoachComponent implements OnInit{
 
   date= new Date(Date.now());
   listaAtletas: any;
+  listaActividades: any;
+  listaDeportes: any;
   
   get_Date(){
     return this.date.toLocaleDateString();
   }
   
   ngOnInit(): void {
-    this.getAtletas();
+    this.getListaDeportes();
+    this.getListaAtletas();
+    this.getListaAcatividades();
   }
 
-  async getAtletas(){
-    const response = await fetch('https://btop.es/server/home.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaAtletas(){
+    const response = await fetch('https://btop.es/server/homeListaAtletas.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaAtletas = await response.json();
     console.log(this.listaAtletas);
-}
+  }
+
+  async getListaAcatividades(){
+    const response = await fetch('https://btop.es/server/homeListaActividadesHoy.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+    this.listaActividades = await response.json();
+    console.log(this.listaActividades);
+  }
+
+  async getListaDeportes(){
+    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
+    this.listaDeportes = await response.json();
+    console.log(this.listaDeportes);
+  }
+
+  calcularEdad(fechaNacimiento: string): number {
+    const fechaActual = new Date();
+    const fechaNacimientoDate = new Date(fechaNacimiento);
+    let edad = fechaActual.getFullYear() - fechaNacimientoDate.getFullYear();
+    const mesActual = fechaActual.getMonth();
+    const mesNacimiento = fechaNacimientoDate.getMonth();
+    if (mesNacimiento > mesActual || (mesNacimiento === mesActual && fechaNacimientoDate.getDate() > fechaActual.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
 }

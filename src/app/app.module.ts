@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
 import { LoginGuardian } from './guards/login-guardian';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginGuardian } from './guards/login-guardian';
     UserInfoComponent,
     FormEntrenoComponent,
     FormNutritionComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

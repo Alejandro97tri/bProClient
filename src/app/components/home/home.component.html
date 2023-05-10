@@ -1,4 +1,4 @@
-<app-home-athlete *ngIf="userLoged.rol === 'ATL' && userInfoActive === false" >
+<app-home-athlete *ngIf="userLoged.rol === 'ATH' && userInfoActive === false" >
 
 </app-home-athlete>
 
@@ -8,8 +8,10 @@
                 [userLoged]="userLoged">
 </app-home-coach>
 
-<app-home-nutritionist *ngIf="userLoged.rol === 'NUT' && userInfoActive === false" [userLoged]="userLoged"
->
+<app-home-nutritionist *ngIf="userLoged.rol === 'NUT' && userInfoActive === false"
+                (userInfoActiveEmitter)="setUserInfoActive($event)"
+                (userInfoEmitter)="setUserInfo($event)"
+                [userLoged]="userLoged">
 </app-home-nutritionist>
 
 <app-user-info *ngIf="userInfoActive === true"

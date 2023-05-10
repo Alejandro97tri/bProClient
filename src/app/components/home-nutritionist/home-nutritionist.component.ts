@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home-nutritionist',
@@ -6,6 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./home-nutritionist.component.css']
 })
 export class HomeNutritionistComponent {
+  @Output() userInfoActiveEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() userInfoEmitter: EventEmitter<any> = new EventEmitter();
+  
   @Input() userLoged: any ;
 
   date= new Date(Date.now());
@@ -31,6 +34,11 @@ export class HomeNutritionistComponent {
     const response = await fetch('https://btop.es/server/homeListaNutris.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaNutris = await response.json();
     console.log(this.listaNutris);
+  }
+
+  userInfo(user: any){
+    this.userInfoActiveEmitter.emit(true);
+    this.userInfoEmitter.emit(user);
   }
 
   calcularEdad(fechaNacimiento: string): number {

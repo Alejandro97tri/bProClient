@@ -1,5 +1,5 @@
 <div class="row mx-4 mt-4">
-    <div class="col-lg-6 bg-light">
+    <div class="col-lg-6 bg-light pb-3">
         <p class="mt-3">CLIENTS</p>
         <ng-container *ngFor="let user of listaAtletas">
             <div class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
@@ -24,7 +24,7 @@
             </div>
         </ng-container>
     </div>
-    <div class="col-lg-6 bg-light">
+    <div class="col-lg-6 bg-light pb-3">
         <p class="mt-3">ENTRENAMIENTOS HOY</p>
         <ng-container *ngFor="let userActividad of listaActividades">
             <div class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
@@ -34,7 +34,7 @@
                 <ng-container *ngFor="let deporte of listaDeportes">
                     <ng-container *ngIf="deporte.id_deporte == userActividad.id_deporte">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end align-items-center">
-                            <button class="btn btn-info btn-lg mx-1" type="button">{{deporte.nombre}}</button>
+                            <button class="btn btn-info btn-lg mx-1 my-1" type="button">{{deporte.nombre}}</button>
                         </div>
                     </ng-container>
                 </ng-container>

@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
 import { LoginGuardian } from './guards/login-guardian';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 const appRoutes: Routes = [
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'userinfo', component: UserInfoComponent, canActivate:[LoginGuardian] },
   { path: 'formentreno', component: FormEntrenoComponent, canActivate:[LoginGuardian] },
-  { path: 'formnutri', component: FormNutritionComponent, canActivate:[LoginGuardian] }
+  { path: 'formnutri', component: FormNutritionComponent, canActivate:[LoginGuardian] },
+  { path: 'settings', component: SettingsComponent, canActivate:[LoginGuardian] },
 ];
 
 @NgModule({

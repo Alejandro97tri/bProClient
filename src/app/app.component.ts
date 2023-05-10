@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'bProClient';
-  type = "TRA"
+  title = 'BTOP';
+
+  logout(){
+    sessionStorage.setItem("auth", '');
+  }
 }

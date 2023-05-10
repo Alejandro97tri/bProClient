@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home-coach',
@@ -6,6 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./home-coach.component.css']
 })
 export class HomeCoachComponent implements OnInit{
+  @Output() userInfoActiveEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() userInfoEmitter: EventEmitter<any> = new EventEmitter();
+
   @Input() userLoged: any ;
 
   date= new Date(Date.now());
@@ -39,6 +42,11 @@ export class HomeCoachComponent implements OnInit{
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
+  }
+
+  userInfo(user: any){
+    this.userInfoActiveEmitter.emit(true);
+    this.userInfoEmitter.emit(user);
   }
 
   calcularEdad(fechaNacimiento: string): number {

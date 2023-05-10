@@ -8,12 +8,22 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent {
 
   userLoged: any;
+  userInfoActive: boolean = false;
+  userInfo: any;
 
   constructor() {
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
+  }
+
+  setUserInfoActive(e: any){
+    this.userInfoActive = e;
+  }
+
+  setUserInfo(e: any){
+    this.userInfo = e;
   }
 
 }

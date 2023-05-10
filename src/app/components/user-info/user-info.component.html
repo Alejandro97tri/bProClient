@@ -1,6 +1,6 @@
 <div class="row mx-4 mt-4">
     <div class="col-lg-12 bg-light">
-        <h2 class="my-4">ALEJANDRO FERRER GARCIA</h2>
+        <h2 class="my-4">{{userInfo.nombre}}</h2>
         <div class="row bg-dark">
             <div class="col-lg-5 my-3">
                 <div class="icono-cliente rounded-2">
@@ -16,7 +16,7 @@
                         <p class="text-white">Edad</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">25 años</p>
+                        <p class="text-white text-end">{{calcularEdad(userInfo.fecha_nacimiento)}} años</p>
                     </div>
                 </div>
                 <div class="row">
@@ -24,7 +24,7 @@
                         <p class="text-white">Fecha de nacimiento</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">10/10/1997</p>
+                        <p class="text-white text-end">{{userInfo.fecha_nacimiento}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -32,7 +32,7 @@
                         <p class="text-white">Genero</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">Masculino</p>
+                        <p class="text-white text-end">{{userInfo.Genero}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +40,7 @@
                         <p class="text-white">Peso</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">62 kg</p>
+                        <p class="text-white text-end">{{userInfo.peso}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +48,7 @@
                         <p class="text-white">Altura</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">173 cm</p>
+                        <p class="text-white text-end">{{userInfo.altura}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,7 @@
                         <p class="text-white">Deporte principal</p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">Triatlon</p>
+                        <p class="text-white text-end">{{userInfo.deporte_principal}}</p>
                     </div>
                 </div>
                 

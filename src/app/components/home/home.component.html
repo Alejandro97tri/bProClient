@@ -1,3 +1,17 @@
-<app-home-athlete *ngIf="userLoged.rol === 'ATL'" ></app-home-athlete>
-<app-home-coach *ngIf="userLoged.rol === 'TRA'" [userLoged]="userLoged"></app-home-coach>
-<app-home-nutritionist *ngIf="userLoged.rol === 'NUT'" [userLoged]="userLoged"></app-home-nutritionist>
+<app-home-athlete *ngIf="userLoged.rol === 'ATL' && userInfoActive === false" >
+
+</app-home-athlete>
+
+<app-home-coach *ngIf="userLoged.rol === 'TRA' && userInfoActive === false" 
+                (userInfoActiveEmitter)="setUserInfoActive($event)" 
+                (userInfoEmitter)="setUserInfo($event)" 
+                [userLoged]="userLoged">
+</app-home-coach>
+
+<app-home-nutritionist *ngIf="userLoged.rol === 'NUT' && userInfoActive === false" [userLoged]="userLoged"
+>
+</app-home-nutritionist>
+
+<app-user-info *ngIf="userInfoActive === true"
+                [userInfo]="userInfo">
+</app-user-info>

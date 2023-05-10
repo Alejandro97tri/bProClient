@@ -10,7 +10,7 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consulta = $conexion->prepare('SELECT * FROM Nutricion n INNER JOIN User u ON n.id_user = u.id WHERE n.fecha = CURDATE() AND u.nutritionist = ?');
+$consulta = $conexion->prepare('SELECT n.* FROM Nutricion n INNER JOIN User u ON n.id_user = u.id WHERE n.fecha = CURDATE() AND u.nutritionist = ?');
 $resultado = $consulta->execute([
     $datos['id'],
 ]);

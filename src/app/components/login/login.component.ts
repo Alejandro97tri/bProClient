@@ -10,13 +10,24 @@ import { ApiService } from 'src/app/services/api.services';
 })
 export class LoginComponent {
 
+  /// VARIABLES ///
+
+  // Form inputs
   username: string = "";
   password: string = "";
+
+  // Error de login
   error: string = "Username o Password erroneos";
   errorcheck: boolean = true;
   
+
+  /// INICIO ///
   constructor(private router: Router, private apiService: ApiService){}
 
+
+  /// FUNCIONES ///
+
+  // Función de login
   login = async() => {
     this.errorcheck = true;
     const response = await fetch('https://btop.es/server/login.php', { method: 'POST', body: JSON.stringify({ 'username': this.username, 'password': this.password})});
@@ -29,6 +40,7 @@ export class LoginComponent {
     }
   }
 
+  // Función para comprobar si se esta logueado y que actie el guard
   estaLogueado(){
     return sessionStorage.getItem('auth');
   }

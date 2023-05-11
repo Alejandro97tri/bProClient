@@ -6,41 +6,55 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./home-nutritionist.component.css']
 })
 export class HomeNutritionistComponent {
+
+  /// SALIDA ///
   @Output() userInfoActiveEmitter: EventEmitter<any> = new EventEmitter();
   @Output() userInfoEmitter: EventEmitter<any> = new EventEmitter();
   
+
+  /// ENTRADA ///
   @Input() userLoged: any ;
 
-  date= new Date(Date.now());
+
+  /// VARIABLES ///
+  
+  // Listado de clientes
   listaNutris: any;
+
+  // Listado de dietas hoy
   listaNutrisHoy: any;
   
-  get_Date(){
-    return this.date.toLocaleDateString();
-  }
-  
+  /// INICIO ///
   ngOnInit(): void {
     this.getListaNutris();
     this.getListaNutrisHoy();
   }
 
+  /// CONSULTAS ///
+
+  // Consulta a la bd para obtener las dietas de hoy
   async getListaNutrisHoy(){
     const response = await fetch('https://btop.es/server/homeListaNutrisHoy.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaNutrisHoy = await response.json();
     console.log(this.listaNutrisHoy);
   }
 
+  // Consulta a la bd para obtener los clientes del nutricionista
   async getListaNutris(){
     const response = await fetch('https://btop.es/server/homeListaNutris.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaNutris = await response.json();
     console.log(this.listaNutris);
   }
 
+  /// FUNCIONES ///
+
+  // Emisor de la informacion de usuario para verla
   userInfo(user: any){
     this.userInfoActiveEmitter.emit(true);
     this.userInfoEmitter.emit(user);
   }
 
+  // Calculo de la edad respecto a la fecha de nacimiento
   calcularEdad(fechaNacimiento: string): number {
     const fechaActual = new Date();
     const fechaNacimientoDate = new Date(fechaNacimiento);

@@ -151,13 +151,15 @@ export class FormEntrenoComponent {
   fcMedia: any;
   descripcion: any;
 
-  /// Fin Var ///
 
+  /// INICIO ///
   ngOnInit(): void {
     this.getListaDeportes();
   }
 
+  /// CONSULTAS /// 
 
+  // Consulta del listado de deportes
   async getListaDeportes(){
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
     this.listaDeportes = await response.json();

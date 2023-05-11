@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
 })
 export class HomeAthleteComponent implements OnInit, OnChanges {
 
-  constructor(private router: Router){
-
-  }
+  /// VARIABLEs ///
   
+  // Lista de dias de la semana
   daysOfWeek: Array<string> = [
     "LUNES",
     "MARTES",
@@ -21,19 +20,31 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     "SÁBADO",
     "DOMINGO",
   ]
+
+  // 
   selectedDate = new Date();
   date = new Date();
   weeks: Array<Array<number | null>> = [];
   firstDayOfWeek = 1;
+
+  // Dias que no se van a rellenar por que forman parte del otro mes
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
+
   year:number = 0;
   mes:string = '';
   offset: number = 0;
-  ngOnChanges(changes: SimpleChanges): void {
-    this.generateCalendar();
-  }
+
+
+  /// INICIO ///
+  constructor(private router: Router){}
   
   ngOnInit() {
+    this.generateCalendar();
+  }
+
+
+  /// CAMBIOS ///
+  ngOnChanges(changes: SimpleChanges): void {
     this.generateCalendar();
   }
 
@@ -42,6 +53,10 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.generateCalendar();
   }
 
+
+  /// FUNCIONES ///
+
+  // Función para generar el calendario
   generateCalendar() {
     const month = this.selectedDate.getMonth();
     const year = this.selectedDate.getFullYear();
@@ -49,18 +64,14 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const weeks: Array<Array<number | null>> = [[]];
 
-    // Determine the index of the first day of the week (0 for Sunday, 1 for Monday, etc.)
     this.firstDayOfWeek = 1;
 
-    // Determine the offset from the first day of the month to the first day of the week
     this.offset = (firstDay - this.firstDayOfWeek + 7) % 7;
 
-    // Add empty cells before the first day of the month if necessary
     for (let i = 0; i < this.offset; i++) {
       weeks[0].push(null);
     }
 
-    // Add the days of the month to the calendar
     for (let i = 1; i <= daysInMonth; i++) {
       const dayOfWeek = new Date(year, month, i).getDay();
       if (dayOfWeek === this.firstDayOfWeek) {

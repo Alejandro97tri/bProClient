@@ -7,9 +7,15 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
+  /// VARIABLE ///
+
+  // Usuario actual
   userLoged: any;
+
+  // Listado de deportes
   listaDeportes: any;
   
+  // Formulario
   fecha_nacimiento: any;
   genero: any;
   peso: any;
@@ -19,6 +25,8 @@ export class SettingsComponent {
   horario_entrenamientos: any;
   horario_comidas: any;
 
+
+  /// INICIO ///
   constructor() {
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
@@ -38,12 +46,18 @@ export class SettingsComponent {
     this.getListaDeportes();
   }
 
+  /// CONSULTAS ///
+
+  // Consulta para obtener la lista de deportes
   async getListaDeportes(){
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
   }
 
+  /// FUNCIONES ///
+  
+  // Función para insertar en la bd las variables
   guardar(){
     console.log(this.fecha_nacimiento);
     console.log(this.genero);
@@ -55,6 +69,7 @@ export class SettingsComponent {
     console.log(this.horario_comidas);
   }
 
+  // Función para calcular la edad respecto a la fecha de nacimiento
   calcularEdad(fechaNacimiento: string): number {
     const fechaActual = new Date();
     const fechaNacimientoDate = new Date(fechaNacimiento);

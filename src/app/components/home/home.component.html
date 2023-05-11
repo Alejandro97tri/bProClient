@@ -1,5 +1,5 @@
-<app-home-athlete *ngIf="userLoged.rol === 'ATH' && userInfoActive === false" >
-
+<app-home-athlete *ngIf="userLoged.rol === 'ATH' && userInfoActive === false" 
+                    [userLoged]="userLoged">
 </app-home-athlete>
 
 <app-home-coach *ngIf="userLoged.rol === 'TRA' && userInfoActive === false" 

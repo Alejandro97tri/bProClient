@@ -1,12 +1,15 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home-athlete',
   templateUrl: './home-athlete.component.html',
   styleUrls: ['./home-athlete.component.css']
 })
 export class HomeAthleteComponent implements OnInit, OnChanges {
+
+  @Input() userLoged: any ;
 
   /// VARIABLEs ///
   
@@ -34,12 +37,19 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   mes:string = '';
   offset: number = 0;
 
+  listaEntrenos: any;
+  listaNutricion: any;
+
+  fechaSearch: any;
+
 
   /// INICIO ///
   constructor(private router: Router){}
   
   ngOnInit() {
     this.generateCalendar();
+    this.getListaEntrenos();
+    this.getListaNutricion();
   }
 
 
@@ -53,6 +63,18 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.generateCalendar();
   }
 
+
+  async getListaEntrenos(){
+    const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+    this.listaEntrenos = await response.json();
+    console.log(this.listaEntrenos);
+  }
+
+  async getListaNutricion(){
+    const response = await fetch('https://btop.es/server/homeListaNutricionAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+    this.listaNutricion = await response.json();
+    console.log(this.listaNutricion);
+  }
 
   /// FUNCIONES ///
 
@@ -94,4 +116,41 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   setMes(e:any){
     this.mes = e;
   }
+
+  getEntreno(day: number){
+    this.fechaSearch = this.formatDate(day,this.mes,this.year);
+    return !this.listaEntrenos || !this.listaEntrenos.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
+  }
+
+  getNutricion(day: number){
+    this.fechaSearch = this.formatDate(day,this.mes,this.year);
+    return !this.listaNutricion || !this.listaNutricion.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
+  }
+
+  
+  formatDate(day: number, month: string, year: number): string {
+    interface MonthNames {
+      [key: string]: string;
+    }
+
+    const monthNames: MonthNames = {
+      'ENERO': 'January',
+      'FEBRERO': 'February',
+      'MARZO': 'March',
+      'ABRIL': 'April',
+      'MAYO': 'May',
+      'JUNIO': 'June',
+      'JULIO': 'July',
+      'AGOSTO': 'August',
+      'SEPTIEMBRE': 'September',
+      'OCTUBRE': 'October',
+      'NOVIEMBRE': 'November',
+      'DICIEMBRE': 'December'
+    };
+    const monthNumber = new Date(`${monthNames[month]} 1, ${year}`).getMonth() + 1;
+    const formattedMonth = monthNumber.toString().padStart(2, '0');
+    const formattedDay = day.toString().padStart(2, '0');
+    return `${year}-${formattedMonth}-${formattedDay}`;
+  }
+  
 }

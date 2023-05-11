@@ -31,3 +31,8 @@ path {
 .row-datos-entreno{
     padding-left: 0;
 }
+
+.nombre-deporte {
+    cursor: not-allowed;
+    pointer-events: none;
+}

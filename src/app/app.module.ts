@@ -19,6 +19,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
 import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
+import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     FormEntrenoComponent,
     FormNutritionComponent,
     SettingsComponent,
+    CalendarioClienteComponent,
   ],
   imports: [
     BrowserModule,

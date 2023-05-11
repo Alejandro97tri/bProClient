@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-coach',
@@ -29,7 +30,7 @@ export class HomeCoachComponent implements OnInit{
 
   /// INICIO ///
 
-  constructor(){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
     this.getListaDeportes();
@@ -62,6 +63,10 @@ export class HomeCoachComponent implements OnInit{
   }
 
   /// FUNCIONES ///
+
+  calendario(id: any){
+    this.router.navigate(['calendario-cliente',id]);
+  }
 
   // Emisor de los datos de usuario para verlos en detalle
   userInfo(user: any){

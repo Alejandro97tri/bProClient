@@ -8,6 +8,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { FormEntrenoComponent } from './components/form-entreno/form-entreno.component';
 import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
+import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
 
 
 const appRoutes: Routes = [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'formentreno', component: FormEntrenoComponent, canActivate:[LoginGuardian] },
   { path: 'formnutri', component: FormNutritionComponent, canActivate:[LoginGuardian] },
   { path: 'settings', component: SettingsComponent, canActivate:[LoginGuardian] },
+  { path: 'calendario-cliente/:id', component: CalendarioClienteComponent, canActivate:[LoginGuardian] },
 ];
 
 @NgModule({

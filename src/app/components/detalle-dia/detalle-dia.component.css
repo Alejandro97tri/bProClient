@@ -36,3 +36,8 @@ path {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.stop-boton {
+    cursor: not-allowed;
+    pointer-events: none;
+}

@@ -11,9 +11,11 @@ export class DetalleDiaComponent implements OnInit{
   /// VARIABLES
   userLoged:any;
 
+  id: number = 0;
   day: number = 0;
   mes: string = '';
   year: number = 0;
+  formattedMonth: any;
 
   listaDeportes:any;
   listaEntrenosHoy: any;
@@ -25,6 +27,7 @@ export class DetalleDiaComponent implements OnInit{
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
+    this.id = this.rutaActiva.snapshot.params['id'];
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
     this.year = this.rutaActiva.snapshot.params['year'];
@@ -45,8 +48,14 @@ export class DetalleDiaComponent implements OnInit{
   }
 
   async getListaEntrenos(){
-    const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id, 'fecha': this.fechaSearch})});
-    this.listaEntrenosHoy = await response.json();
+    
+    if(this.id == 0 ){
+      const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id, 'fecha': this.fechaSearch})});
+      this.listaEntrenosHoy = await response.json();
+    }else{
+      const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
+      this.listaEntrenosHoy = await response.json();
+    }
     console.log(this.listaEntrenosHoy);
   }
 
@@ -70,8 +79,8 @@ export class DetalleDiaComponent implements OnInit{
       'DICIEMBRE': 'December'
     };
     const monthNumber = new Date(`${monthNames[month]} 1, ${year}`).getMonth() + 1;
-    const formattedMonth = monthNumber.toString().padStart(2, '0');
+    this.formattedMonth = monthNumber.toString().padStart(2, '0');
     const formattedDay = day.toString().padStart(2, '0');
-    return `${year}-${formattedMonth}-${formattedDay}`;
+    return `${year}-${this.formattedMonth}-${formattedDay}`;
   }
 }

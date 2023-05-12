@@ -23,6 +23,11 @@
     width: 5vh;
   }
 
+  .stop-boton {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
   @media (max-width: 600px) {
     .calendar-row {
       flex-wrap: wrap;

@@ -18,23 +18,31 @@
                     <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}}</p>
                 </div>
                 <div class="col-lg-4 d-grid gap-2 my-2">
-                    <button class="btn btn-primary" type="button">Calendario</button>
-                    <button class="btn btn-success" type="button" (click)="userInfo(user)">Información</button>
+                    <button class="btn btn-primary rounded-1" type="button"
+                        (click)="calendario(user.id)">Calendario</button>
+                    <button class="btn btn-success rounded-1" type="button"
+                        (click)="userInfo(user)">Información</button>
                 </div>
             </div>
         </ng-container>
     </div>
     <div class="col-lg-6 bg-light pb-3">
         <p class="mt-3">NUTRICIÓN HOY</p>
-        <ng-container *ngFor="let userNutri of listaNutrisHoy">
-            <div class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6 pt-3">
-                    <p class="text-white">{{userNutri.nombre}} {{userNutri.apellidos}}</p>
+        <ng-container *ngFor="let usuario of listaNutris">
+            <ng-container *ngIf="listaNutrisAtletas.includes(usuario.id)">
+                <div class="row bg-dark d-flex felx-wrap align-items-center justify-content-center rounded-3 mt-2">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 pt-3">
+                        <p class="text-white">{{usuario.nombre}} {{usuario.apellidos}}</p>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-6 d-flex felx-wrap justify-content-end align-items-center">
+                        <ng-container *ngFor="let nutricion of listaNutrisHoy">
+                            <ng-container *ngIf="nutricion.id_user == usuario.id">
+                                <button class="btn btn-info mx-1" type="button">{{nutricion.hora}}</button>
+                            </ng-container>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end align-items-center">
-                    <button class="btn btn-info mx-1" type="button">{{userNutri.hora}}</button>
-                </div>
-            </div>
+            </ng-container>
         </ng-container>
     </div>
 </div>

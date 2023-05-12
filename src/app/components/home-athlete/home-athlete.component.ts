@@ -106,7 +106,7 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   }
 
   goToDay(day:number|null){
-  this.router.navigate(['entrenamiento',day,this.mes,this.year]);
+  this.router.navigate(['entrenamiento',0,day,this.mes,this.year]);
   }
 
   setYear(e:any){

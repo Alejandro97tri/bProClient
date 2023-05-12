@@ -1,19 +1,19 @@
 <div class="row mx-4 mt-4">
     <div class="col-lg-6 col-md-6 bg-light">
 
-        <h2 class="my-4">Entrenos de hoy</h2>
+        <h2 class="my-4">Entrenos {{day}}-{{formattedMonth}}-{{year}}</h2>
 
         <div *ngFor="let entreno of listaEntrenosHoy"
             class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 ps-4">
                 <ng-container *ngFor="let deporte of listaDeportes">
                     <ng-container *ngIf="deporte.id_deporte == entreno.id_deporte">
-                        <button class="btn btn-info ">{{deporte.nombre}}</button>
+                        <button class="btn btn-info btn-lg rounded-1 stop-boton">{{deporte.nombre}}</button>
                     </ng-container>
                 </ng-container>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 pe-4 d-flex justify-content-end">
-                <button class="btn btn-warning " type="button">modificar</button>
+                <button *ngIf="userLoged.rol == 'TRA' || userLoged.rol == 'ATH'" class="btn btn-warning " type="button">modificar</button>
             </div>
             <div class="row row-datos-entreno">
                 <div class="col-lg-6 mb-3">
@@ -60,7 +60,7 @@
     </div>
 
     <div class="col-lg-6 col-md-6 bg-light">
-        <h2 class="my-4">Nutrición de hoy</h2>
+        <h2 class="my-4">Nutrición {{day}}-{{formattedMonth}}-{{year}}</h2>
         <div class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 pt-3">
                 <p class="text-white">Alejandro Ferrer Garcia</p>

@@ -12,7 +12,7 @@ import { CalendarioClienteComponent } from './components/calendario-cliente/cale
 
 
 const appRoutes: Routes = [
-  { path: 'entrenamiento/:dia/:mes/:year', component: DetalleDiaComponent },
+  { path: 'entrenamiento/:id/:dia/:mes/:year', component: DetalleDiaComponent },
   { path: '', component: HomeComponent, canActivate:[LoginGuardian] },
   { path: 'login', component: LoginComponent},
   { path: 'userinfo', component: UserInfoComponent, canActivate:[LoginGuardian] },

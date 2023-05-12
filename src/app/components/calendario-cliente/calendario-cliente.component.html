@@ -32,10 +32,10 @@
                                         <p class="text-white fw-bold ">{{day}}</p>
                                     </div>
                                     <div *ngIf="day !== null" class="d-flex align-items-around">
-                                        <button class="btn btn-sm btn-info mx-1" *ngIf="!getEntreno(day)">
+                                        <button class="btn btn-sm btn-info mx-1 stop-boton" *ngIf="!getEntreno(day)">
                                             Entrenos
                                         </button>
-                                        <button class="btn btn-sm btn-success mx-1" *ngIf="!getNutricion(day)">Nutrición</button>
+                                        <button class="btn btn-sm btn-success mx-1 stop-boton" *ngIf="!getNutricion(day)">Nutrición</button>
                                     </div>
                                 </div>
                             </ng-container>

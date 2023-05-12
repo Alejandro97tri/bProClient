@@ -23,6 +23,7 @@ export class HomeCoachComponent implements OnInit{
 
   // Lista de entrenos de hoy
   listaActividades: any;
+  listaActividadesAtletas:any = [];
 
   // Lista de deportes
   listaDeportes: any;
@@ -52,6 +53,10 @@ export class HomeCoachComponent implements OnInit{
   async getListaAcatividades(){
     const response = await fetch('https://btop.es/server/homeListaActividadesHoy.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaActividades = await response.json();
+    this.listaActividades.forEach((element:any) => {
+      (this.listaActividadesAtletas.includes(element.id_user)) ? null : this.listaActividadesAtletas.push(element.id_user);
+    });
+    console.log(this.listaActividadesAtletas)
     console.log(this.listaActividades);
   }
 

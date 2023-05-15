@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-dia',
@@ -19,10 +19,11 @@ export class DetalleDiaComponent implements OnInit{
 
   listaDeportes:any;
   listaEntrenosHoy: any;
+  listaNutrisHoy: any;
   fechaSearch: any;
 
   /// INICIO ///
-  constructor(private rutaActiva: ActivatedRoute) {
+  constructor(private rutaActiva: ActivatedRoute, private router: Router) {
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
       this.userLoged = JSON.parse(session);
@@ -37,6 +38,7 @@ export class DetalleDiaComponent implements OnInit{
   ngOnInit(): void {
     this.getListaEntrenos();
     this.getListaDeportes();
+    this.getListaNutricion();
   }
   
 
@@ -57,6 +59,39 @@ export class DetalleDiaComponent implements OnInit{
       this.listaEntrenosHoy = await response.json();
     }
     console.log(this.listaEntrenosHoy);
+  }
+
+  async getListaNutricion(){
+    
+    if(this.id == 0 ){
+      const response = await fetch('https://btop.es/server/listaNutrisDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id, 'fecha': this.fechaSearch})});
+      this.listaNutrisHoy = await response.json();
+    }else{
+      const response = await fetch('https://btop.es/server/listaNutrisDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
+      this.listaNutrisHoy = await response.json();
+    }
+    this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
+      if (a.hora < b.hora) return -1;
+      if (a.hora > b.hora) return 1;
+      return 0;
+    });
+    console.log(this.listaNutrisHoy);
+  }
+
+  goToFormEnterno(){
+    this.router.navigate(['formentreno',0, this.day,this.mes,this.year]);
+  }
+
+  goToFormActividadModificar(id: any){
+    this.router.navigate(['formentreno',id, this.day,this.mes,this.year]);
+  }
+
+  goToFormDieta(){
+    this.router.navigate(['formnutricion',0,this.day,this.mes,this.year]);
+  }
+
+  goToFormDietaModificar(id:any){
+    this.router.navigate(['formnutricion',id,this.day,this.mes,this.year]);
   }
 
   formatDate(day: number, month: string, year: number): string {

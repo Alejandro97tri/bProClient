@@ -11,24 +11,29 @@ export class HomeNutritionistComponent {
   /// SALIDA ///
   @Output() userInfoActiveEmitter: EventEmitter<any> = new EventEmitter();
   @Output() userInfoEmitter: EventEmitter<any> = new EventEmitter();
-  
+
 
   /// ENTRADA ///
-  @Input() userLoged: any ;
+  @Input() userLoged: any;
 
 
   /// VARIABLES ///
-  
+
+  dia: any;
+  mes: any;
+  ano: any;
+
   // Listado de clientes
   listaNutris: any;
-  listaNutrisAtletas:any = [];
+  listaNutrisAtletas: any = [];
   // Listado de dietas hoy
   listaNutrisHoy: any;
-  
+
   /// INICIO ///
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.fechaHoy();
     this.getListaNutris();
     this.getListaNutrisHoy();
   }
@@ -36,10 +41,10 @@ export class HomeNutritionistComponent {
   /// CONSULTAS ///
 
   // Consulta a la bd para obtener las dietas de hoy
-  async getListaNutrisHoy(){
-    const response = await fetch('https://btop.es/server/homeListaNutrisHoy.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaNutrisHoy() {
+    const response = await fetch('https://btop.es/server/homeListaNutrisHoy.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaNutrisHoy = await response.json();
-    this.listaNutrisHoy.forEach((element:any) => {
+    this.listaNutrisHoy.forEach((element: any) => {
       (this.listaNutrisAtletas.includes(element.id_user)) ? null : this.listaNutrisAtletas.push(element.id_user);
     });
     this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
@@ -47,28 +52,32 @@ export class HomeNutritionistComponent {
       if (a.hora > b.hora) return 1;
       return 0;
     });
-    
+
     console.log(this.listaNutrisAtletas)
-    console.log(this.listaNutrisHoy);
+    console.log(this.listaNutrisHoy, "sdfsd");
   }
 
   // Consulta a la bd para obtener los clientes del nutricionista
-  async getListaNutris(){
-    const response = await fetch('https://btop.es/server/homeListaNutris.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaNutris() {
+    const response = await fetch('https://btop.es/server/homeListaNutris.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaNutris = await response.json();
     console.log(this.listaNutris);
   }
 
   /// FUNCIONES ///
 
-  calendario(id: any){
-    this.router.navigate(['calendario-cliente',id]);
+  calendario(id: any) {
+    this.router.navigate(['calendario-cliente', id]);
   }
 
   // Emisor de la informacion de usuario para verla
-  userInfo(user: any){
+  userInfo(user: any) {
     this.userInfoActiveEmitter.emit(true);
     this.userInfoEmitter.emit(user);
+  }
+
+  goToFormDietaModificar(id: any) {
+    this.router.navigate(['formnutricion', id, this.dia, this.mes, this.ano]);
   }
 
   // Calculo de la edad respecto a la fecha de nacimiento
@@ -82,6 +91,23 @@ export class HomeNutritionistComponent {
       edad--;
     }
     return edad;
+  }
+
+  fechaHoy() {
+    const fechaHoy: Date = new Date();
+
+    // Obtener día con dos cifras
+    this.dia = ("0" + fechaHoy.getDate()).slice(-2);
+
+    // Obtener mes en letras y mayúsculas
+    const meses: string[] = [
+      "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
+      "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+    ];
+    this.mes = meses[fechaHoy.getMonth()];
+
+    // Obtener año con cuatro cifras
+    this.ano  = fechaHoy.getFullYear().toString();
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-entreno',
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
 export class FormEntrenoComponent {
 
   /// Variables ///
+
+  userLoged:any;
 
   // Listado para los select
   listaDeportes: any;
@@ -143,6 +146,9 @@ export class FormEntrenoComponent {
     "10:00:00",
   ]
 
+  idActividad: any;
+  actividadHoy:any;
+
   // Variables de formulario
   deporte: any;
   duracion: any;
@@ -150,19 +156,75 @@ export class FormEntrenoComponent {
   ritmoMedio: any;
   fcMedia: any;
   descripcion: any;
+  fecha: any;
 
+  day:any;
+  mes:any;
+  year:any;
+
+  constructor(private rutaActiva: ActivatedRoute, private router: Router) {
+    let session = sessionStorage.getItem('auth');
+    if (session !== null) {
+      this.userLoged = JSON.parse(session);
+    }
+    this.idActividad = this.rutaActiva.snapshot.params['id'];
+    this.day = this.rutaActiva.snapshot.params['dia'];
+    this.mes = this.rutaActiva.snapshot.params['mes'];
+    this.year = this.rutaActiva.snapshot.params['year'];
+    this.fecha = this.formatDate(this.day,this.mes,this.year);
+  }
 
   /// INICIO ///
   ngOnInit(): void {
     this.getListaDeportes();
+    this.getActividadModificar();
   }
 
   /// CONSULTAS /// 
+
+  async getActividadModificar(){
+    
+    if(this.idActividad > 0 ){
+      const response = await fetch('https://btop.es/server/entrenoAModificar.php', { method: 'POST', body: JSON.stringify({'id': this.idActividad})});
+      this.actividadHoy = await response.json();
+      this.deporte = this.actividadHoy[0].id_deporte;
+      this.duracion = this.actividadHoy[0].duracion;
+      this.distancia = this.actividadHoy[0].distancia;
+      this.ritmoMedio = this.actividadHoy[0].ritmo_medio;
+      this.fcMedia = this.actividadHoy[0].fc_media;
+      this.descripcion = this.actividadHoy[0].descripcion;
+    }
+  }
 
   // Consulta del listado de deportes
   async getListaDeportes(){
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
+  }
+
+  formatDate(day: number, month: string, year: number): string {
+    interface MonthNames {
+      [key: string]: string;
+    }
+
+    const monthNames: MonthNames = {
+      'ENERO': 'January',
+      'FEBRERO': 'February',
+      'MARZO': 'March',
+      'ABRIL': 'April',
+      'MAYO': 'May',
+      'JUNIO': 'June',
+      'JULIO': 'July',
+      'AGOSTO': 'August',
+      'SEPTIEMBRE': 'September',
+      'OCTUBRE': 'October',
+      'NOVIEMBRE': 'November',
+      'DICIEMBRE': 'December'
+    };
+    const monthNumber = new Date(`${monthNames[month]} 1, ${year}`).getMonth() + 1;
+    const formattedMonth = monthNumber.toString().padStart(2, '0');
+    const formattedDay = day.toString().padStart(2, '0');
+    return `${formattedDay}-${formattedMonth}-${year}`;
   }
 }

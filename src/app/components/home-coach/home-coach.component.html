@@ -37,7 +37,7 @@
                         <ng-container *ngIf="actividad.id_user == usuario.id">
                             <ng-container *ngFor="let deporte of listaDeportes">
                                 <ng-container *ngIf="deporte.id_deporte == actividad.id_deporte">
-                                    <button class="btn btn-info btn-lg mx-1 my-1 rounded-1" type="button">{{deporte.nombre}}</button>
+                                    <button class="btn btn-info btn-lg mx-1 my-1 rounded-1" type="button" (click)="goToFormActividadModificar(actividad[0])">{{deporte.nombre}}</button>
                                 </ng-container>
                             </ng-container>
                         </ng-container>

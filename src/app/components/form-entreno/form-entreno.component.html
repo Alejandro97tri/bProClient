@@ -5,6 +5,15 @@
             <div class="col-lg-6 my-3">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label class="text-white" for="fecha">Fecha</label>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
+                        <input type="email" class="form-control bg-light" id="fecha" [(ngModel)]="fecha">
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                         <label class="text-white" for="deporte">Selecciona un deporte</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
@@ -37,7 +46,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <label class="text-white" for="ritmo">Ritmo medio</label>
+                        <label class="text-white" for="ritmo">Ritmo medio (min/km)</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
                         <input type="email" class="form-control bg-light" id="ritmo" [(ngModel)]="ritmoMedio">
@@ -64,7 +73,7 @@
             </div>
             <div class="row my-3">
                 <div class="col-lg-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-success" >Guardar</button>
                 </div>
             </div>
         </div>

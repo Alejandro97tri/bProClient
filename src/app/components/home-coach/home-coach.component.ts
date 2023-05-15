@@ -18,6 +18,10 @@ export class HomeCoachComponent implements OnInit{
 
   /// VARIABLES ///
 
+  dia: any;
+  mes: any;
+  ano: any;
+
   // Lista de clientes
   listaAtletas: any;
 
@@ -34,6 +38,7 @@ export class HomeCoachComponent implements OnInit{
   constructor(private router: Router){}
 
   ngOnInit(): void {
+    this.fechaHoy();
     this.getListaDeportes();
     this.getListaAtletas();
     this.getListaAcatividades();
@@ -69,6 +74,10 @@ export class HomeCoachComponent implements OnInit{
 
   /// FUNCIONES ///
 
+  goToFormActividadModificar(id: any) {
+    this.router.navigate(['formentreno', id, this.dia, this.mes, this.ano]);
+  }
+
   calendario(id: any){
     this.router.navigate(['calendario-cliente',id]);
   }
@@ -90,5 +99,22 @@ export class HomeCoachComponent implements OnInit{
       edad--;
     }
     return edad;
+  }
+
+  fechaHoy() {
+    const fechaHoy: Date = new Date();
+
+    // Obtener día con dos cifras
+    this.dia = ("0" + fechaHoy.getDate()).slice(-2);
+
+    // Obtener mes en letras y mayúsculas
+    const meses: string[] = [
+      "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
+      "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+    ];
+    this.mes = meses[fechaHoy.getMonth()];
+
+    // Obtener año con cuatro cifras
+    this.ano  = fechaHoy.getFullYear().toString();
   }
 }

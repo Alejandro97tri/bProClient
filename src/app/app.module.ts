@@ -21,6 +21,7 @@ import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { CalendarioClienteComponent } from './components/calendario-cliente/cale
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [ApiService,LoginComponent],
   bootstrap: [AppComponent]

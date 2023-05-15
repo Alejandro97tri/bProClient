@@ -16,8 +16,8 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate:[LoginGuardian] },
   { path: 'login', component: LoginComponent},
   { path: 'userinfo', component: UserInfoComponent, canActivate:[LoginGuardian] },
-  { path: 'formentreno', component: FormEntrenoComponent, canActivate:[LoginGuardian] },
-  { path: 'formnutri', component: FormNutritionComponent, canActivate:[LoginGuardian] },
+  { path: 'formentreno/:id/:dia/:mes/:year', component: FormEntrenoComponent, canActivate:[LoginGuardian] },
+  { path: 'formnutricion/:id/:dia/:mes/:year', component: FormNutritionComponent, canActivate:[LoginGuardian] },
   { path: 'settings', component: SettingsComponent, canActivate:[LoginGuardian] },
   { path: 'calendario-cliente/:id', component: CalendarioClienteComponent, canActivate:[LoginGuardian] },
 ];

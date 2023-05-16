@@ -9,6 +9,7 @@ import { FormEntrenoComponent } from './components/form-entreno/form-entreno.com
 import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'formnutricion/:id_user/:id/:dia/:mes/:year', component: FormNutritionComponent, canActivate:[LoginGuardian] },
   { path: 'settings', component: SettingsComponent, canActivate:[LoginGuardian] },
   { path: 'calendario-cliente/:id', component: CalendarioClienteComponent, canActivate:[LoginGuardian] },
+  { path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

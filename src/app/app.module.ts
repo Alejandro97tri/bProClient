@@ -20,6 +20,7 @@ import { FormEntrenoComponent } from './components/form-entreno/form-entreno.com
 import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { CalendarioClienteComponent } from './components/calendario-cliente/cale
     FormNutritionComponent,
     SettingsComponent,
     CalendarioClienteComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

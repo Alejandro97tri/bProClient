@@ -38,12 +38,13 @@ export class SettingsComponent {
     fecha_nacimientoErrorFormato: '',
     generoVacio: '',
     pesoVacio: '',
+    pesoErrorFormato: '',
     alturaVacio: '',
+    alturaErrorFormato: '',
     deporte_principalVacio: '',
-    objetivosVacio: '',
-    horario_entrenamientosVacio: '',
-    horario_comidasVacio: '',
-    userInfoVacio: '',
+    // objetivosVacio: '',
+    // horario_entrenamientosVacio: '',
+    // horario_comidasVacio: '',
   }
 
 
@@ -158,57 +159,59 @@ export class SettingsComponent {
     this.numeroErrores = 0;
     const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
     const regexNumeros = /^\d+$/;
-    const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
 
     this.errores = {
       fecha_nacimientoVacio: '',
       fecha_nacimientoErrorFormato: '',
       generoVacio: '',
       pesoVacio: '',
+      pesoErrorFormato: '',
       alturaVacio: '',
+      alturaErrorFormato: '',
       deporte_principalVacio: '',
-      objetivosVacio: '',
-      horario_entrenamientosVacio: '',
-      horario_comidasVacio: '',
-      userInfoVacio: '',
+      // objetivosVacio: '',
+      // horario_entrenamientosVacio: '',
+      // horario_comidasVacio: '',
     }
 
     if (this.fecha_nacimiento == null || this.fecha_nacimiento == '') {
-      this.errores.fecha_nacimientoVacio = "La fecha no puede estar vacía";
+      this.errores.fecha_nacimientoVacio = "La fecha de nacimiento no puede estar vacía";
       this.numeroErrores++
     }
     if (!this.errores.fecha_nacimientoVacio && !regexFecha.test(this.fecha_nacimiento)) {
       this.errores.fecha_nacimientoErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
       this.numeroErrores++;
     }
-    // if(this.deporte == null || this.deporte == ''){
-    //   this.errores.deporteVacio = "El deporte no puede estar vacío";
-    //   this.numeroErrores++
-    // }
-    // if(this.duracion == null || this.duracion == ''){
-    //   this.errores.duracionVacio = "La duración no puede estar vacía";
-    //   this.numeroErrores++
-    // } 
 
-    // if (!regexNumeros.test(this.distancia)) {
-    //   this.errores.distanciaErrorFormato = 'La distancia debe ser un número';
-    //   this.numeroErrores++;
-    // }
+    if (this.genero == null || this.genero == '') {
+      this.errores.generoVacio = "El género no puede estar vacío";
+      this.numeroErrores++;
+    }
 
-    // if (!regexNumerosDecimales.test(this.ritmoMedio)) {
-    //   this.errores.ritmoMedioErrorFormato = 'El ritmo debe ser un número separado por un punto y el decimal no superior a 59 (Ej. 3.59)';
-    //   this.numeroErrores++;
-    // }
+    if(this.peso == null || this.peso == '') {
+      this.errores.pesoVacio = "El peso no puede estar vacío";
+      this.numeroErrores++;
+    }
 
-    // if (!regexNumeros.test(this.fcMedia)) {
-    //   this.errores.fcMediaErrorFormato = 'La frecuencia cardíaca debe ser un número';
-    //   this.numeroErrores++;
-    // }
+    if (!this.errores.pesoVacio && !regexNumeros.test(this.peso)) {
+      this.errores.pesoErrorFormato = 'El peso debe ser un número entero';
+      this.numeroErrores++;
+    }
 
-    // if(this.descripcion == null || this.descripcion == ''){   
-    //   this.errores.descripcionVacia = "La descripción no puede estar vacía";
-    //   this.numeroErrores++
-    // }
+    if(this.altura == null || this.altura == '') {
+      this.errores.alturaVacio = "La altura no puede estar vacía";
+      this.numeroErrores++;
+    }
+
+    if(!this.errores.alturaVacio && !regexNumeros.test(this.altura)) {
+      this.errores.alturaErrorFormato = 'La altura debe ser un número entero';
+      this.numeroErrores++;
+    }
+
+    if(this.deporte_principal == null || this.deporte_principal == '') {
+      this.errores.deporte_principalVacio = "El deporte principal no puede estar vacío";
+      this.numeroErrores++;
+    }
 
     this.erroresNoVacios = Object.values(this.errores).filter(error => error !== '');
   }

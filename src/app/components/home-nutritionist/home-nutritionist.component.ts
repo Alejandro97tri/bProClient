@@ -75,8 +75,8 @@ export class HomeNutritionistComponent {
     this.router.navigate(['userinfo',user]);
   }
 
-  goToFormDietaModificar(id: any) {
-    this.router.navigate(['formnutricion', id, this.dia, this.mes, this.ano]);
+  goToFormDietaModificar(uer_id:any, id: any) {
+    this.router.navigate(['formnutricion', uer_id, id, this.dia, this.mes, this.ano]);
   }
 
   // Calculo de la edad respecto a la fecha de nacimiento

@@ -70,8 +70,8 @@ export class HomeCoachComponent implements OnInit{
 
   /// FUNCIONES ///
 
-  goToFormActividadModificar(id: any) {
-    this.router.navigate(['formentreno', id, this.dia, this.mes, this.ano]);
+  goToFormActividadModificar(user_id:any, id: any) {
+    this.router.navigate(['formentreno', user_id, id, this.dia, this.mes, this.ano]);
   }
 
   calendario(id: any){

@@ -12,6 +12,7 @@ export class FormNutritionComponent {
   /// Variables ///
 
   userLoged: any;
+  idUser: any;
 
   // Listado para los select
   listaTiempos: Array<any> = [
@@ -359,6 +360,7 @@ export class FormNutritionComponent {
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
+    this.idUser = this.rutaActiva.snapshot.params['id_user'];
     this.idDieta = this.rutaActiva.snapshot.params['id'];
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
@@ -399,6 +401,20 @@ export class FormNutritionComponent {
     });
     this.successAlert = true;
   }
+  
+  async insertDieta() {
+    const fechaEnviar = this.formatDateModificar(this.fecha);
+    const response = await fetch('https://btop.es/server/insertDieta.php', {
+      method: 'POST', body: JSON.stringify({
+        'id_user': this.idUser,
+        'hora': this.hora,
+        'fecha': fechaEnviar,
+        'kcal': this.kcal,
+        'descripcion': this.descripcion,
+      })
+    });
+    this.successAlert = true;
+  }
 
   async guardar() {
     console.log(this.hora);
@@ -408,10 +424,12 @@ export class FormNutritionComponent {
     this.checkErrores();
     if (this.numeroErrores == 0) {
       this.errorAlert = false;
-      //if(this.idDieta > 0 ){
-      //  await this.updateEntreno();
-      //}
-      //await this.getDietaModificar();
+      if(this.idDieta > 0 ){
+        await this.updateDieta();
+      }else{
+        await this.insertDieta();
+      }
+      await this.getDietaModificar();
     } else {
       this.errorAlert = true;
     }
@@ -459,7 +477,6 @@ export class FormNutritionComponent {
     this.numeroErrores = 0;
     const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
     const regexNumeros = /^\d+$/;
-    const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
 
     this.errores = {
       fechaVacia: '',
@@ -489,7 +506,8 @@ export class FormNutritionComponent {
       this.numeroErrores++
     }
 
-    if (this.kcal !== undefined && this.kcal !== '' && !regexFecha.test(this.kcal)) {
+    if (this.kcal !== undefined && this.kcal !== '' && !regexNumeros.test(this.kcal)) {
+      console.log(this.kcal);
         this.errores.kcalErrorFormato = 'Las calorías deben ser un números';
         this.numeroErrores++;
     

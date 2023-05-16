@@ -54,26 +54,16 @@ export class DetalleDiaComponent implements OnInit{
   }
 
   async getListaEntrenos(){
-    
-    if(this.id == 0 ){
-      const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id, 'fecha': this.fechaSearch})});
-      this.listaEntrenosHoy = await response.json();
-    }else{
       const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
       this.listaEntrenosHoy = await response.json();
-    }
+
     console.log(this.listaEntrenosHoy);
   }
 
   async getListaNutricion(){
-    
-    if(this.id == 0 ){
-      const response = await fetch('https://btop.es/server/listaNutrisDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id, 'fecha': this.fechaSearch})});
-      this.listaNutrisHoy = await response.json();
-    }else{
+
       const response = await fetch('https://btop.es/server/listaNutrisDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
       this.listaNutrisHoy = await response.json();
-    }
     this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
       if (a.hora < b.hora) return -1;
       if (a.hora > b.hora) return 1;
@@ -83,19 +73,19 @@ export class DetalleDiaComponent implements OnInit{
   }
 
   goToFormEnterno(){
-    this.router.navigate(['formentreno',0, this.day,this.mes,this.year]);
+    this.router.navigate(['formentreno', this.id, 0, this.day,this.mes,this.year]);
   }
 
   goToFormActividadModificar(id: any){
-    this.router.navigate(['formentreno',id, this.day,this.mes,this.year]);
+    this.router.navigate(['formentreno', this.id, id, this.day,this.mes,this.year]);
   }
 
   goToFormDieta(){
-    this.router.navigate(['formnutricion',0,this.day,this.mes,this.year]);
+    this.router.navigate(['formnutricion',this.id, 0,this.day,this.mes,this.year]);
   }
 
   goToFormDietaModificar(id:any){
-    this.router.navigate(['formnutricion',id,this.day,this.mes,this.year]);
+    this.router.navigate(['formnutricion',this.id, id,this.day,this.mes,this.year]);
   }
 
   formatDate(day: number, month: string, year: number): string {

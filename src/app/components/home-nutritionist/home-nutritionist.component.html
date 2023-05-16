@@ -37,7 +37,7 @@
                     <div class="col-lg-8 col-md-6 col-sm-6 col-6 d-flex felx-wrap justify-content-end align-items-center">
                         <ng-container *ngFor="let nutricion of listaNutrisHoy">
                             <ng-container *ngIf="nutricion.id_user == usuario.id">
-                                <button class="btn btn-info mx-1" type="button" (click)="goToFormDietaModificar(nutricion[0])">{{nutricion.hora}}</button>
+                                <button class="btn btn-info mx-1" type="button" (click)="goToFormDietaModificar(usuario.id, nutricion[0])">{{nutricion.hora}}</button>
                             </ng-container>
                         </ng-container>
                     </div>

@@ -10,7 +10,8 @@ export class FormEntrenoComponent {
 
   /// Variables ///
 
-  userLoged:any;
+  userLoged: any;
+  idUser:any;
 
   // Listado para los select
   listaDeportes: any;
@@ -147,7 +148,7 @@ export class FormEntrenoComponent {
   ]
 
   idActividad: any;
-  actividadHoy:any;
+  actividadHoy: any;
 
   // Variables de formulario
   deporte: any;
@@ -158,9 +159,9 @@ export class FormEntrenoComponent {
   descripcion: any;
   fecha: any;
 
-  day:any;
-  mes:any;
-  year:any;
+  day: any;
+  mes: any;
+  year: any;
 
   successAlert: boolean = false;
   errorAlert: boolean = false;
@@ -169,14 +170,14 @@ export class FormEntrenoComponent {
   numeroErrores: number = 0;
   erroresNoVacios: any = {};
   errores = {
-    fechaVacia:'',
-    fechaErrorFormato:'',
-    deporteVacio:'',
-    duracionVacio:'',
-    distanciaErrorFormato:'',
-    ritmoMedioErrorFormato:'',
-    fcMediaErrorFormato:'',
-    descripcionVacia:'',
+    fechaVacia: '',
+    fechaErrorFormato: '',
+    deporteVacio: '',
+    duracionVacio: '',
+    distanciaErrorFormato: '',
+    ritmoMedioErrorFormato: '',
+    fcMediaErrorFormato: '',
+    descripcionVacia: '',
   }
 
   constructor(private rutaActiva: ActivatedRoute, private router: Router) {
@@ -184,11 +185,12 @@ export class FormEntrenoComponent {
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
+    this.idUser = this.rutaActiva.snapshot.params['id_user'];
     this.idActividad = this.rutaActiva.snapshot.params['id'];
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
     this.year = this.rutaActiva.snapshot.params['year'];
-    this.fecha = this.formatDateMostrar(this.day,this.mes,this.year);
+    this.fecha = this.formatDateMostrar(this.day, this.mes, this.year);
   }
 
   /// INICIO ///
@@ -199,10 +201,10 @@ export class FormEntrenoComponent {
 
   /// CONSULTAS /// 
 
-  async getActividadModificar(){
-    
-    if(this.idActividad > 0 ){
-      const response = await fetch('https://btop.es/server/entrenoAModificar.php', { method: 'POST', body: JSON.stringify({'id': this.idActividad})});
+  async getActividadModificar() {
+
+    if (this.idActividad > 0) {
+      const response = await fetch('https://btop.es/server/entrenoAModificar.php', { method: 'POST', body: JSON.stringify({ 'id': this.idActividad }) });
       this.actividadHoy = await response.json();
       this.deporte = this.actividadHoy[0].id_deporte;
       this.duracion = this.actividadHoy[0].duracion;
@@ -214,38 +216,58 @@ export class FormEntrenoComponent {
   }
 
   // Consulta del listado de deportes
-  async getListaDeportes(){
-    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
+  async getListaDeportes() {
+    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
   }
 
   async updateEntreno() {
-    const fechaEnviar =  this.formatDateModificar(this.fecha);
+    const fechaEnviar = this.formatDateModificar(this.fecha);
     const response = await fetch('https://btop.es/server/updateEntreno.php', {
       method: 'POST', body: JSON.stringify({
-        'fecha':  fechaEnviar, 
-        'id_deporte': this.deporte, 
-        'duracion': this.duracion, 
-        'distancia': this.distancia, 
-        'ritmo_medio': this.ritmoMedio, 
+        'fecha': fechaEnviar,
+        'id_deporte': this.deporte,
+        'duracion': this.duracion,
+        'distancia': this.distancia,
+        'ritmo_medio': this.ritmoMedio,
         'fc_media': this.fcMedia,
         'descripcion': this.descripcion,
         'id': this.idActividad
-        })});
-        this.successAlert = true;
+      })
+    });
+    this.successAlert = true;
   }
 
-  async guardar(){
+  async insertEntreno() {
+    const fechaEnviar = this.formatDateModificar(this.fecha);
+    const response = await fetch('https://btop.es/server/insertEntreno.php', {
+      method: 'POST', body: JSON.stringify({
+        'id_user': this.idUser, 
+        'fecha': fechaEnviar,
+        'id_deporte': this.deporte,
+        'duracion': this.duracion,
+        'distancia': this.distancia,
+        'ritmo_medio': this.ritmoMedio,
+        'fc_media': this.fcMedia,
+        'descripcion': this.descripcion,
+      })
+    });
+    this.successAlert = true;
+  }
+
+  async guardar() {
     console.log(this.numeroErrores);
     this.checkErrores();
-    if(this.numeroErrores == 0){
+    if (this.numeroErrores == 0) {
       this.errorAlert = false;
-      //if(this.idActividad > 0 ){
-      //  await this.updateEntreno();
-      //}
-      //await this.getActividadModificar();
-    }else{
+      if (this.idActividad > 0) {
+        await this.updateEntreno();
+      }else{
+        await this.insertEntreno();
+      }
+      await this.getActividadModificar();
+    } else {
       this.errorAlert = true;
     }
   }
@@ -287,7 +309,7 @@ export class FormEntrenoComponent {
     return nuevaFecha;
   }
 
-  checkErrores(){
+  checkErrores() {
 
     this.numeroErrores = 0;
     const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
@@ -295,53 +317,53 @@ export class FormEntrenoComponent {
     const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
 
     this.errores = {
-      fechaVacia:'',
-      fechaErrorFormato:'',
-      deporteVacio:'',
-      duracionVacio:'',
-      distanciaErrorFormato:'',
-      ritmoMedioErrorFormato:'',
-      fcMediaErrorFormato:'',
-      descripcionVacia:'',
+      fechaVacia: '',
+      fechaErrorFormato: '',
+      deporteVacio: '',
+      duracionVacio: '',
+      distanciaErrorFormato: '',
+      ritmoMedioErrorFormato: '',
+      fcMediaErrorFormato: '',
+      descripcionVacia: '',
     }
 
-    if(this.fecha == null || this.fecha == ''){
+    if (this.fecha == null || this.fecha == '') {
       this.errores.fechaVacia = "La fecha no puede estar vacía";
       this.numeroErrores++
     }
     if (!this.errores.fechaVacia && !regexFecha.test(this.fecha)) {
-         this.errores.fechaErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
-         this.numeroErrores++;
+      this.errores.fechaErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
+      this.numeroErrores++;
     }
-    if(this.deporte == null || this.deporte == ''){
+    if (this.deporte == null || this.deporte == '') {
       this.errores.deporteVacio = "El deporte no puede estar vacío";
       this.numeroErrores++
     }
-    if(this.duracion == null || this.duracion == ''){
+    if (this.duracion == null || this.duracion == '') {
       this.errores.duracionVacio = "La duración no puede estar vacía";
       this.numeroErrores++
-    } 
+    }
 
-    if (!regexNumeros.test(this.distancia)) {
+    if(this.distancia !== undefined && this.distancia !== '' && !regexNumeros.test(this.distancia)) {
       this.errores.distanciaErrorFormato = 'La distancia debe ser un número';
       this.numeroErrores++;
     }
 
-    if (!regexNumerosDecimales.test(this.ritmoMedio)) {
+    if(this.ritmoMedio !== undefined && this.ritmoMedio !== '' && !regexNumerosDecimales.test(this.ritmoMedio)) {
       this.errores.ritmoMedioErrorFormato = 'El ritmo debe ser un número separado por un punto y el decimal no superior a 59 (Ej. 3.59)';
       this.numeroErrores++;
     }
 
-    if (!regexNumeros.test(this.fcMedia)) {
+    if(this.fcMedia !== undefined && this.fcMedia !== '' && !regexNumeros.test(this.fcMedia)) {
       this.errores.fcMediaErrorFormato = 'La frecuencia cardíaca debe ser un número';
       this.numeroErrores++;
     }
 
-    if(this.descripcion == null || this.descripcion == ''){   
+    if (this.descripcion == null || this.descripcion == '') {
       this.errores.descripcionVacia = "La descripción no puede estar vacía";
       this.numeroErrores++
     }
-       
+
     this.erroresNoVacios = Object.values(this.errores).filter(error => error !== '');
   }
 }

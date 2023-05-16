@@ -1,5 +1,5 @@
 <div class="row mx-4 my-4">
-    <div class="col-lg-12 bg-light">
+    <div class="col-lg-12 bg-light mb-4">
         <h2 class="my-4">NUTRICIÓN</h2>
         <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -24,7 +24,7 @@
             <div class="col-lg-6 my-3">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <label class="text-white" for="fecha">Fecha</label>
+                        <label class="text-white" for="fecha">FECHA</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
                         <input type="email" class="form-control bg-light" id="fecha" [(ngModel)]="fecha">
@@ -33,7 +33,7 @@
 
                 <div class="row mt-3">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <label class="text-white" for="duracion">Selecciona la hora</label>
+                        <label class="text-white" for="duracion">SELECCIONA UNA HORA</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
                         <select class="form-select bg-light" aria-label="Default select example" id="duracion"
@@ -46,7 +46,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <label class="text-white" for="Kcal">Kcal</label>
+                        <label class="text-white" for="Kcal">CALORÍAS</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
                         <input type="email" class="form-control bg-light" id="Kcal" [(ngModel)]="kcal">
@@ -57,7 +57,7 @@
             <div class="col-lg-6 mt-3">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <label class="text-white" for="objetivos">Descripción</label>
+                        <label class="text-white" for="objetivos">DESCRIPCIÓN</label>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2">
                         <textarea class="form-control bg-light" id="objetivos" [(ngModel)]="descripcion"></textarea>
@@ -66,7 +66,7 @@
             </div>
             <div class="row my-3">
                 <div class="col-lg-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-success" (click)="guardar()">Guardar</button>
+                    <button type="button" class="btn btn-lg btn-success" (click)="guardar()">Guardar</button>
                 </div>
             </div>
         </div>

@@ -25,7 +25,26 @@ export class SettingsComponent {
   objetivos: any;
   horario_entrenamientos: any;
   horario_comidas: any;
-  userInfo: any ="";
+  userInfo: any = "";
+
+  successAlert: boolean = false;
+  errorAlert: boolean = false;
+
+  // Errores
+  numeroErrores: number = 0;
+  erroresNoVacios: any = {};
+  errores = {
+    fecha_nacimientoVacio: '',
+    fecha_nacimientoErrorFormato: '',
+    generoVacio: '',
+    pesoVacio: '',
+    alturaVacio: '',
+    deporte_principalVacio: '',
+    objetivosVacio: '',
+    horario_entrenamientosVacio: '',
+    horario_comidasVacio: '',
+    userInfoVacio: '',
+  }
 
 
   /// INICIO ///
@@ -51,10 +70,10 @@ export class SettingsComponent {
   }
 
   async getUser() {
-    const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST' , body: JSON.stringify({'id':this.userLoged.id})});
+    const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.userInfo = await response.json();
     this.userInfo = this.userInfo[0];
-    this.fecha_nacimiento = this.userInfo.fecha_nacimiento;
+    this.fecha_nacimiento =  this.formatDateMostrar(this.userInfo.fecha_nacimiento);
     this.genero = this.userInfo.genero;
     this.peso = this.userInfo.peso;
     this.altura = this.userInfo.altura;
@@ -65,9 +84,10 @@ export class SettingsComponent {
   }
 
   async updateSetings() {
+    const fechaEnviar = this.formatDateModificar(this.fecha_nacimiento);
     const response = await fetch('https://btop.es/server/updateSettings.php', {
       method: 'POST', body: JSON.stringify({
-        'fecha_nacimiento': this.fecha_nacimiento,
+        'fecha_nacimiento': fechaEnviar,
         'genero': this.genero,
         'peso': this.peso,
         'altura': this.altura,
@@ -77,16 +97,47 @@ export class SettingsComponent {
         'horario_comidas': this.horario_comidas,
         'id': this.userLoged.id
       })
+      
     });
-    
+    this.successAlert = true;
   }
 
   /// FUNCIONES ///
 
   // Función para insertar en la bd las variables
   async guardar() {
-    await this.updateSetings();
-    await this.getUser();
+    this.checkErrores();
+    if (this.numeroErrores == 0) {
+      this.errorAlert = false;
+      await this.updateSetings();
+      await this.getUser();
+    } else {
+      this.errorAlert = true;
+    }
+  }
+
+  formatDateMostrar(fecha: string): string {
+    const partes = fecha.split('-');
+    const year = partes[0];
+    const mes = partes[1];
+    const dia = partes[2];
+
+    // Formatear la fecha en el nuevo formato
+    const nuevaFecha = `${dia}-${mes}-${year}`;
+
+    return nuevaFecha;
+  }
+
+  formatDateModificar(fecha: string): string {
+    const partes = fecha.split('-');
+    const dia = partes[0];
+    const mes = partes[1];
+    const year = partes[2];
+
+    // Formatear la fecha en el nuevo formato
+    const nuevaFecha = `${year}-${mes}-${dia}`;
+
+    return nuevaFecha;
   }
 
   // Función para calcular la edad respecto a la fecha de nacimiento
@@ -100,5 +151,65 @@ export class SettingsComponent {
       edad--;
     }
     return edad;
+  }
+
+  checkErrores() {
+
+    this.numeroErrores = 0;
+    const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+    const regexNumeros = /^\d+$/;
+    const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
+
+    this.errores = {
+      fecha_nacimientoVacio: '',
+      fecha_nacimientoErrorFormato: '',
+      generoVacio: '',
+      pesoVacio: '',
+      alturaVacio: '',
+      deporte_principalVacio: '',
+      objetivosVacio: '',
+      horario_entrenamientosVacio: '',
+      horario_comidasVacio: '',
+      userInfoVacio: '',
+    }
+
+    if (this.fecha_nacimiento == null || this.fecha_nacimiento == '') {
+      this.errores.fecha_nacimientoVacio = "La fecha no puede estar vacía";
+      this.numeroErrores++
+    }
+    if (!this.errores.fecha_nacimientoVacio && !regexFecha.test(this.fecha_nacimiento)) {
+      this.errores.fecha_nacimientoErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
+      this.numeroErrores++;
+    }
+    // if(this.deporte == null || this.deporte == ''){
+    //   this.errores.deporteVacio = "El deporte no puede estar vacío";
+    //   this.numeroErrores++
+    // }
+    // if(this.duracion == null || this.duracion == ''){
+    //   this.errores.duracionVacio = "La duración no puede estar vacía";
+    //   this.numeroErrores++
+    // } 
+
+    // if (!regexNumeros.test(this.distancia)) {
+    //   this.errores.distanciaErrorFormato = 'La distancia debe ser un número';
+    //   this.numeroErrores++;
+    // }
+
+    // if (!regexNumerosDecimales.test(this.ritmoMedio)) {
+    //   this.errores.ritmoMedioErrorFormato = 'El ritmo debe ser un número separado por un punto y el decimal no superior a 59 (Ej. 3.59)';
+    //   this.numeroErrores++;
+    // }
+
+    // if (!regexNumeros.test(this.fcMedia)) {
+    //   this.errores.fcMediaErrorFormato = 'La frecuencia cardíaca debe ser un número';
+    //   this.numeroErrores++;
+    // }
+
+    // if(this.descripcion == null || this.descripcion == ''){   
+    //   this.errores.descripcionVacia = "La descripción no puede estar vacía";
+    //   this.numeroErrores++
+    // }
+
+    this.erroresNoVacios = Object.values(this.errores).filter(error => error !== '');
   }
 }

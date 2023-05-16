@@ -1,6 +1,6 @@
 <div class="row mx-4 mt-4">
     <div class="col-lg-6 bg-light pb-3">
-        <p class="mt-3">CLIENTS</p>
+        <p class="mt-3">CLIENTES</p>
         <ng-container *ngFor="let user of listaNutris">
             <div class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
                 <div class="col-lg-2 my-2">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 my-2 pt-3">
                     <p class="text-white">{{user.nombre}} {{user.apellidos}}</p>
-                    <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}}</p>
+                    <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}} años</p>
                 </div>
                 <div class="col-lg-4 d-grid gap-2 my-2">
                     <button class="btn btn-primary rounded-1" type="button"

@@ -162,6 +162,23 @@ export class FormEntrenoComponent {
   mes:any;
   year:any;
 
+  successAlert: boolean = false;
+  errorAlert: boolean = false;
+
+  // Errores
+  numeroErrores: number = 0;
+  erroresNoVacios: any = {};
+  errores = {
+    fechaVacia:'',
+    fechaErrorFormato:'',
+    deporteVacio:'',
+    duracionVacio:'',
+    distanciaErrorFormato:'',
+    ritmoMedioErrorFormato:'',
+    fcMediaErrorFormato:'',
+    descripcionVacia:'',
+  }
+
   constructor(private rutaActiva: ActivatedRoute, private router: Router) {
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
@@ -216,11 +233,21 @@ export class FormEntrenoComponent {
         'descripcion': this.descripcion,
         'id': this.idActividad
         })});
+        this.successAlert = true;
   }
 
   async guardar(){
-    await this.updateEntreno();
-    await this.getActividadModificar();
+    console.log(this.numeroErrores);
+    this.checkErrores();
+    if(this.numeroErrores == 0){
+      this.errorAlert = false;
+      //if(this.idActividad > 0 ){
+      //  await this.updateEntreno();
+      //}
+      //await this.getActividadModificar();
+    }else{
+      this.errorAlert = true;
+    }
   }
 
   formatDateMostrar(day: number, month: string, year: number): string {
@@ -258,5 +285,63 @@ export class FormEntrenoComponent {
     const nuevaFecha = `${year}-${mes}-${dia}`;
 
     return nuevaFecha;
+  }
+
+  checkErrores(){
+
+    this.numeroErrores = 0;
+    const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+    const regexNumeros = /^\d+$/;
+    const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
+
+    this.errores = {
+      fechaVacia:'',
+      fechaErrorFormato:'',
+      deporteVacio:'',
+      duracionVacio:'',
+      distanciaErrorFormato:'',
+      ritmoMedioErrorFormato:'',
+      fcMediaErrorFormato:'',
+      descripcionVacia:'',
+    }
+
+    if(this.fecha == null || this.fecha == ''){
+      this.errores.fechaVacia = "La fecha no puede estar vacía";
+      this.numeroErrores++
+    }
+    if (!this.errores.fechaVacia && !regexFecha.test(this.fecha)) {
+         this.errores.fechaErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
+         this.numeroErrores++;
+    }
+    if(this.deporte == null || this.deporte == ''){
+      this.errores.deporteVacio = "El deporte no puede estar vacío";
+      this.numeroErrores++
+    }
+    if(this.duracion == null || this.duracion == ''){
+      this.errores.duracionVacio = "La duración no puede estar vacía";
+      this.numeroErrores++
+    } 
+
+    if (!regexNumeros.test(this.distancia)) {
+      this.errores.distanciaErrorFormato = 'La distancia debe ser un número';
+      this.numeroErrores++;
+    }
+
+    if (!regexNumerosDecimales.test(this.ritmoMedio)) {
+      this.errores.ritmoMedioErrorFormato = 'El ritmo debe ser un número separado por un punto y el decimal no superior a 59 (Ej. 3.59)';
+      this.numeroErrores++;
+    }
+
+    if (!regexNumeros.test(this.fcMedia)) {
+      this.errores.fcMediaErrorFormato = 'La frecuencia cardíaca debe ser un número';
+      this.numeroErrores++;
+    }
+
+    if(this.descripcion == null || this.descripcion == ''){   
+      this.errores.descripcionVacia = "La descripción no puede estar vacía";
+      this.numeroErrores++
+    }
+       
+    this.erroresNoVacios = Object.values(this.errores).filter(error => error !== '');
   }
 }

@@ -11,7 +11,7 @@ export class FormNutritionComponent {
 
   /// Variables ///
 
-  userLoged:any;
+  userLoged: any;
 
   // Listado para los select
   listaTiempos: Array<any> = [
@@ -286,7 +286,7 @@ export class FormNutritionComponent {
     "20:45:00",
     "20:50:00",
     "20:55:00",
-    
+
     "21:00:00",
     "21:05:00",
     "21:10:00",
@@ -327,29 +327,43 @@ export class FormNutritionComponent {
     "23:55:00",
   ]
 
-  idHora: any;
+  idDieta: any;
   // Variables de formulario
   hora: any;
   kcal: any;
   descripcion: any;
   fecha: any;
 
-  dietaHoy:any;
+  dietaHoy: any;
 
-  day:any;
-  mes:any;
-  year:any;
+  day: any;
+  mes: any;
+  year: any;
+
+  successAlert: boolean = false;
+  errorAlert: boolean = false;
+
+  // Errores
+  numeroErrores: number = 0;
+  erroresNoVacios: any = {};
+  errores = {
+    fechaVacia: '',
+    fechaErrorFormato: '',
+    horaVacia: '',
+    kcalErrorFormato: '',
+    descripcionVacia: '',
+  }
 
   constructor(private rutaActiva: ActivatedRoute, private router: Router) {
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
-    this.idHora = this.rutaActiva.snapshot.params['id'];
+    this.idDieta = this.rutaActiva.snapshot.params['id'];
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
     this.year = this.rutaActiva.snapshot.params['year'];
-    this.fecha = this.formatDate(this.day,this.mes,this.year);
+    this.fecha = this.formatDateMostrar(this.day, this.mes, this.year);
   }
 
   /// INICIO ///
@@ -361,10 +375,10 @@ export class FormNutritionComponent {
   /// CONSULTAS /// 
 
   // Consulta del listado de deportes
-  async getDietaModificar(){
-    
-    if(this.idHora > 0 ){
-      const response = await fetch('https://btop.es/server/dietaAModificar.php', { method: 'POST', body: JSON.stringify({'id': this.idHora})});
+  async getDietaModificar() {
+
+    if (this.idDieta > 0) {
+      const response = await fetch('https://btop.es/server/dietaAModificar.php', { method: 'POST', body: JSON.stringify({ 'id': this.idDieta }) });
       this.dietaHoy = await response.json();
       this.hora = this.dietaHoy[0].hora;
       this.kcal = this.dietaHoy[0].kcal;
@@ -372,14 +386,38 @@ export class FormNutritionComponent {
     }
   }
 
-  guardar(){
+  async updateDieta() {
+    const fechaEnviar = this.formatDateModificar(this.fecha);
+    const response = await fetch('https://btop.es/server/updateDieta.php', {
+      method: 'POST', body: JSON.stringify({
+        'fecha': fechaEnviar,
+        'hora': this.hora,
+        'kcal': this.kcal,
+        'descripcion': this.descripcion,
+        'id': this.idDieta
+      })
+    });
+    this.successAlert = true;
+  }
+
+  async guardar() {
     console.log(this.hora);
     console.log(this.kcal);
     console.log(this.descripcion);
     console.log(this.fecha);
+    this.checkErrores();
+    if (this.numeroErrores == 0) {
+      this.errorAlert = false;
+      //if(this.idDieta > 0 ){
+      //  await this.updateEntreno();
+      //}
+      //await this.getDietaModificar();
+    } else {
+      this.errorAlert = true;
+    }
   }
 
-  formatDate(day: number, month: string, year: number): string {
+  formatDateMostrar(day: number, month: string, year: number): string {
     interface MonthNames {
       [key: string]: string;
     }
@@ -402,5 +440,61 @@ export class FormNutritionComponent {
     const formattedMonth = monthNumber.toString().padStart(2, '0');
     const formattedDay = day.toString().padStart(2, '0');
     return `${formattedDay}-${formattedMonth}-${year}`;
+  }
+
+  formatDateModificar(fecha: string): string {
+    const partes = fecha.split('-');
+    const dia = partes[0];
+    const mes = partes[1];
+    const year = partes[2];
+
+    // Formatear la fecha en el nuevo formato
+    const nuevaFecha = `${year}-${mes}-${dia}`;
+
+    return nuevaFecha;
+  }
+
+  checkErrores() {
+
+    this.numeroErrores = 0;
+    const regexFecha = /^(0[1-9]|1\d|2\d|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+    const regexNumeros = /^\d+$/;
+    const regexNumerosDecimales = /^\d+(\.[0-5]?\d)?$/;
+
+    this.errores = {
+      fechaVacia: '',
+      fechaErrorFormato: '',
+      horaVacia: '',
+      kcalErrorFormato: '',
+      descripcionVacia: '',
+    }
+
+    if (this.fecha == null || this.fecha == '') {
+      this.errores.fechaVacia = "La fecha no puede estar vacía";
+      this.numeroErrores++
+    }
+
+    if (!this.errores.fechaVacia && !regexFecha.test(this.fecha)) {
+      this.errores.fechaErrorFormato = 'La fecha debe tener formato dd-mm-yyyy (Ej. 16-05-2023)';
+      this.numeroErrores++;
+    }
+
+    if (this.hora == null || this.hora == '') {
+      this.errores.horaVacia = "La hora no puede estar vacía";
+      this.numeroErrores++
+    }
+
+    if (this.descripcion == null || this.descripcion == '') {
+      this.errores.descripcionVacia = "La descripción no puede estar vacía";
+      this.numeroErrores++
+    }
+
+    if (this.kcal !== undefined && this.kcal !== '' && !regexFecha.test(this.kcal)) {
+        this.errores.kcalErrorFormato = 'Las calorías deben ser un números';
+        this.numeroErrores++;
+    
+    }
+
+    this.erroresNoVacios = Object.values(this.errores).filter(error => error !== '');
   }
 }

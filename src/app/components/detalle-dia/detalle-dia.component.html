@@ -20,7 +20,7 @@
                 </ng-container>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 pe-4 d-flex justify-content-end">
-                <button *ngIf="userLoged.rol == 'TRA' || userLoged.rol == 'ATH'" class="btn btn-warning "
+                <button *ngIf="userLoged.rol == 'TRA' || userLoged.rol == 'ATH'" class="btn btn-warning rounded-1"
                     type="button" (click)="goToFormActividadModificar(entreno.id)">modificar</button>
             </div>
             <div class="row row-datos-entreno">
@@ -82,24 +82,26 @@
                 <button class="btn btn-info btn-lg rounded-1 stop-boton" type="button">{{hora.hora}}</button>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 pe-4 d-flex justify-content-end">
-                <button *ngIf="userLoged.rol == 'NUT' || userLoged.rol == 'ATH'" class="btn btn-warning "
+                <button *ngIf="userLoged.rol == 'NUT' || userLoged.rol == 'ATH'" class="btn btn-warning rounded-1"
                     type="button" (click)="goToFormDietaModificar(hora.id)" >Modificar</button>
             </div>
             <div class="row row-datos-entreno">
-                <div class="col-lg-6 mb-3">
+                <div class="col-lg-12 mb-3">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <p class="text-white">Kcal</p>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                            <p class="text-white text-end">{{hora.kcal}}</p>
+                        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
+                            <p class="text-white">{{hora.kcal}}</p>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-12 mb-3">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <p class="text-white">Descripción</p>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="col-lg-9 col-md-6 col-sm-6 col-6">
                             <p class="text-white ">{{hora.descripcion}}</p>
                         </div>
                     </div>

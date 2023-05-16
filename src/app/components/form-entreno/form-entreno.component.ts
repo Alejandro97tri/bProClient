@@ -171,7 +171,7 @@ export class FormEntrenoComponent {
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
     this.year = this.rutaActiva.snapshot.params['year'];
-    this.fecha = this.formatDate(this.day,this.mes,this.year);
+    this.fecha = this.formatDateMostrar(this.day,this.mes,this.year);
   }
 
   /// INICIO ///
@@ -203,7 +203,27 @@ export class FormEntrenoComponent {
     console.log(this.listaDeportes);
   }
 
-  formatDate(day: number, month: string, year: number): string {
+  async updateEntreno() {
+    const fechaEnviar =  this.formatDateModificar(this.fecha);
+    const response = await fetch('https://btop.es/server/updateEntreno.php', {
+      method: 'POST', body: JSON.stringify({
+        'fecha':  fechaEnviar, 
+        'id_deporte': this.deporte, 
+        'duracion': this.duracion, 
+        'distancia': this.distancia, 
+        'ritmo_medio': this.ritmoMedio, 
+        'fc_media': this.fcMedia,
+        'descripcion': this.descripcion,
+        'id': this.idActividad
+        })});
+  }
+
+  async guardar(){
+    await this.updateEntreno();
+    await this.getActividadModificar();
+  }
+
+  formatDateMostrar(day: number, month: string, year: number): string {
     interface MonthNames {
       [key: string]: string;
     }
@@ -226,5 +246,17 @@ export class FormEntrenoComponent {
     const formattedMonth = monthNumber.toString().padStart(2, '0');
     const formattedDay = day.toString().padStart(2, '0');
     return `${formattedDay}-${formattedMonth}-${year}`;
+  }
+
+  formatDateModificar(fecha: string): string {
+    const partes = fecha.split('-');
+    const dia = partes[0];
+    const mes = partes[1];
+    const year = partes[2];
+
+    // Formatear la fecha en el nuevo formato
+    const nuevaFecha = `${year}-${mes}-${dia}`;
+
+    return nuevaFecha;
   }
 }

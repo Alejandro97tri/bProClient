@@ -41,7 +41,7 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   listaNutricion: any;
 
   fechaSearch: any;
-
+  dateNow: Date = new Date;
 
   /// INICIO ///
   constructor(private router: Router){}
@@ -128,7 +128,16 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   }
 
   
-  formatDate(day: number, month: string, year: number): string {
+  formatDateNow(date: Date): string {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // Los meses empiezan en 0
+    let day = date.getDate();
+    let monthStr = month < 10 ? `0${month}` : `${month}`; // Añadir un 0 al mes si es menor a 10
+    let dayStr = day < 10 ? `0${day}` : `${day}`; // Añadir un 0 al día si es menor a 10
+    return `${year}-${monthStr}-${dayStr}`;
+  }
+
+  formatDate(day: number|null, month: string, year: number): string {
     interface MonthNames {
       [key: string]: string;
     }
@@ -149,8 +158,12 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     };
     const monthNumber = new Date(`${monthNames[month]} 1, ${year}`).getMonth() + 1;
     const formattedMonth = monthNumber.toString().padStart(2, '0');
-    const formattedDay = day.toString().padStart(2, '0');
-    return `${year}-${formattedMonth}-${formattedDay}`;
+    if(day!==null){
+      const formattedDay = day.toString().padStart(2, '0');
+      return `${year}-${formattedMonth}-${formattedDay}`;
+    }else{
+      return `Fecha erronea`;
+    }
   }
   
 }

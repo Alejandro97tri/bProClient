@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,7 @@ export class SettingsComponent {
 
   // Listado de deportes
   listaDeportes: any;
-  
+
   // Formulario
   fecha_nacimiento: any;
   genero: any;
@@ -24,6 +25,7 @@ export class SettingsComponent {
   objetivos: any;
   horario_entrenamientos: any;
   horario_comidas: any;
+  userInfo: any ="";
 
 
   /// INICIO ///
@@ -35,38 +37,56 @@ export class SettingsComponent {
   }
 
   ngOnInit(): void {
-    this.fecha_nacimiento= this.userLoged.fecha_nacimiento;
-    this.genero= this.userLoged.genero;
-    this.peso= this.userLoged.peso;
-    this.altura= this.userLoged.altura;
-    this.deporte_principal= this.userLoged.deporte_principal;
-    this.objetivos= this.userLoged.objetivos;
-    this.horario_entrenamientos= this.userLoged.horario_entrenamiento;
-    this.horario_comidas= this.userLoged.horario_comidas;
+    this.getUser();
     this.getListaDeportes();
   }
 
   /// CONSULTAS ///
 
   // Consulta para obtener la lista de deportes
-  async getListaDeportes(){
-    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
+  async getListaDeportes() {
+    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
   }
 
+  async getUser() {
+    const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST' , body: JSON.stringify({'id':this.userLoged.id})});
+    this.userInfo = await response.json();
+    this.userInfo = this.userInfo[0];
+    this.fecha_nacimiento = this.userInfo.fecha_nacimiento;
+    this.genero = this.userInfo.genero;
+    this.peso = this.userInfo.peso;
+    this.altura = this.userInfo.altura;
+    this.deporte_principal = this.userInfo.deporte_principal;
+    this.objetivos = this.userInfo.objetivos;
+    this.horario_entrenamientos = this.userInfo.horario_entrenamiento;
+    this.horario_comidas = this.userInfo.horario_comidas;
+  }
+
+  async updateSetings() {
+    const response = await fetch('https://btop.es/server/updateSettings.php', {
+      method: 'POST', body: JSON.stringify({
+        'fecha_nacimiento': this.fecha_nacimiento,
+        'genero': this.genero,
+        'peso': this.peso,
+        'altura': this.altura,
+        'deporte_principal': this.deporte_principal,
+        'objetivos': this.objetivos,
+        'horario_entrenamientos': this.horario_entrenamientos,
+        'horario_comidas': this.horario_comidas,
+        'id': this.userLoged.id
+      })
+    });
+    
+  }
+
   /// FUNCIONES ///
-  
+
   // Función para insertar en la bd las variables
-  guardar(){
-    console.log(this.fecha_nacimiento);
-    console.log(this.genero);
-    console.log(this.peso);
-    console.log(this.altura);
-    console.log(this.deporte_principal);
-    console.log(this.objetivos);
-    console.log(this.horario_entrenamientos);
-    console.log(this.horario_comidas);
+  async guardar() {
+    await this.updateSetings();
+    await this.getUser();
   }
 
   // Función para calcular la edad respecto a la fecha de nacimiento

@@ -1,50 +1,58 @@
  .calendar-row {
-    max-width: 100%;
-    display: flex;
-    height: 12.5vh;
-  } 
-  
-  .calendar-cell {
-    width: 14.28%;
-    padding: 10px;
-  }
-  
-  .border-days{
-    border: 1px solid rgb(194, 194, 194);
-  }
-  .calendar-cell-empty {
-    /* visibility: hidden; */
-    border: none;
-    background-color: rgb(194, 194, 194);
-  }
+   max-width: 100%;
+   display: flex;
+   height: 12.5vh;
+ }
 
-  .bg-calendar-days{
-    background-color: #53789c;
-    width: 5vh;
-  }
+ .calendar-cell {
+   width: 14.28%;
+   padding: 10px;
+ }
 
-  .stop-boton {
-    cursor: not-allowed;
-    pointer-events: none;
-}
+ .border-days {
+   border: 1px solid rgb(194, 194, 194);
+ }
 
-  @media (max-width: 600px) {
-    .calendar-row {
-      flex-wrap: wrap;
-      height: auto;
-    }
-  
-    .calendar-cell {
-      width: 100%;
-      height: 25vh;
-    }
+ .calendar-cell-empty {
+   /* visibility: hidden; */
+   border: none;
+   background-color: rgb(194, 194, 194);
+ }
 
-    .calendar-cell-empty {
-      display: none;
-    }
+ .bg-calendar-days {
+   background-color: #53789c;
+   width: 5vh;
+ }
 
-    .calendar-days{
-      display: none;
-    }
-  }
-  
+ .stop-boton {
+   cursor: not-allowed;
+   pointer-events: none;
+ }
+
+ .old-days {
+   background-color: #ebebeb;
+ }
+
+ .today {
+  border: 3px solid rgb(255, 112, 112);
+ }
+
+ @media (max-width: 600px) {
+   .calendar-row {
+     flex-wrap: wrap;
+     height: auto;
+   }
+
+   .calendar-cell {
+     width: 100%;
+     height: 25vh;
+   }
+
+   .calendar-cell-empty {
+     display: none;
+   }
+
+   .calendar-days {
+     display: none;
+   }
+ }

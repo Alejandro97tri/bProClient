@@ -1,6 +1,6 @@
 <div class="row mx-4 mt-4">
     <div class="col-lg-12 bg-light">
-        <h2 class="my-4">{{userLoged.nombre}} {{userLoged.apellidos}}</h2>
+        <h2 class="my-4">{{userInfo.nombre}} {{userInfo.apellidos}}</h2>
         <div class="row bg-dark">
             <div class="col-lg-5 my-3">
                 <div class="icono-cliente rounded-2">
@@ -16,7 +16,7 @@
                         <p class="text-white">Edad</p>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-6">
-                        <p class="text-white text-end">{{calcularEdad(userLoged.fecha_nacimiento)}} años</p>
+                        <p class="text-white text-end">{{calcularEdad(userInfo.fecha_nacimiento)}} años</p>
                     </div>
                 </div>
                 <div class="row my-1">
@@ -33,10 +33,10 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                         <select [(ngModel)]="genero" class="form-select bg-light" aria-label="Default select example" id="genero">
-                                <option value="{{userLoged.genero}}" selected>
-                                    <span *ngIf="userLoged.genero === 'MAS'">Masculino (Actual)</span>
-                                    <span *ngIf="userLoged.genero === 'FEM'">Femenino (Actual)</span>
-                                    <span *ngIf="userLoged.genero === 'OTR'">Otro (Actual)</span>
+                                <option value="{{userInfo.genero}}" selected>
+                                    <span *ngIf="userInfo.genero === 'MAS'">Masculino (Actual)</span>
+                                    <span *ngIf="userInfo.genero === 'FEM'">Femenino (Actual)</span>
+                                    <span *ngIf="userInfo.genero === 'OTR'">Otro (Actual)</span>
                                 </option>
                                 <option value="MAS">Masculino </option>
                                 <option value="FEM">Femenino </option>
@@ -49,7 +49,7 @@
                         <label class="text-white" for="peso">Peso (kg)</label>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-6">
-                        <input type="email" class="form-control bg-light text-end" id="peso" name="peso" value="{{userLoged.peso}}" [(ngModel)]="peso">
+                        <input type="email" class="form-control bg-light text-end" id="peso" name="peso" value="{{userInfo.peso}}" [(ngModel)]="peso">
                     </div>
                 </div>
                 <div class="row my-1">
@@ -57,7 +57,7 @@
                         <label class="text-white" for="altura">Altura (cm)</label>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-6">
-                        <input type="email" class="form-control bg-light text-end" id="altura" name="altura" value="{{userLoged.altura}}" [(ngModel)]="altura">
+                        <input type="email" class="form-control bg-light text-end" id="altura" name="altura" value="{{userInfo.altura}}" [(ngModel)]="altura">
                     </div>
                 </div>
                 <div class="row my-1">
@@ -66,9 +66,9 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                         <select [(ngModel)]="deporte_principal" class="form-select bg-light " aria-label="Default select example" id="deporte">
-                                <option value="{{userLoged.deporte_principal}}">{{userLoged.deporte_principal}} (Actual)</option>
+                                <option value="{{userInfo.deporte_principal}}">{{userInfo.deporte_principal}} (Actual)</option>
                                 <ng-container *ngFor="let deporte of listaDeportes">
-                                    <option value="{{deporte.id_deporte}}">{{deporte.nombre}}</option>
+                                    <option value="{{deporte.nombre}}">{{deporte.nombre}}</option>
                                 </ng-container>
                         </select>
                     </div>

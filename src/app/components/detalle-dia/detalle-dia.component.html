@@ -1,10 +1,10 @@
 <div class="row mx-4 mt-4">
     <div class="col-lg-6 col-md-6 bg-light">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4">
+            <div class="col-lg-8 col-md-6 col-sm-6 col-6 my-4">
                 <h2>Actividades {{day}}-{{formattedMonth}}-{{year}}</h2>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 d-flex justify-content-end">
+            <div *ngIf="addVisible" class="col-lg-4 col-md-6 col-sm-6 col-6 my-4 d-flex justify-content-end">
                 <button *ngIf="userLoged.rol == 'TRA' || userLoged.rol == 'ATH'" class="btn btn-dark btn-sm" (click)="goToFormEnterno()">Añadir actividad</button>
             </div>
         </div>
@@ -69,10 +69,10 @@
 
     <div class="col-lg-6 col-md-6 bg-light">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4">
+            <div class="col-lg-8 col-md-6 col-sm-6 col-6 my-4">
                 <h2>Nutrición {{day}}-{{formattedMonth}}-{{year}}</h2>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 my-4 d-flex justify-content-end">
+            <div *ngIf="addVisible" class="col-lg-4 col-md-6 col-sm-6 col-6 my-4 d-flex justify-content-end">
                 <button *ngIf="userLoged.rol == 'NUT' || userLoged.rol == 'ATH'" class="btn btn-dark btn-sm" (click)="goToFormDieta()">Añadir dieta</button>
             </div>
         </div>

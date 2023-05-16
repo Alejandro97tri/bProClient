@@ -27,7 +27,10 @@
 
                             <!-- AQUI -->
                             <ng-container *ngFor="let day of week">
-                                <div class="border-days calendar-cell" [ngClass]="{'calendar-cell-empty': day === null}" (click)="goToDay(day)">
+                                <div class="border-days calendar-cell" [ngClass]="{'calendar-cell-empty': day === null, 
+                                'old-days': this.formatDateNow(dateNow) > this.formatDate(day,mes,year),
+                                'today': this.formatDateNow(dateNow) == this.formatDate(day,mes,year)}" 
+                                (click)="goToDay(day)">
                                     <div class="calendar-day-number rounded-3 px-2 bg-calendar-days text-center">
                                         <p class="text-white fw-bold">{{day}}</p>
                                     </div>

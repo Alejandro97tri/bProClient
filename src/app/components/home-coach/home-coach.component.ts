@@ -8,10 +8,6 @@ import { Route, Router } from '@angular/router';
 })
 export class HomeCoachComponent implements OnInit{
 
-  /// SALIDA ///
-  @Output() userInfoActiveEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() userInfoEmitter: EventEmitter<any> = new EventEmitter();
-
   /// ENTRADA ///
   @Input() userLoged: any ;
 
@@ -84,8 +80,7 @@ export class HomeCoachComponent implements OnInit{
 
   // Emisor de los datos de usuario para verlos en detalle
   userInfo(user: any){
-    this.userInfoActiveEmitter.emit(true);
-    this.userInfoEmitter.emit(user);
+    this.router.navigate(['userinfo',user]);
   }
 
   // Calculo de la edad respecto a la fecha de nacimiento

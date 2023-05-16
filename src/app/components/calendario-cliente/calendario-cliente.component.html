@@ -1,7 +1,7 @@
 <div class="mx-4">
     <app-menu-calendar (mes)="setMes($event)" (year)="setYear($event)"
         (dateChanged)="onDateChanged($event)"></app-menu-calendar>
-    <div class="row h-100 prueba">
+    <div class="row h-100">
         <div class="col-lg-12">
             <div class="row">
                 <div class="calendar-days">
@@ -17,17 +17,12 @@
                     <ng-container *ngFor="let week of weeks; let i=index">
                         <div *ngIf='!(i == 0 && offset == 0)' class="calendar-row"
                             [ngStyle]="{'max-width': i === 1 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
-                            <!-- <ng-container *ngIf="i === 0">
-                                <ng-container *ngFor="let day of emptyDays">
-                                    <div class="card border-dark calendar-cell calendar-cell-empty">
-                                        <div class="calendar-day-number">{{day}}</div>
-                                    </div>
-                                </ng-container>
-                            </ng-container> -->
 
-                            <!-- AQUI -->
                             <ng-container *ngFor="let day of week">
-                                <div class="border-days calendar-cell" [ngClass]="{'calendar-cell-empty': day === null}" (click)="goToDay(day)">
+                                <div class="border-days calendar-cell" [ngClass]="{'calendar-cell-empty': day === null, 
+                                            'old-days': this.formatDateNow(dateNow) > this.formatDate(day,mes,year),
+                                            'today': this.formatDateNow(dateNow) == this.formatDate(day,mes,year)}" 
+                                            (click)="goToDay(day)">
                                     <div class="calendar-day-number rounded-3 px-2 bg-calendar-days text-center">
                                         <p class="text-white fw-bold ">{{day}}</p>
                                     </div>
@@ -44,8 +39,5 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-lg-2 bg-light">
-            <p> contenido secundario</p>
-        </div> -->
     </div>
 </div>

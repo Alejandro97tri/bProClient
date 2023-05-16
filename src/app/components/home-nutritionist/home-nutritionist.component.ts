@@ -72,8 +72,7 @@ export class HomeNutritionistComponent {
 
   // Emisor de la informacion de usuario para verla
   userInfo(user: any) {
-    this.userInfoActiveEmitter.emit(true);
-    this.userInfoEmitter.emit(user);
+    this.router.navigate(['userinfo',user]);
   }
 
   goToFormDietaModificar(id: any) {

@@ -5,8 +5,8 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                 <p class="mb-0 px-3 py-2">Actualizado correctamente</p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end">
-                <button class="btn btn-ouline-success" (click)="successAlert = false">X</button>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end align-items-center">
+                <button class="btn btn-ouline-success btn-cerrar" (click)="successAlert = false">X</button>
             </div>
         </div>
         <div *ngIf="errorAlert" class="row bg-danger mb-3 rounded-2 ">
@@ -16,8 +16,8 @@
                         <li class="text-white" *ngFor="let error of erroresNoVacios">{{error}}</li>
                     </ul>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end">
-                <button class="btn btn-sm btn-ouline-danger" (click)="errorAlert = false">X</button>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end align-items-center">
+                <button class="btn btn-sm btn-ouline-danger btn-cerrar" (click)="errorAlert = false">X</button>
             </div>
         </div>
         <div class="row bg-dark mb-3 rounded-2">

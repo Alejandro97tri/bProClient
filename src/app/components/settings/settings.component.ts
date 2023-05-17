@@ -107,6 +107,8 @@ export class SettingsComponent {
 
   // Función para insertar en la bd las variables
   async guardar() {
+    this.successAlert= false;
+    this.errorAlert= false;
     this.checkErrores();
     if (this.numeroErrores == 0) {
       this.errorAlert = false;

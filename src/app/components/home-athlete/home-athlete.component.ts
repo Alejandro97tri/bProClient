@@ -117,12 +117,13 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.mes = e;
   }
 
-  getEntreno(day: number){
+  getEntreno(day: number | null){
     this.fechaSearch = this.formatDate(day,this.mes,this.year);
+    console.log(!this.listaEntrenos || !this.listaEntrenos.find((e: { fecha: string; }) => e.fecha === this.fechaSearch))
     return !this.listaEntrenos || !this.listaEntrenos.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
   }
 
-  getNutricion(day: number){
+  getNutricion(day: number | null){
     this.fechaSearch = this.formatDate(day,this.mes,this.year);
     return !this.listaNutricion || !this.listaNutricion.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
   }

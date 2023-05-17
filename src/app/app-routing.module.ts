@@ -13,7 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 
 const appRoutes: Routes = [
-  { path: 'entrenamiento/:id/:dia/:mes/:year', component: DetalleDiaComponent },
+  { path: 'entrenamiento/:id/:dia/:mes/:year', component: DetalleDiaComponent,canActivate:[LoginGuardian] },
   { path: '', component: HomeComponent, canActivate:[LoginGuardian] },
   { path: 'login', component: LoginComponent},
   { path: 'userinfo/:id', component: UserInfoComponent, canActivate:[LoginGuardian] },

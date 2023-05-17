@@ -14,6 +14,8 @@ export class HomeCoachComponent implements OnInit{
 
   /// VARIABLES ///
 
+  actividadesEmpty:boolean = false;
+
   dia: any;
   mes: any;
   ano: any;
@@ -57,8 +59,11 @@ export class HomeCoachComponent implements OnInit{
     this.listaActividades.forEach((element:any) => {
       (this.listaActividadesAtletas.includes(element.id_user)) ? null : this.listaActividadesAtletas.push(element.id_user);
     });
+    if(this.listaActividades.length == 0){
+      this.actividadesEmpty = true;
+    }
     console.log(this.listaActividadesAtletas)
-    console.log(this.listaActividades);
+    console.log(this.listaActividades.length);
   }
 
   // Consulta de la lista de deportes

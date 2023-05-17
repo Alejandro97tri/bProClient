@@ -257,6 +257,8 @@ export class FormEntrenoComponent {
   }
 
   async guardar() {
+    this.successAlert= false;
+    this.errorAlert= false;
     console.log(this.numeroErrores);
     this.checkErrores();
     if (this.numeroErrores == 0) {

@@ -356,6 +356,7 @@ export class FormNutritionComponent {
   }
 
   constructor(private rutaActiva: ActivatedRoute, private router: Router) {
+
     let session = sessionStorage.getItem('auth');
     if (session !== null) {
       this.userLoged = JSON.parse(session);
@@ -366,6 +367,7 @@ export class FormNutritionComponent {
     this.mes = this.rutaActiva.snapshot.params['mes'];
     this.year = this.rutaActiva.snapshot.params['year'];
     this.fecha = this.formatDateMostrar(this.day, this.mes, this.year);
+    
   }
 
   /// INICIO ///
@@ -417,6 +419,8 @@ export class FormNutritionComponent {
   }
 
   async guardar() {
+    this.successAlert= false;
+    this.errorAlert= false;
     console.log(this.hora);
     console.log(this.kcal);
     console.log(this.descripcion);

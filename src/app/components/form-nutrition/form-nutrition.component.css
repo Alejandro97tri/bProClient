@@ -20,3 +20,7 @@ path {
 textarea{
     height: 23.5vh;
 }
+
+.btn-cerrar{
+    width: min-content;
+}

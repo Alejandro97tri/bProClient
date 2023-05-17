@@ -29,12 +29,14 @@
                             <ng-container *ngFor="let day of week">
                                 <div class="border-days calendar-cell" [ngClass]="{'calendar-cell-empty': day === null, 
                                 'old-days': this.formatDateNow(dateNow) > this.formatDate(day,mes,year),
-                                'today': this.formatDateNow(dateNow) == this.formatDate(day,mes,year)}" 
+                                'next-days': this.formatDateNow(dateNow) <= this.formatDate(day,mes,year),
+                                'today': this.formatDateNow(dateNow) == this.formatDate(day,mes,year),
+                                'cursor-pointer': !getNutricion(day) || !getEntreno(day)}" 
                                 (click)="goToDay(day)">
                                     <div class="calendar-day-number rounded-3 px-2 bg-calendar-days text-center">
                                         <p class="text-white fw-bold">{{day}}</p>
                                     </div>
-                                    <div *ngIf="day !== null" class="d-flex align-items-around">
+                                    <div class="d-flex align-items-around">
                                         <button class="btn btn-sm btn-info mx-1 stop-boton" *ngIf="!getEntreno(day)">
                                             Entrenos
                                         </button>

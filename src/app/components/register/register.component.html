@@ -2,118 +2,118 @@
     <div class="container py-5 ">
         <div class="row bg-dark text-white box-login rounded-2 borde p-5">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2 text-center">
-                <h2 class="fw-bold mb-2">Regístrate</h2>
+                <h2 class="fw-bold mb-4">Regístrate</h2>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="Username">USERNAME</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="Username">
+                <div class="row d-flex align-items-end justify-content-end">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="Username" placeholder="Username"  [(ngModel)]="username">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="password">PASSWORD</label>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="password" class="form-control bg-light mt-2" id="password" placeholder="Password"  [(ngModel)]="password">
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="password" class="form-control bg-light" id="password" >
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
+                <div class="row d-flex align-items-end justify-content-end">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="nombre" placeholder="Nombre"  [(ngModel)]="nombre">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="nombre">NOMBRE</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="nombre" >
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="apellidos" placeholder="Apellidos"  [(ngModel)]="apellidos">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="apellidos">APELLIDOS</label>
+                <div class="row d-flex align-items-end justify-content-end">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="fecha_nacimiento" placeholder="DD-MM-YYYY"  [(ngModel)]="fecha_nacimiento">
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="apellidos" >
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="email" placeholder="Email"  [(ngModel)]="email">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="rol">ROL</label>
+                <div class="row d-flex align-items-end justify-content-end">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+
+                        <select class="form-select bg-light mt-2" aria-label="Default select example" id="deporte"
+                            [(ngModel)]="genero">
+                            <option value="" selected>Selecciona un genero</option>
+                            <option value="MAS">Masculino</option>
+                            <option value="FEM">Femenino</option>
+                            <option value="OTR">Otro</option>
+                        </select>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="rol" >
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12  d-flex flex-column">
+
+                        <select class="form-select bg-light mt-2" aria-label="Default select example" id="deporte"
+                            [(ngModel)]="rol">
+                            <option value="" selected>Selecciona un rol</option>
+                            <option value="ATH">Atleta</option>
+                            <option value="TRA">Entrenador</option>
+                            <option value="NUT">Nutricionista</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
+                <div class="row d-flex align-items-end justify-content-end">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="peso" placeholder="Peso"  [(ngModel)]="peso">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="email">EMAIL</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="email" class="form-control bg-light" id="email" >
+                <div class="row ">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
+                        <input type="text" class="form-control bg-light mt-2" id="altura" placeholder="Altura"  [(ngModel)]="altura">
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="fecha_nacimiento">FECHA DE NACIMIENTO</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="fecha_nacimiento" >
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
+                <div class="row ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-center">
+                        <button class="btn btn-outline-light btn-lg px-5" (click)="enviar()">Enviar</button>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
+            <!-- <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="genero">GENERO</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="genero" >
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="peso">PESO</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="peso" >
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
-                        <label class="text-white" for="altura">ALTURA</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="altura" >
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-end">
                         <label class="text-white" for="deporte_principal">DEPORTE PRINCIPAL</label>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <input type="text" class="form-control bg-light" id="deporte_principal" >
+                        <select class="form-select bg-light" aria-label="Default select example" id="deporte"
+                            [(ngModel)]="deporte">
+                            <ng-container *ngFor="let deporte of listaDeportes">
+                                <option value="">Seleciona un deporte</option>
+                                <option value="{{deporte.id_deporte}}">{{deporte.nombre}}</option>
+                            </ng-container>
+                        </select>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </div>

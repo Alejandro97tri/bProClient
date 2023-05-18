@@ -4,9 +4,10 @@ section {
     position: relative;
 }
 .box-login {
-    background-color: rgba(0, 0, 0, 0.7) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .borde {
     border: 1px solid rgba(223, 215, 202, 0.75);
 }
+

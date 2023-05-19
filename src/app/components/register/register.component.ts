@@ -32,7 +32,24 @@ export class RegisterComponent {
     console.log(this.listaDeportes);
   }
 
+  registro() {
+    fetch('https://btop.es/server/registro.php', {
+      method: 'POST', body: JSON.stringify({
+        username: this.username,
+        password: this.password,
+        nombre: this.nombre,
+        apellidos: this.apellidos,
+        fecha_nacimiento: this.fecha_nacimiento,
+        email: this.email,
+        genero: this.genero,
+        rol: this.rol,
+        peso: this.peso,
+        altura: this.altura,
+      })
+    });
+  }
+
   enviar(){
-    
+    this.registro();
   }
 }

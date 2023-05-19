@@ -15,6 +15,7 @@
 
  .calendar-cell-empty {
    /* visibility: hidden; */
+   pointer-events: none;
    border: none;
    background-color: rgb(194, 194, 194);
  }
@@ -31,6 +32,7 @@
 
  .old-days {
    background-color: #ebebeb;
+   pointer-events: none;
  }
 
  .next-days {
@@ -39,10 +41,12 @@
 
  .today {
   border: 3px solid rgb(255, 112, 112);
+  cursor: pointer;
  }
 
  .cursor-pointer {
   cursor: pointer;
+  pointer-events: all;
 }
 
  @media (max-width: 600px) {

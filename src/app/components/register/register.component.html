@@ -1,120 +1,136 @@
-<section class="vh-100 gradient-custom">
+<section class="vh-100 gradient-custom clearfix">
     <div class="container py-5 ">
-        <div class="row bg-dark text-white box-login rounded-2 borde p-5">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-2 text-center">
-                <h2 class="fw-bold mb-4">Regístrate</h2>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row d-flex align-items-end justify-content-end">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="Username" placeholder="Username"  [(ngModel)]="username">
+        <div class="col-md-12 col-lg-12 bg-dark box-login rounded-2 borde px-5 text-white">
+            <h2 class="fw-bold text-center mb-2 mt-4">Regístrate</h2>
+            <form class="needs-validation" novalidate="">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control bg-light" name="nombre" id="nombre" [(ngModel)]="nombre">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="password" class="form-control bg-light mt-2" id="password" placeholder="Password"  [(ngModel)]="password">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row d-flex align-items-end justify-content-end">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="nombre" placeholder="Nombre"  [(ngModel)]="nombre">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="apellidos" placeholder="Apellidos"  [(ngModel)]="apellidos">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row d-flex align-items-end justify-content-end">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="fecha_nacimiento" placeholder="DD-MM-YYYY"  [(ngModel)]="fecha_nacimiento">
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="email" placeholder="Email"  [(ngModel)]="email">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="Apellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control bg-light"name="Apellidos"  id="Apellidos" [(ngModel)]="apellidos">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row d-flex align-items-end justify-content-end">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
 
-                        <select class="form-select bg-light mt-2" aria-label="Default select example" id="deporte"
-                            [(ngModel)]="genero">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control bg-light" name="username" id="username" placeholder="Username" [(ngModel)]="username">
+                            <div class="invalid-feedback">
+                                Your username is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control bg-light"  name="email" id="email" placeholder="you@example.com" [(ngModel)]="email">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-sm-12">
+                        <label for="password1" class="form-label">Constraseña</label>
+                        <input type="password" class="form-control bg-light" name="password1" id="password1" [(ngModel)]="password1">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6 col-sm-12">
+                        <label for="password2" class="form-label">Repite la contraseña</label>
+                        <input type="password" class="form-control bg-light" name="password2" id="password2" [(ngModel)]="password2">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="genero" class="form-label">Genero</label>
+                        <select class="form-select bg-light" id="genero" name="genero" [(ngModel)]="genero" [ngModelOptions]="{ standalone: true }">
                             <option value="" selected>Selecciona un genero</option>
                             <option value="MAS">Masculino</option>
                             <option value="FEM">Femenino</option>
                             <option value="OTR">Otro</option>
                         </select>
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12  d-flex flex-column">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="fecha" class="form-label">Fecha de nacimiento</label>
+                        <input type="text" class="form-control bg-light" id="fecha" name="fecha" placeholder="DD-MM-YYYY" [(ngModel)]="fecha_nacimiento">
+                        <div class="invalid-feedback">
+                            Please provide a valid state.
+                        </div>
+                    </div>
 
-                        <select class="form-select bg-light mt-2" aria-label="Default select example" id="deporte"
-                            [(ngModel)]="rol">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="peso" class="form-label">Peso</label>
+                        <input type="text" class="form-control bg-light" id="peso" name="peso" placeholder="Kg" [(ngModel)]="peso">
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="altura" class="form-label">Altura</label>
+                        <input type="text" class="form-control bg-light" id="altura" name="altura" placeholder="Cm" [(ngModel)]="altura">
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-select bg-light" id="rol" [(ngModel)]="rol" [ngModelOptions]="{ standalone: true }">
                             <option value="" selected>Selecciona un rol</option>
                             <option value="ATH">Atleta</option>
                             <option value="TRA">Entrenador</option>
                             <option value="NUT">Nutricionista</option>
                         </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row d-flex align-items-end justify-content-end">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="peso" placeholder="Peso"  [(ngModel)]="peso">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column">
-                        <input type="text" class="form-control bg-light mt-2" id="altura" placeholder="Altura"  [(ngModel)]="altura">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mt-4">
-                <div class="row ">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-center">
-                        <button class="btn btn-outline-light btn-lg px-5" (click)="enviar()">Enviar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-end">
-                        <label class="text-white" for="deporte_principal">DEPORTE PRINCIPAL</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 my-2">
-                        <select class="form-select bg-light" aria-label="Default select example" id="deporte"
-                            [(ngModel)]="deporte">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="deporte" class="form-label">Deporte principal</label>
+                        <select class="form-select bg-light" id="deporte" [(ngModel)]="deporte" [ngModelOptions]="{ standalone: true }">
+                            <option value="" selected>Seleciona un deporte</option>
                             <ng-container *ngFor="let deporte of listaDeportes">
-                                <option value="">Seleciona un deporte</option>
                                 <option value="{{deporte.id_deporte}}">{{deporte.nombre}}</option>
                             </ng-container>
                         </select>
+                        <div class="invalid-feedback">
+                            Please select a valid country.
+                        </div>
                     </div>
+                
                 </div>
-            </div> -->
-        </div>
 
+                <!-- <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info">
+                    <label class="form-check-label" for="save-info">Acepto la política de privacidad</label>
+                </div>
+
+                <hr class="my-4"> -->
+
+                <div class="d-flex justify-content-end my-4">
+                    <button class="btn btn-primary btn-lg text-center" type="submit" (click)="enviar()">Enviar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </section>

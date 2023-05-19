@@ -9,12 +9,13 @@ export class RegisterComponent {
 
   deporte: string = '';
   username: any;
-  password: any;
+  password1: any;
+  password2: any;
   nombre: any;
   apellidos: any;
   fecha_nacimiento: any;
   email: any;
-  genero: string = '';
+  genero: string = "";
   rol: string = '';
   peso: any;
   altura: any;
@@ -36,7 +37,7 @@ export class RegisterComponent {
     fetch('https://btop.es/server/registro.php', {
       method: 'POST', body: JSON.stringify({
         username: this.username,
-        password: this.password,
+        password: this.password1,
         nombre: this.nombre,
         apellidos: this.apellidos,
         fecha_nacimiento: this.fecha_nacimiento,

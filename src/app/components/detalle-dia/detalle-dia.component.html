@@ -9,6 +9,11 @@
             </div>
         </div>
 
+        <div *ngIf="entrenosEmpty" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 py-3">
+                <p class="text-white">No hay actividades para hoy</p>
+            </div>
+        </div>
 
         <div *ngFor="let entreno of listaEntrenosHoy"
             class="row bg-dark d-flex align-items-center justify-content-center rounded-2 mt-2">
@@ -74,6 +79,11 @@
             </div>
             <div *ngIf="addVisible" class="col-lg-4 col-md-6 col-sm-6 col-6 my-4 d-flex justify-content-end">
                 <button *ngIf="userLoged.rol == 'NUT' || userLoged.rol == 'ATH'" class="btn btn-dark btn-sm" (click)="goToFormDieta()">Añadir dieta</button>
+            </div>
+        </div>
+        <div *ngIf="nutricionEmpty" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 py-3">
+                <p class="text-white">No hay nutrición para hoy</p>
             </div>
         </div>
         <div *ngFor="let hora of listaNutrisHoy"

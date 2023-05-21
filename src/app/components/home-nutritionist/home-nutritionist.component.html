@@ -25,6 +25,11 @@
                 </div>
             </div>
         </ng-container>
+        <div *ngIf="clienteEmpty" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-3">
+                <p class="text-white">Todavía no tienes clientes</p>
+            </div>
+        </div>
     </div>
     <div class="col-lg-6 bg-light pb-3">
         <p class="mt-3">NUTRICIÓN HOY</p>
@@ -44,5 +49,10 @@
                 </div>
             </ng-container>
         </ng-container>
+        <div *ngIf="nutricionEmpty" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-3">
+                <p class="text-white">No hay actividades para hoy</p>
+            </div>
+        </div>
     </div>
 </div>

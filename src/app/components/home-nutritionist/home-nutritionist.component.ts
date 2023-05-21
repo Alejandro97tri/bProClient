@@ -29,6 +29,10 @@ export class HomeNutritionistComponent {
   // Listado de dietas hoy
   listaNutrisHoy: any;
 
+  
+  nutricionEmpty:boolean = false;
+  clienteEmpty:boolean = false;
+
   /// INICIO ///
   constructor(private router: Router) { }
 
@@ -47,6 +51,9 @@ export class HomeNutritionistComponent {
     this.listaNutrisHoy.forEach((element: any) => {
       (this.listaNutrisAtletas.includes(element.id_user)) ? null : this.listaNutrisAtletas.push(element.id_user);
     });
+    if(this.listaNutrisHoy.length == 0){
+      this.nutricionEmpty = true;
+    }
     this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
       if (a.hora < b.hora) return -1;
       if (a.hora > b.hora) return 1;
@@ -61,6 +68,9 @@ export class HomeNutritionistComponent {
   async getListaNutris() {
     const response = await fetch('https://btop.es/server/homeListaNutris.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaNutris = await response.json();
+    if(this.listaNutris.length == 0){
+      this.clienteEmpty = true;
+    }
     console.log(this.listaNutris);
   }
 

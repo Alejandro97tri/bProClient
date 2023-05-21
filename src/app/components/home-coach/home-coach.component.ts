@@ -15,6 +15,7 @@ export class HomeCoachComponent implements OnInit{
   /// VARIABLES ///
 
   actividadesEmpty:boolean = false;
+  clientesEmpty:boolean = false;
 
   dia: any;
   mes: any;
@@ -49,6 +50,9 @@ export class HomeCoachComponent implements OnInit{
   async getListaAtletas(){
     const response = await fetch('https://btop.es/server/homeListaAtletas.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
     this.listaAtletas = await response.json();
+    if(this.listaAtletas.length == 0){
+      this.clientesEmpty = true;
+    }
     console.log(this.listaAtletas);
   }
 

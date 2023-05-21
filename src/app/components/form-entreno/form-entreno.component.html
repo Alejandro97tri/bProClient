@@ -1,7 +1,7 @@
 <div class="row mx-4 my-4">
     <div class="col-lg-12 bg-light mb-4">
         <h2 class="my-4">ENTRENAMIENTO</h2>
-        <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 ">
+        <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 fadeIn">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                 <p class="mb-0 px-3 py-2">Actualizado correctamente</p>
             </div>
@@ -9,7 +9,7 @@
                 <button class="btn btn-ouline-success btn-cerrar" (click)="successAlert = false">X</button>
             </div>
         </div>
-        <div *ngIf="errorAlert" class="row bg-danger mb-3 rounded-2 ">
+        <div *ngIf="errorAlert" class="row bg-danger mb-3 rounded-2 fadeIn">
             <div class="col-lg-11 col-md-11 col-sm-11 col-11">
                 <p class="mb-0 px-3 py-2 text-white">Errores</p>
                     <ul class="ms-3">
@@ -92,7 +92,8 @@
             </div>
             <div class="row my-3">
                 <div class="col-lg-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-success" (click)="guardar()">Guardar</button>
+                    <button type="button" class="btn btn-success me-3" (click)="guardar()">Guardar</button>
+                    <button type="button" class="btn btn-lg btn-danger" (click)="guardar()">Eliminar</button>
                 </div>
             </div>
         </div>

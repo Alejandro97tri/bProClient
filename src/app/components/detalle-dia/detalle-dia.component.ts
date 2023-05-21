@@ -19,6 +19,9 @@ export class DetalleDiaComponent implements OnInit{
   year: number = 0;
   formattedMonth: any;
 
+  nutricionEmpty:boolean = false;
+  entrenosEmpty:boolean = false;
+
   listaDeportes:any;
   listaEntrenosHoy: any;
   listaNutrisHoy: any;
@@ -56,6 +59,9 @@ export class DetalleDiaComponent implements OnInit{
   async getListaEntrenos(){
       const response = await fetch('https://btop.es/server/listaActividadesDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
       this.listaEntrenosHoy = await response.json();
+      if(this.listaEntrenosHoy.length == 0){
+        this.entrenosEmpty = true;
+      }
 
     console.log(this.listaEntrenosHoy);
   }
@@ -64,7 +70,10 @@ export class DetalleDiaComponent implements OnInit{
 
       const response = await fetch('https://btop.es/server/listaNutrisDiaAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.id, 'fecha': this.fechaSearch})});
       this.listaNutrisHoy = await response.json();
-    this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
+      if(this.listaNutrisHoy.length == 0){
+        this.nutricionEmpty = true;
+      }
+      this.listaNutrisHoy.sort((a: { hora: number; }, b: { hora: number; }) => {
       if (a.hora < b.hora) return -1;
       if (a.hora > b.hora) return 1;
       return 0;

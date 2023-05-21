@@ -23,25 +23,6 @@ if (count($resultados) > 0) {
     return;
 }
 
-// if($datos['pass'] != $datos['pass2']){
-//     echo json_encode(false);
-//     return;
-// }
-
-// if(!preg_match('/^[a-zA-Z0-9_-]{3,16}$/', $datos['username'])) {
-//     echo json_encode(false);
-//     return;
-// }
-
-// if(!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $datos['email'])) {
-//     echo json_encode(false);
-//     return;
-// }
-
-// if(!preg_match('/\S+/', $datos['pass']) || !preg_match('/\S+/', $datos['pass2'])){
-//     echo json_encode(false);
-//     return;
-// }
 
 $consulta = $conexion->prepare('INSERT INTO `User` (username, `password`, nombre, apellidos, rol, email, fecha_nacimiento, genero, peso, altura ) VALUES (?,?,?,?,?,?,?,?,?,?)');
 $resultado = $consulta->execute([

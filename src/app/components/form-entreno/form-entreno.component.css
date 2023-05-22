@@ -25,6 +25,10 @@ textarea{
     width: min-content;
 }
 
+.bg-warning{
+    background-color: rgba(244,124,60, 0.7) !important;
+    }
+    
 .fadeIn{
     animation: fadeIn 1s ease forwards;
 }

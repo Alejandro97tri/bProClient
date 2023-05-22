@@ -165,6 +165,7 @@ export class FormEntrenoComponent {
 
   successAlert: boolean = false;
   errorAlert: boolean = false;
+  deleteAlert: boolean = false;
 
   // Errores
   numeroErrores: number = 0;
@@ -259,6 +260,7 @@ export class FormEntrenoComponent {
   async guardar() {
     this.successAlert= false;
     this.errorAlert= false;
+    this.deleteAlert= false;
     console.log(this.numeroErrores);
     this.checkErrores();
     if (this.numeroErrores == 0) {
@@ -273,6 +275,24 @@ export class FormEntrenoComponent {
       this.errorAlert = true;
     }
   }
+
+  alerta() {
+    this.deleteAlert = true;
+   }
+ 
+   eliminar() {
+     fetch('https://btop.es/server/deleteEntreno.php', {
+       method: 'POST', body: JSON.stringify({
+         'id': this.idActividad,
+       })
+     }).then(response => {
+      if (response.ok) {
+        this.router.navigate(['entrenamiento',this.idUser, this.day,this.mes,this.year]);
+      } else {
+        throw new Error('Error en la solicitud fetch');
+      }
+    })
+    }
 
   formatDateMostrar(day: number, month: string, year: number): string {
     interface MonthNames {

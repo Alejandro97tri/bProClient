@@ -29,6 +29,10 @@ textarea{
     animation: fadeIn 1s ease forwards;
 }
 
+.bg-warning{
+background-color: rgba(244,124,60, 0.7) !important;
+}
+
 @keyframes fadeIn {
     0% {
       opacity: 0;

@@ -42,6 +42,10 @@ export class LoginComponent {
     }
   }
 
+  register(){
+    this.router.navigate(['register']);
+  }
+
   // Función para comprobar si se esta logueado y que actie el guard
   estaLogueado(){
     return sessionStorage.getItem('auth');

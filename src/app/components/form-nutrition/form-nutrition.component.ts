@@ -343,6 +343,7 @@ export class FormNutritionComponent {
 
   successAlert: boolean = false;
   errorAlert: boolean = false;
+  deleteAlert: boolean = false;
 
   // Errores
   numeroErrores: number = 0;
@@ -420,6 +421,7 @@ export class FormNutritionComponent {
 
   async guardar() {
     this.successAlert= false;
+    this.deleteAlert= false;
     this.errorAlert= false;
     console.log(this.hora);
     console.log(this.kcal);
@@ -438,6 +440,24 @@ export class FormNutritionComponent {
       this.errorAlert = true;
     }
   }
+
+  alerta() {
+   this.deleteAlert = true;
+  }
+
+  eliminar() {
+    fetch('https://btop.es/server/deleteNutricion.php', {
+      method: 'POST', body: JSON.stringify({
+        'id': this.idDieta,
+      })
+    }).then(response => {
+      if (response.ok) {
+        this.router.navigate(['entrenamiento',this.idUser, this.day,this.mes,this.year]);
+      } else {
+        throw new Error('Error en la solicitud fetch');
+      }
+    })
+   }
 
   formatDateMostrar(day: number, month: string, year: number): string {
     interface MonthNames {

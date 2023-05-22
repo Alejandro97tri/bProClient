@@ -34,3 +34,8 @@ svg {
 .user-box .dropdown-toggle::after {
     display: none;
   }
+
+  .curs {
+    cursor: pointer !important;
+  }
+  

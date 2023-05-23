@@ -94,7 +94,7 @@ export class SettingsComponent {
         'altura': this.altura,
         'deporte_principal': this.deporte_principal,
         'objetivos': this.objetivos,
-        'horario_entrenamientos': this.horario_entrenamientos,
+        'horario_entrenamiento': this.horario_entrenamientos,
         'horario_comidas': this.horario_comidas,
         'id': this.userLoged.id
       })

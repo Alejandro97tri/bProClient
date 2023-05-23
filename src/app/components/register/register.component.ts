@@ -73,7 +73,7 @@ export class RegisterComponent {
         password: this.password1,
         nombre: this.nombre,
         apellidos: this.apellidos,
-        fecha_nacimiento: this.fecha_nacimiento,
+        fecha_nacimiento: this.formatDateModificar(this.fecha_nacimiento),
         email: this.email,
         genero: this.genero,
         rol: this.rol,
@@ -97,6 +97,18 @@ export class RegisterComponent {
       this.errorAlert = true;
       }, 500)
     }
+  }
+
+  formatDateModificar(fecha: string): string {
+    const partes = fecha.split('-');
+    const dia = partes[0];
+    const mes = partes[1];
+    const year = partes[2];
+
+    // Formatear la fecha en el nuevo formato
+    const nuevaFecha = `${year}-${mes}-${dia}`;
+
+    return nuevaFecha;
   }
 
   formError(){

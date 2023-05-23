@@ -36,13 +36,13 @@
         <ng-container *ngFor="let usuario of listaNutris">
             <ng-container *ngIf="listaNutrisAtletas.includes(usuario.id)">
                 <div class="row bg-dark d-flex felx-wrap align-items-center justify-content-center rounded-3 mt-2">
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-6 pt-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 pt-3">
                         <p class="text-white">{{usuario.nombre}} {{usuario.apellidos}}</p>
                     </div>
-                    <div class="col-lg-8 col-md-6 col-sm-6 col-6 d-flex felx-wrap justify-content-end align-items-center">
+                    <div class="col-lg-8 col-md-6 col-sm-6 col-12 d-flex felx-wrap justify-content-sm-start justify-content-md-end justify-content-lg-end justify-content-xl-end align-items-center">
                         <ng-container *ngFor="let nutricion of listaNutrisHoy">
                             <ng-container *ngIf="nutricion.id_user == usuario.id">
-                                <button class="btn btn-info mx-1" type="button" (click)="goToFormDietaModificar(usuario.id, nutricion[0])">{{nutricion.hora}}</button>
+                                <button class="btn btn-info mx-1 my-1 rounded-1 margin-movil" type="button" (click)="goToFormDietaModificar(usuario.id, nutricion[0])">{{nutricion.hora}}</button>
                             </ng-container>
                         </ng-container>
                     </div>

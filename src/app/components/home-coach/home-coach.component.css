@@ -21,3 +21,10 @@ path {
 svg {
     width: 100%;
 }
+
+@media (max-width: 500px) {
+    .margin-movil {
+      margin-bottom: 3vh !important;
+    }
+
+  }

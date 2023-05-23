@@ -24,3 +24,10 @@ path {
 .svg-icono {
     width: 60%;
 }
+
+@media (max-width: 500px) {
+    .margin-movil {
+      margin-bottom: 3vh !important;
+    }
+
+  }

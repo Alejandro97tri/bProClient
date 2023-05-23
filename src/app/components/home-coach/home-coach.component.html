@@ -34,15 +34,15 @@
         <ng-container *ngFor="let usuario of listaAtletas">
             <ng-container *ngIf="listaActividadesAtletas.includes(usuario.id)">
             <div *ngIf="!actividadesEmpty" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-6 pt-3">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 pt-3">
                     <p class="text-white">{{usuario.nombre}} {{usuario.apellidos}}</p>
                 </div>
-                <div class="col-lg-8 col-md-6 col-sm-6 col-6 d-flex flex-wrap justify-content-end align-items-center">
+                <div class="col-lg-8 col-md-6 col-sm-6 col-12 d-flex felx-wrap justify-content-sm-start justify-content-md-end justify-content-lg-end justify-content-xl-end align-items-center">
                     <ng-container *ngFor="let actividad of listaActividades">
                         <ng-container *ngIf="actividad.id_user == usuario.id">
                             <ng-container *ngFor="let deporte of listaDeportes">
                                 <ng-container *ngIf="deporte.id_deporte == actividad.id_deporte">
-                                    <button class="btn btn-info btn-lg mx-1 my-1 rounded-1" type="button" (click)="goToFormActividadModificar(usuario.id, actividad[0])">{{deporte.nombre}}</button>
+                                    <button class="btn btn-info btn-lg mx-1 my-1 rounded-1 margin-movil" type="button" (click)="goToFormActividadModificar(usuario.id, actividad[0])">{{deporte.nombre}}</button>
                                 </ng-container>
                             </ng-container>
                         </ng-container>

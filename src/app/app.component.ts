@@ -27,6 +27,10 @@ export class AppComponent {
   }
 
 
+  contactos(){
+    this.router.navigate(['contactos']);
+  }
+
   settings(){
     this.router.navigate(['settings']);
   }
@@ -36,7 +40,6 @@ export class AppComponent {
     this.router.navigate(['login']);
   }
   home(){
-
     this.router.navigate(['']);
   }
 }

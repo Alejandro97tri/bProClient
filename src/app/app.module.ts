@@ -21,6 +21,7 @@ import { LoginGuardian } from './guards/login-guardian';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CalendarioClienteComponent } from './components/calendario-cliente/calendario-cliente.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AmistadesComponent } from './components/amistades/amistades.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { RegisterComponent } from './components/register/register.component';
     SettingsComponent,
     CalendarioClienteComponent,
     RegisterComponent,
+    AmistadesComponent,
   ],
   imports: [
     BrowserModule,

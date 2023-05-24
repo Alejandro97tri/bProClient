@@ -1,0 +1,136 @@
+<div class="row mx-4 my-4">
+    <div class="col-lg-12 bg-light mb-4">
+        <h2 class="my-4">Contactos</h2>
+        <!-- <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 fadeIn">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                <p class="mb-0 px-3 py-2">Actualizado correctamente</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end align-items-center">
+                <button class="btn btn-ouline-success btn-cerrar" (click)="successAlert = false">X</button>
+            </div>
+        </div>
+        <div *ngIf="errorAlert" class="row bg-danger mb-3 rounded-2 fadeIn">
+            <div class="col-lg-11 col-md-11 col-sm-11 col-11">
+                <p class="mb-0 px-3 py-2 text-white">Errores</p>
+                    <ul class="ms-3">
+                        <li class="text-white" *ngFor="let error of erroresNoVacios">{{error}}</li>
+                    </ul>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end align-items-center">
+                <button class="btn btn-sm btn-ouline-danger text-white btn-cerrar" (click)="errorAlert = false">X</button>
+            </div>
+        </div>
+        <div *ngIf="deleteAlert" class="row bg-warning mb-3 rounded-2 fadeIn">
+            <div class="col-lg-11 col-md-11 col-sm-11 col-11">
+                <p class="mb-0 py-2 text-white">Seguro que quieres eliminar la planificación?</p>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end align-items-center">
+                <button class="btn btn-sm btn-ouline-danger text-white btn-cerrar" (click)="deleteAlert = false">X</button>
+            </div>
+            <div class="col-lg-12 d-flex justify-content-start mb-3">
+                <button type="button" class="btn btn-lg btn-success me-3" (click)="eliminar()">Si</button>
+                <button type="button" class="btn btn-lg btn-danger " (click)="deleteAlert = false">No</button>
+            </div>
+        </div> -->
+        <div class="row bg-dark mb-3 rounded-2">
+            <div class="col-lg-12 my-3">
+                <div *ngIf="!entrenador && !nutricionista" class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 py-3">
+                        <p class="text-white">Todavía no tienes contactos</p>
+                    </div>
+                </div>
+                <div *ngIf="entrenador || nutricionista"
+                    class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+                    <div *ngIf="entrenador"
+                        class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
+                        <div class="col-lg-2 my-2">
+                            <div class="icono-cliente rounded-2">
+                                <span class="d-flex align-items-center justify-content-center pt-2">
+                                    <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 my-2 pt-3">
+                            <p class="text-white">{{entrenador[0].nombre}} {{entrenador[0].apellidos}} - Entrenador</p>
+                        </div>
+                        <div class="col-lg-3 d-grid gap-2 my-2">
+                            <button class="btn btn-danger rounded-1" type="button">Eliminar entrenador</button>
+                        </div>
+                    </div>
+                    <div *ngIf="nutricionista"
+                        class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
+                        <div class="col-lg-2 my-2">
+                            <div class="icono-cliente rounded-2">
+                                <span class="d-flex align-items-center justify-content-center pt-2">
+                                    <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 my-2 pt-3">
+                            <p class="text-white">{{nutricionista[0].nombre}} {{nutricionista[0].apellidos}} -
+                                Nutricionista</p>
+                        </div>
+                        <div class="col-lg-3 d-grid gap-2 my-2">
+                            <button class="btn btn-lg btn-danger rounded-1" type="button">Eliminar
+                                nutricionista</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 my-3">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <label class="text-white" for="fecha">¿Que contacto quiere añadir?</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-2 d-flex">
+                            <input type="email" class="form-control bg-light me-3" id="fecha"
+                                placeholder="Escribe su nombre de usuario" [(ngModel)]="busqueda">
+                            <button class="btn btn-primary btn-lg" (click)="buscar()">Buscar</button>
+                        </div>
+                    </div>
+                    <div *ngIf="usuarioEncontrado"
+                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
+                        <div class="col-lg-2 my-2">
+                            <div class="icono-cliente rounded-2">
+                                <span class="d-flex align-items-center justify-content-center pt-2">
+                                    <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-2 pt-3">
+                            <p class="text-white">{{usuarioBuscado.nombre}} {{usuarioBuscado.apellidos}} - {{rol}}
+                            </p>
+                            <!-- <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}} años</p> -->
+                        </div>
+                        <div class="col-lg-4 d-grid gap-2 my-2">
+                            <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar petición</button>
+                        </div>
+                    </div>
+                    <div *ngIf="errorMismoRol"
+                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
+                        <div class="col-lg-12 my-2">
+                            <p class="text-white">No puedes añadir un usuario de tu mismo rol (Atleta, Entrenador o Nutricionista)
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngIf="errorProfesionalExistente"
+                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
+                        <div class="col-lg-12 my-2">
+                            <p class="text-white">No puedes añadir un contacto que ya tienes
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

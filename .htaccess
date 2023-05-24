@@ -1,0 +1,20 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirigir a HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+# Evitar redirecciones internas para index.html
+RewriteRule ^index\.html$ - [L]
+
+# Redirigir todas las solicitudes no existentes a index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L]
+
+# Configurar las cabeceras
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "upgrade-insecure-requests;"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

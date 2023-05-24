@@ -1,0 +1,30 @@
+p{
+    font-weight: 700;
+    font-size: larger;
+}
+
+.icono-cliente{
+    width: 10vh;
+    height: 10vh;
+    background-color: #6F6F6F;
+}
+
+path {
+    fill: white;
+
+}
+
+.svg-icono {
+    width: 60%;
+}
+
+svg {
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    .margin-movil {
+      margin-bottom: 3vh !important;
+    }
+
+  }

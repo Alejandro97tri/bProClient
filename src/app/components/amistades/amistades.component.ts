@@ -67,22 +67,16 @@ export class AmistadesComponent {
       case 'ATH':
         if (this.userLoged.rol == 'TRA') {
           myInit.body = JSON.stringify({
-            'id_ath': this.usuarioBuscado.id,
-            'id_nut': null,
-            'id_tra': this.userLoged.id,
-            'ath_username': this.usuarioBuscado.username,
-            'nut_username': null,
-            'tra_username': this.userLoged.username,
+            'id_enviado': this.userLoged.id,
+            'id_recibido': this.usuarioBuscado.id,
+
           });
         }
         if (this.userLoged.rol == 'NUT') {
           myInit.body = JSON.stringify({
-            'id_ath': this.usuarioBuscado.id,
-            'id_nut': this.userLoged.id,
-            'id_tra': null,
-            'ath_username': this.usuarioBuscado.username,
-            'nut_username': this.userLoged.username,
-            'tra_username': null,
+            'id_enviado': this.userLoged.id,
+            'id_recibido': this.usuarioBuscado.id,
+
           });
         }
         break;
@@ -92,12 +86,9 @@ export class AmistadesComponent {
         }
         if (this.userLoged.rol == 'ATH') {
           myInit.body = JSON.stringify({
-            'id_ath': this.userLoged.id,
-            'id_nut': null,
-            'id_tra': this.usuarioBuscado.id,
-            'ath_username': this.userLoged.username,
-            'nut_username': null,
-            'tra_username': this.usuarioBuscado.username,
+            'id_enviado': this.userLoged.id,
+            'id_recibido': this.usuarioBuscado.id,
+
           });
         }
         break;
@@ -107,12 +98,8 @@ export class AmistadesComponent {
         }
         if (this.userLoged.rol == 'ATH') {
           myInit.body = JSON.stringify({
-            'id_ath': this.userLoged.id,
-            'id_nut': this.usuarioBuscado.id,
-            'id_tra': null,
-            'ath_username': this.userLoged.username,
-            'nut_username': this.usuarioBuscado.username,
-            'tra_username': null,
+            'id_enviado': this.userLoged.id,
+            'id_recibido': this.usuarioBuscado.id,
           });
         }
         break;

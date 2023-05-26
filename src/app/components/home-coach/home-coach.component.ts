@@ -30,6 +30,8 @@ export class HomeCoachComponent implements OnInit{
 
   // Lista de deportes
   listaDeportes: any;
+  listaPeticiones: any;
+  peticiones: boolean = false;
   
 
   /// INICIO ///
@@ -41,10 +43,20 @@ export class HomeCoachComponent implements OnInit{
     this.getListaDeportes();
     this.getListaAtletas();
     this.getListaAcatividades();
+    this.getPeticiones();
   }
 
 
   /// CONSULTAS ///
+
+  async getPeticiones() {
+    const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+    this.listaPeticiones = await response.json();
+    if(this.listaPeticiones.length > 0){
+      this.peticiones = true;
+    }
+    console.log(this.listaPeticiones);
+  }
 
   // Consulta de los clientes del entrenador
   async getListaAtletas(){

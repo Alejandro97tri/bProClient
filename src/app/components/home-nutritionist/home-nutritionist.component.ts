@@ -28,6 +28,8 @@ export class HomeNutritionistComponent {
   listaNutrisAtletas: any = [];
   // Listado de dietas hoy
   listaNutrisHoy: any;
+  listaPeticiones: any;
+  peticiones: boolean = false;
 
   
   nutricionEmpty:boolean = false;
@@ -40,9 +42,19 @@ export class HomeNutritionistComponent {
     this.fechaHoy();
     this.getListaNutris();
     this.getListaNutrisHoy();
+    this.getPeticiones();
   }
 
   /// CONSULTAS ///
+
+  async getPeticiones() {
+    const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+    this.listaPeticiones = await response.json();
+    if(this.listaPeticiones.length > 0){
+      this.peticiones = true;
+    }
+    console.log(this.listaPeticiones);
+  }
 
   // Consulta a la bd para obtener las dietas de hoy
   async getListaNutrisHoy() {

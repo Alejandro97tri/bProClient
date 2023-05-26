@@ -10,7 +10,9 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consulta = $conexion->prepare('SELECT * FROM Contactos WHERE id_ath = ? or id_nut = ? or id_tra = ?');
+
+
+$consulta = $conexion->prepare('SELECT * FROM Contactos WHERE id_recibido = ?');
 $resultado = $consulta->execute([
     $datos['id'],
 ]);

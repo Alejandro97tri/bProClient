@@ -10,14 +10,10 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consulta = $conexion->prepare('INSERT INTO Contacto (id_ath, id_nut, id_tra, ath_username, nut_username, tra_username) VALUES (?,?,?,?,?,?)');
+$consulta = $conexion->prepare('INSERT INTO Contacto (id_enviado, id_recibido) VALUES (?,?)');
 $resultado = $consulta->execute([
-    $datos['id_ath'],
-    $datos['id_nut'],
-    $datos['id_tra'],
-    $datos['ath_username'],
-    $datos['nut_username'],
-    $datos['tra_username'],
+    $datos['id_enviado'],
+    $datos['id_recibido'],
 ]);
 
 $lista = $consulta->fetchAll();

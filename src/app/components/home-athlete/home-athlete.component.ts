@@ -39,6 +39,9 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
 
   listaEntrenos: any;
   listaNutricion: any;
+  listaPeticiones: any;
+  peticiones: boolean = false;
+  infoUserEnvia: any;
 
   fechaSearch: any;
   dateNow: Date = new Date;
@@ -63,6 +66,20 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.generateCalendar();
   }
 
+  // async getPeticiones() {
+  //   const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+  //   this.listaPeticiones = await response.json();
+  //   async if(this.listaPeticiones.length > 0){
+  //     this.peticiones = true;
+  //     async getUser() {
+  //       const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.listaPeticiones.id_enviado }) });
+  //       this.infoUserEnvia = await response.json();
+  //       console.log(this.infoUserEnvia);
+  //     }
+  //   }
+  //   console.log(this.listaPeticiones);
+  // }
+
 
   async getListaEntrenos(){
     const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
@@ -77,6 +94,14 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   }
 
   /// FUNCIONES ///
+
+  aceptar(){
+
+  }
+
+  denegar(){
+    
+  }
 
   // Función para generar el calendario
   generateCalendar() {

@@ -32,6 +32,7 @@ export class HomeCoachComponent implements OnInit{
   listaDeportes: any;
   listaPeticiones: any;
   peticiones: boolean = false;
+  infoUserEnvia: any = [];
   
 
   /// INICIO ///
@@ -49,13 +50,28 @@ export class HomeCoachComponent implements OnInit{
 
   /// CONSULTAS ///
 
+  async getUser() {
+    for (const element of this.listaPeticiones) {
+      console.log(element.id_enviado);
+      const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': element.id_enviado }) });
+      const userInfo = await response.json();
+      this.infoUserEnvia.push(userInfo);
+      console.log(this.infoUserEnvia);
+    }
+  }
+
   async getPeticiones() {
     const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaPeticiones = await response.json();
-    if(this.listaPeticiones.length > 0){
-      this.peticiones = true;
+    if (this.listaPeticiones.length > 0) {
+      setTimeout(() => {
+        this.peticiones = true;
+      }, 500)
+      this.getUser();
+    } else{
+      this.peticiones = false;
     }
-    console.log(this.listaPeticiones);
+    console.log(this.listaPeticiones, 'Peticiones');
   }
 
   // Consulta de los clientes del entrenador
@@ -90,6 +106,20 @@ export class HomeCoachComponent implements OnInit{
   }
 
   /// FUNCIONES ///
+
+  denegar(id: any) {
+    this.infoUserEnvia = [];
+    fetch('https://btop.es/server/deletePeticion.php', { method: 'POST', body: JSON.stringify({ 'id_enviado': id , 'id_recibido': this.userLoged.id }) })
+
+      .then(response => {
+        // La petición se completó correctamente, puedes realizar acciones aquí
+        this.getPeticiones();
+      })
+      .catch(error => {
+        // Ocurrió un error durante la petición, puedes manejarlo aquí
+        console.error("error");
+      });
+  }
 
   goToFormActividadModificar(user_id:any, id: any) {
     this.router.navigate(['formentreno', user_id, id, this.dia, this.mes, this.ano]);

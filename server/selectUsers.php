@@ -10,7 +10,7 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consulta = $conexion->prepare('SELECT username, rol, nombre, apellidos FROM User');
+$consulta = $conexion->prepare('SELECT id, username, rol, nombre, apellidos, trainer, nutritionist FROM User');
 $resultado = $consulta->execute([]);
 
 $lista = $consulta->fetchAll();

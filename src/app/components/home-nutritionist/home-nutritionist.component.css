@@ -24,6 +24,20 @@ path {
 .svg-icono {
     width: 60%;
 }
+.fadeIn{
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      max-height: 0px;
+    }
+    100% {
+      opacity: 1;
+      max-height: 50vh;
+    }
+  }
 
 @media (max-width: 500px) {
     .margin-movil {

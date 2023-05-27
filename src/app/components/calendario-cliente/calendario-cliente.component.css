@@ -34,15 +34,39 @@
 }
 
 .next-days {
+  background-color: #fffdfb;
   cursor: pointer;
+
+}
+.next-days:hover {
+  transform: scale(1.1); /* Escala el elemento al 110% de su tamaño original */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Añade una sombra al pasar el ratón */
+  border: 2px solid rgb(0, 68, 255); /* Cambia el color y el grosor del borde al pasar el ratón */
 }
 
-.today {
+ .today {
+  background-color: #fffdfb;
   border: 3px solid rgb(255, 112, 112);
+  cursor: pointer;
+  transition: border-color 0.2s ease; /* Añade una transición suave */
+ }
+
+ .today:hover {
+  transform: scale(1.1); /* Escala el elemento al 110% de su tamaño original */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Añade una sombra al pasar el ratón */
+  border: 2px solid rgb(255, 112, 112); /* Cambia el color y el grosor del borde al pasar el ratón */
 }
 
-.cursor-pointer {
+ .cursor-pointer {
   cursor: pointer;
+  pointer-events: all;
+  transition: border-color 0.2s ease; /* Añade una transición suave */
+}
+
+.cursor-pointer:hover {
+  transform: scale(1.1); /* Escala el elemento al 110% de su tamaño original */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Añade una sombra al pasar el ratón */
+  border: 2px solid rgb(0, 68, 255); /* Cambia el color y el grosor del borde al pasar el ratón */
 }
 
 @media (max-width: 600px) {

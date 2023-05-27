@@ -10,10 +10,9 @@ header("Access-Control-Allow-Methods: *"); // Allow POST requests
 header("Access-Control-Allow-Headers: *"); // Allow the Content-Type header
 $datos = json_decode(file_get_contents('php://input'),true);
 
-$consulta = $conexion->prepare('INSERT INTO Contactos (id_enviado, id_recibido) VALUES (?,?)');
+$consulta = $conexion->prepare('UPDATE User SET trainer = NULL WHERE id = ?');
 $resultado = $consulta->execute([
-    $datos['id_enviado'],
-    $datos['id_recibido'],
+    $datos['id'],
 ]);
 
 $lista = $consulta->fetchAll();

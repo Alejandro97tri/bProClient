@@ -1,52 +1,57 @@
 <div class="mx-4">
     <div class="col-lg-12 bg-light pb-3">
-        <div *ngIf="peticiones" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+        <div *ngIf="peticiones" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 m-3 fadeIn">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-3">
                 <p class="text-white">Tienes peticiones de amistad</p>
             </div>
-            <div class="col-lg-2 my-2">
-                <div class="icono-cliente rounded-2">
-                    <span class="d-flex align-items-center justify-content-center pt-2">
-                        <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <path
-                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                        </svg>
-                    </span>
+            <div *ngFor="let user of infoUserEnvia" class=" col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
+                <div class="col-lg-2 my-2">
+                    <div class="icono-cliente rounded-2">
+                        <span class="d-flex align-items-center justify-content-center pt-2">
+                            <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 my-2 pt-3">
-                <p class="text-white">{{infoUserEnvia.nombre}} {{infoUserEnvia.apellidos}} - {{infoUserEnvia.rol}}
-                </p>
-                <!-- <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}} años</p> -->
-            </div>
-            <div class="col-lg-4 d-grid gap-2 my-2">
-                <button class="btn btn-success rounded-1" type="button" (click)="aceptar()">Enviar petición</button>
-            </div>
-            <div class="col-lg-3 d-grid gap-2 my-2">
-                <button class="btn btn-lg btn-danger rounded-1" type="button" (click)="denegar()">Denegar petición</button>
+                <div class="col-lg-6 my-2 pt-3">
+                     <p class="text-white">{{user[0].nombre}} {{user[0].apellidos}} - 
+                        <ng-container *ngIf="user[0].rol == 'TRA'"> Entrenador</ng-container> 
+                        <ng-container *ngIf="user[0].rol == 'ATH'"> Atleta</ng-container>
+                        <ng-container *ngIf="user[0].rol == 'NUT'"> Nutricionista</ng-container></p>
+                </div>
+                <div class="col-lg-2 d-grid gap-2 my-2">
+                    <button class="btn btn-success rounded-1 me-2" type="button">Aceptar</button>
+                </div>
+                <div class="col-lg-2 d-grid gap-2 my-2">
+                    <button class="btn btn-danger rounded-1" type="button" (click)="denegar(user[0].id)">Denegar</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <app-menu-calendar (mes)="setMes($event)" (year)="setYear($event)"
-        (dateChanged)="onDateChanged($event)"></app-menu-calendar>
-    <div class="row h-100 prueba">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="calendar-days">
-                    <div class="calendar-header d-flex">
-                        <ng-container *ngFor="let dayName of daysOfWeek; let i=index">
-                            <div class="text-white bg-dark calendar-cell calendar-day text-center">{{dayName}}</div>
-                        </ng-container>
+    <div class="col-lg-12 bg-light pb-3">
+        <app-menu-calendar (mes)="setMes($event)" (year)="setYear($event)"
+            (dateChanged)="onDateChanged($event)"></app-menu-calendar>
+        <div class="row h-100 prueba">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="calendar-days">
+                        <div class="calendar-header d-flex">
+                            <ng-container *ngFor="let dayName of daysOfWeek; let i=index">
+                                <div class="text-white bg-dark calendar-cell calendar-day text-center">{{dayName}}
+                                </div>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="calendar-body h-100">
-                    <ng-container *ngFor="let week of weeks; let i=index">
-                        <div *ngIf='!(i == 0 && offset == 0)' class="calendar-row"
-                            [ngStyle]="{'max-width': i === 1 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
-                            <!-- <ng-container *ngIf="i === 0">
+                <div class="row">
+                    <div class="calendar-body h-100">
+                        <ng-container *ngFor="let week of weeks; let i=index">
+                            <div *ngIf='!(i == 0 && offset == 0)' class="calendar-row"
+                                [ngStyle]="{'max-width': i === 1 && firstDayOfWeek === 6 ? 'calc(100% - 14.28%)' : '100%', 'display': 'flex'}">
+                                <!-- <ng-container *ngIf="i === 0">
                                 <ng-container *ngFor="let day of emptyDays">
                                     <div class="card border-dark calendar-cell calendar-cell-empty">
                                         <div class="calendar-day-number">{{day}}</div>
@@ -54,32 +59,33 @@
                                 </ng-container>
                             </ng-container> -->
 
-                            <!-- AQUI -->
-                            <ng-container *ngFor="let day of week">
-                                <div class="border-days calendar-cell" [ngClass]="{
+                                <!-- AQUI -->
+                                <ng-container *ngFor="let day of week">
+                                    <div class="border-days calendar-cell" [ngClass]="{
                                 'calendar-cell-empty': day === null, 
                                 'old-days': this.formatDateNow(dateNow) > this.formatDate(day,mes,year),
                                 'next-days': this.formatDateNow(dateNow) < this.formatDate(day,mes,year),
                                 'today': this.formatDateNow(dateNow) == this.formatDate(day,mes,year),
                                 'cursor-pointer': !getNutricion(day) || !getEntreno(day)
                                 }" (click)="goToDay(day)">
-                                    <div class="calendar-day-number rounded-3 px-2 bg-calendar-days text-center">
-                                        <p class="text-white fw-bold">{{day}}</p>
+                                        <div class="calendar-day-number rounded-3 px-2 bg-calendar-days text-center">
+                                            <p class="text-white fw-bold">{{day}}</p>
+                                        </div>
+                                        <div class="d-flex align-items-around">
+                                            <button class="btn btn-sm btn-info mx-1 stop-boton"
+                                                *ngIf="!getEntreno(day)">
+                                                Entrenos
+                                            </button>
+                                            <button class="btn btn-sm btn-success mx-1 stop-boton"
+                                                *ngIf="!getNutricion(day)">Nutrición</button>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-around">
-                                        <button class="btn btn-sm btn-info mx-1 stop-boton" *ngIf="!getEntreno(day)">
-                                            Entrenos
-                                        </button>
-                                        <button class="btn btn-sm btn-success mx-1 stop-boton"
-                                            *ngIf="!getNutricion(day)">Nutrición</button>
-                                    </div>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

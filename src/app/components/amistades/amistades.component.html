@@ -1,26 +1,15 @@
 <div class="row mx-4 my-4">
     <div class="col-lg-12 bg-light mb-4">
         <h2 class="my-4">Contactos</h2>
-        <!-- <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 fadeIn">
+        <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 fadeIn">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                <p class="mb-0 px-3 py-2">Actualizado correctamente</p>
+                <p class="mb-0 px-3 py-2">Enviado correctamente</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end align-items-center">
                 <button class="btn btn-ouline-success btn-cerrar" (click)="successAlert = false">X</button>
             </div>
         </div>
-        <div *ngIf="errorAlert" class="row bg-danger mb-3 rounded-2 fadeIn">
-            <div class="col-lg-11 col-md-11 col-sm-11 col-11">
-                <p class="mb-0 px-3 py-2 text-white">Errores</p>
-                    <ul class="ms-3">
-                        <li class="text-white" *ngFor="let error of erroresNoVacios">{{error}}</li>
-                    </ul>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end align-items-center">
-                <button class="btn btn-sm btn-ouline-danger text-white btn-cerrar" (click)="errorAlert = false">X</button>
-            </div>
-        </div>
-        <div *ngIf="deleteAlert" class="row bg-warning mb-3 rounded-2 fadeIn">
+        <!-- <div *ngIf="deleteAlert" class="row bg-warning mb-3 rounded-2 fadeIn">
             <div class="col-lg-11 col-md-11 col-sm-11 col-11">
                 <p class="mb-0 py-2 text-white">Seguro que quieres eliminar la planificación?</p>
             </div>
@@ -57,7 +46,7 @@
                             <p class="text-white">{{entrenador[0].nombre}} {{entrenador[0].apellidos}} - Entrenador</p>
                         </div>
                         <div class="col-lg-3 d-grid gap-2 my-2">
-                            <button class="btn btn-danger rounded-1" type="button">Eliminar entrenador</button>
+                            <button class="btn btn-danger rounded-1" type="button" (click)="eliminarEntrenador()">Eliminar entrenador</button>
                         </div>
                     </div>
                     <div *ngIf="nutricionista"
@@ -77,8 +66,7 @@
                                 Nutricionista</p>
                         </div>
                         <div class="col-lg-3 d-grid gap-2 my-2">
-                            <button class="btn btn-lg btn-danger rounded-1" type="button">Eliminar
-                                nutricionista</button>
+                            <button class="btn btn-lg btn-danger rounded-1" type="button" (click)="eliminarNutricionista()">Eliminar nutricionista</button>
                         </div>
                     </div>
                 </div>
@@ -115,18 +103,15 @@
                             <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar petición</button>
                         </div>
                     </div>
-                    <div *ngIf="errorMismoRol"
+                    <div *ngIf="errorMismoRol || errorContactoExistente || errorEntrenadorExistente || errorNutricionistaExistente||errorUsuarioConProfesionales|| errorSoloAtletas"
                         class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
                         <div class="col-lg-12 my-2">
-                            <p class="text-white">No puedes añadir un usuario de tu mismo rol (Atleta, Entrenador o Nutricionista)
-                            </p>
-                        </div>
-                    </div>
-                    <div *ngIf="errorProfesionalExistente"
-                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
-                        <div class="col-lg-12 my-2">
-                            <p class="text-white">No puedes añadir un contacto que ya tienes
-                            </p>
+                            <p *ngIf="errorMismoRol" class="text-white">No puedes añadir un usuario de tu mismo rol (Atleta, Entrenador o Nutricionista)</p>
+                            <p *ngIf="errorContactoExistente" class="text-white">No puedes añadir un contacto que ya tienes</p>
+                            <p *ngIf="errorEntrenadorExistente" class="text-white">No puedes añadir un entrenador si ya tienes uno, elimina el actual previamente</p>
+                            <p *ngIf="errorNutricionistaExistente" class="text-white">No puedes añadir un nutricionista si ya tienes uno, elimina el actual previamente</p>
+                            <p *ngIf="errorUsuarioConProfesionales" class="text-white">No puedes añadir un deportista si que ya dispone de entrenador o nutricionista, debe eliminarlo previamente</p>
+                            <p *ngIf="errorSoloAtletas" class="text-white">Solo puedes añadir deportistas</p>
                         </div>
                     </div>
                 </div>

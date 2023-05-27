@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class HomeAthleteComponent implements OnInit, OnChanges {
 
-  @Input() userLoged: any ;
+  @Input() userLoged: any;
 
   /// VARIABLEs ///
-  
+
   // Lista de dias de la semana
   daysOfWeek: Array<string> = [
     "LUNES",
@@ -33,26 +33,27 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
   // Dias que no se van a rellenar por que forman parte del otro mes
   emptyDays: Array<any> = new Array(this.firstDayOfWeek - 1).fill(null);
 
-  year:number = 0;
-  mes:string = '';
+  year: number = 0;
+  mes: string = '';
   offset: number = 0;
 
   listaEntrenos: any;
   listaNutricion: any;
   listaPeticiones: any;
   peticiones: boolean = false;
-  infoUserEnvia: any;
+  infoUserEnvia: any = [];
 
   fechaSearch: any;
   dateNow: Date = new Date;
 
   /// INICIO ///
-  constructor(private router: Router){}
-  
+  constructor(private router: Router) { }
+
   ngOnInit() {
     this.generateCalendar();
     this.getListaEntrenos();
     this.getListaNutricion();
+    this.getPeticiones();
   }
 
 
@@ -66,41 +67,61 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.generateCalendar();
   }
 
-  // async getPeticiones() {
-  //   const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
-  //   this.listaPeticiones = await response.json();
-  //   async if(this.listaPeticiones.length > 0){
-  //     this.peticiones = true;
-  //     async getUser() {
-  //       const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.listaPeticiones.id_enviado }) });
-  //       this.infoUserEnvia = await response.json();
-  //       console.log(this.infoUserEnvia);
-  //     }
-  //   }
-  //   console.log(this.listaPeticiones);
-  // }
+  async getUser() {
+    for (const element of this.listaPeticiones) {
+      console.log(element.id_enviado);
+      const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': element.id_enviado }) });
+      const userInfo = await response.json();
+      this.infoUserEnvia.push(userInfo);
+      console.log(this.infoUserEnvia);
+    }
+  }
+
+  async getPeticiones() {
+    const response = await fetch('https://btop.es/server/peticionPendiente.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+    this.listaPeticiones = await response.json();
+    if (this.listaPeticiones.length > 0) {
+      setTimeout(() => {
+        this.peticiones = true;
+      }, 500)
+      this.getUser();
+    } else{
+      this.peticiones = false;
+    }
+    console.log(this.listaPeticiones, 'Peticiones');
+  }
 
 
-  async getListaEntrenos(){
-    const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaEntrenos() {
+    const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaEntrenos = await response.json();
     console.log(this.listaEntrenos);
   }
 
-  async getListaNutricion(){
-    const response = await fetch('https://btop.es/server/homeListaNutricionAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaNutricion() {
+    const response = await fetch('https://btop.es/server/homeListaNutricionAtleta.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaNutricion = await response.json();
     console.log(this.listaNutricion);
   }
 
   /// FUNCIONES ///
 
-  aceptar(){
+  aceptar() {
 
   }
 
-  denegar(){
-    
+  denegar(id: any) {
+    this.infoUserEnvia = [];
+    fetch('https://btop.es/server/deletePeticion.php', { method: 'POST', body: JSON.stringify({ 'id_enviado': id,  'id_recibido': this.userLoged.id }) })
+
+      .then(response => {
+        // La petición se completó correctamente, puedes realizar acciones aquí
+        this.getPeticiones();
+      })
+      .catch(error => {
+        // Ocurrió un error durante la petición, puedes manejarlo aquí
+        console.error("error");
+      });
   }
 
   // Función para generar el calendario
@@ -130,30 +151,29 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     this.weeks = weeks;
   }
 
-  goToDay(day:number|null){
-  this.router.navigate(['entrenamiento',this.userLoged.id,day,this.mes,this.year]);
+  goToDay(day: number | null) {
+    this.router.navigate(['entrenamiento', this.userLoged.id, day, this.mes, this.year]);
   }
 
-  setYear(e:any){
+  setYear(e: any) {
     this.year = e;
   }
 
-  setMes(e:any){
+  setMes(e: any) {
     this.mes = e;
   }
 
-  getEntreno(day: number | null){
-    this.fechaSearch = this.formatDate(day,this.mes,this.year);
-    console.log(!this.listaEntrenos || !this.listaEntrenos.find((e: { fecha: string; }) => e.fecha === this.fechaSearch))
+  getEntreno(day: number | null) {
+    this.fechaSearch = this.formatDate(day, this.mes, this.year);
     return !this.listaEntrenos || !this.listaEntrenos.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
   }
 
-  getNutricion(day: number | null){
-    this.fechaSearch = this.formatDate(day,this.mes,this.year);
+  getNutricion(day: number | null) {
+    this.fechaSearch = this.formatDate(day, this.mes, this.year);
     return !this.listaNutricion || !this.listaNutricion.find((e: { fecha: string; }) => e.fecha === this.fechaSearch);
   }
 
-  
+
   formatDateNow(date: Date): string {
     let year = date.getFullYear();
     let month = date.getMonth() + 1; // Los meses empiezan en 0
@@ -163,7 +183,7 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     return `${year}-${monthStr}-${dayStr}`;
   }
 
-  formatDate(day: number|null, month: string, year: number): string {
+  formatDate(day: number | null, month: string, year: number): string {
     interface MonthNames {
       [key: string]: string;
     }
@@ -184,12 +204,12 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     };
     const monthNumber = new Date(`${monthNames[month]} 1, ${year}`).getMonth() + 1;
     const formattedMonth = monthNumber.toString().padStart(2, '0');
-    if(day!==null){
+    if (day !== null) {
       const formattedDay = day.toString().padStart(2, '0');
       return `${year}-${formattedMonth}-${formattedDay}`;
-    }else{
+    } else {
       return `Fecha erronea`;
     }
   }
-  
+
 }

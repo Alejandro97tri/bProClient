@@ -106,10 +106,32 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
 
   /// FUNCIONES ///
 
-  aceptar() {
-
+  aceptar(id: any, rol:any) {
+    if(rol == 'TRA'){
+      fetch('https://btop.es/server/aceptPeticionEntrenador.php', { method: 'POST', body: JSON.stringify({ 'trainer': id , 'id': this.userLoged.id }) })
+      .then(response => {
+        // La petición se completó correctamente, puedes realizar acciones aquí
+        // Llamar a la función denegar después de que se complete la solicitud fetch
+        this.denegar(id);
+      })
+      .then(() => {
+        return fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+      })
+      .then(response => response.json())
+      .then(updatedUser => {
+        this.userLoged = updatedUser[0];
+        sessionStorage.setItem("auth", JSON.stringify(this.userLoged))
+      });
+    }else{
+      fetch('https://btop.es/server/aceptPeticionNutricionista.php', { method: 'POST', body: JSON.stringify({ 'nutritionist': id, 'id': this.userLoged.id }) })
+      .then(response => {
+        // La petición se completó correctamente, puedes realizar acciones aquí
+        // Llamar a la función denegar después de que se complete la solicitud fetch
+        this.denegar(id);
+      })
+    }
+  
   }
-
   denegar(id: any) {
     this.infoUserEnvia = [];
     fetch('https://btop.es/server/deletePeticion.php', { method: 'POST', body: JSON.stringify({ 'id_enviado': id,  'id_recibido': this.userLoged.id }) })

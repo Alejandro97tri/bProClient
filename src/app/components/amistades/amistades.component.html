@@ -1,5 +1,5 @@
 <div class="row mx-4 my-4">
-    <div class="col-lg-12 bg-light mb-4">
+    <div class="col-lg-12 bg-light rounded-2 mb-4">
         <h2 class="my-4">Contactos</h2>
         <div *ngIf="successAlert" class="row bg-success mb-3 rounded-2 fadeIn">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
@@ -9,18 +9,6 @@
                 <button class="btn btn-ouline-success btn-cerrar" (click)="successAlert = false">X</button>
             </div>
         </div>
-        <!-- <div *ngIf="deleteAlert" class="row bg-warning mb-3 rounded-2 fadeIn">
-            <div class="col-lg-11 col-md-11 col-sm-11 col-11">
-                <p class="mb-0 py-2 text-white">Seguro que quieres eliminar la planificación?</p>
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end align-items-center">
-                <button class="btn btn-sm btn-ouline-danger text-white btn-cerrar" (click)="deleteAlert = false">X</button>
-            </div>
-            <div class="col-lg-12 d-flex justify-content-start mb-3">
-                <button type="button" class="btn btn-lg btn-success me-3" (click)="eliminar()">Si</button>
-                <button type="button" class="btn btn-lg btn-danger " (click)="deleteAlert = false">No</button>
-            </div>
-        </div> -->
         <div class="row bg-dark mb-3 rounded-2">
             <div class="col-lg-12 my-3">
                 <div *ngIf="!entrenador && !nutricionista" class="row">
@@ -83,7 +71,7 @@
                         </div>
                     </div>
                     <div *ngIf="usuarioEncontrado"
-                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
+                        class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5 fadeIn">
                         <div class="col-lg-2 my-2">
                             <div class="icono-cliente rounded-2">
                                 <span class="d-flex align-items-center justify-content-center pt-2">
@@ -103,7 +91,14 @@
                             <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar petición</button>
                         </div>
                     </div>
-                    <div *ngIf="errorMismoRol || errorContactoExistente || errorEntrenadorExistente || errorNutricionistaExistente||errorUsuarioConProfesionales|| errorSoloAtletas"
+                    <div *ngIf="errorMismoRol || 
+                                errorContactoExistente || 
+                                errorEntrenadorExistente || 
+                                errorNutricionistaExistente||
+                                errorUsuarioConProfesionales||
+                                errorSoloAtletas || 
+                                errorPeticionEnviada ||
+                                errorPeticionEsperando"
                         class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
                         <div class="col-lg-12 my-2">
                             <p *ngIf="errorMismoRol" class="text-white">No puedes añadir un usuario de tu mismo rol (Atleta, Entrenador o Nutricionista)</p>
@@ -112,6 +107,8 @@
                             <p *ngIf="errorNutricionistaExistente" class="text-white">No puedes añadir un nutricionista si ya tienes uno, elimina el actual previamente</p>
                             <p *ngIf="errorUsuarioConProfesionales" class="text-white">No puedes añadir un deportista si que ya dispone de entrenador o nutricionista, debe eliminarlo previamente</p>
                             <p *ngIf="errorSoloAtletas" class="text-white">Solo puedes añadir deportistas</p>
+                            <p *ngIf="errorPeticionEnviada" class="text-white">No puedes volver a mandar la petición al mismo usuario, espera que la acepte o deniegue</p>
+                            <p *ngIf="errorPeticionEsperando" class="text-white">El usuario que buscas ya te ha mandado la petición</p>
                         </div>
                     </div>
                 </div>

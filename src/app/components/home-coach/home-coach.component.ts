@@ -6,16 +6,16 @@ import { Route, Router } from '@angular/router';
   templateUrl: './home-coach.component.html',
   styleUrls: ['./home-coach.component.css']
 })
-export class HomeCoachComponent implements OnInit{
+export class HomeCoachComponent implements OnInit {
 
   /// ENTRADA ///
-  @Input() userLoged: any ;
+  @Input() userLoged: any;
 
 
   /// VARIABLES ///
 
-  actividadesEmpty:boolean = false;
-  clientesEmpty:boolean = false;
+  actividadesEmpty: boolean = false;
+  clientesEmpty: boolean = false;
 
   dia: any;
   mes: any;
@@ -26,18 +26,18 @@ export class HomeCoachComponent implements OnInit{
 
   // Lista de entrenos de hoy
   listaActividades: any;
-  listaActividadesAtletas:any = [];
+  listaActividadesAtletas: any = [];
 
   // Lista de deportes
   listaDeportes: any;
   listaPeticiones: any;
   peticiones: boolean = false;
   infoUserEnvia: any = [];
-  
+
 
   /// INICIO ///
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.fechaHoy();
@@ -68,30 +68,30 @@ export class HomeCoachComponent implements OnInit{
         this.peticiones = true;
       }, 500)
       this.getUser();
-    } else{
+    } else {
       this.peticiones = false;
     }
     console.log(this.listaPeticiones, 'Peticiones');
   }
 
   // Consulta de los clientes del entrenador
-  async getListaAtletas(){
-    const response = await fetch('https://btop.es/server/homeListaAtletas.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaAtletas() {
+    const response = await fetch('https://btop.es/server/homeListaAtletas.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaAtletas = await response.json();
-    if(this.listaAtletas.length == 0){
+    if (this.listaAtletas.length == 0) {
       this.clientesEmpty = true;
     }
     console.log(this.listaAtletas);
   }
 
   // Consulta de las actividades de hoy de los clientes del entrenador
-  async getListaAcatividades(){
-    const response = await fetch('https://btop.es/server/homeListaActividadesHoy.php', { method: 'POST', body: JSON.stringify({'id': this.userLoged.id})});
+  async getListaAcatividades() {
+    const response = await fetch('https://btop.es/server/homeListaActividadesHoy.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaActividades = await response.json();
-    this.listaActividades.forEach((element:any) => {
+    this.listaActividades.forEach((element: any) => {
       (this.listaActividadesAtletas.includes(element.id_user)) ? null : this.listaActividadesAtletas.push(element.id_user);
     });
-    if(this.listaActividades.length == 0){
+    if (this.listaActividades.length == 0) {
       this.actividadesEmpty = true;
     }
     console.log(this.listaActividadesAtletas)
@@ -99,39 +99,52 @@ export class HomeCoachComponent implements OnInit{
   }
 
   // Consulta de la lista de deportes
-  async getListaDeportes(){
-    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
+  async getListaDeportes() {
+    const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
     console.log(this.listaDeportes);
   }
 
   /// FUNCIONES ///
 
+  aceptar(id: any) {
+    fetch('https://btop.es/server/aceptPeticionEntrenador.php', { method: 'POST', body: JSON.stringify({ 'trainer': this.userLoged.id, 'id': id }) })
+      .then(response => {
+        // La petición se completó correctamente, puedes realizar acciones aquí
+        // Llamar a la función denegar después de que se complete la solicitud fetch
+        this.denegar(id);
+      })
+      .then(() => {
+        return fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
+      })
+      .then(response => response.json())
+      .then(updatedUser => {
+        this.userLoged = updatedUser[0];
+        sessionStorage.setItem("auth", JSON.stringify(this.userLoged))
+      });
+  }
+
   denegar(id: any) {
     this.infoUserEnvia = [];
-    fetch('https://btop.es/server/deletePeticion.php', { method: 'POST', body: JSON.stringify({ 'id_enviado': id , 'id_recibido': this.userLoged.id }) })
+    fetch('https://btop.es/server/deletePeticion.php', { method: 'POST', body: JSON.stringify({ 'id_enviado': id, 'id_recibido': this.userLoged.id }) })
 
       .then(response => {
         // La petición se completó correctamente, puedes realizar acciones aquí
         this.getPeticiones();
       })
-      .catch(error => {
-        // Ocurrió un error durante la petición, puedes manejarlo aquí
-        console.error("error");
-      });
   }
 
-  goToFormActividadModificar(user_id:any, id: any) {
+  goToFormActividadModificar(user_id: any, id: any) {
     this.router.navigate(['formentreno', user_id, id, this.dia, this.mes, this.ano]);
   }
 
-  calendario(id: any){
-    this.router.navigate(['calendario-cliente',id]);
+  calendario(id: any) {
+    this.router.navigate(['calendario-cliente', id]);
   }
 
   // Emisor de los datos de usuario para verlos en detalle
-  userInfo(user: any){
-    this.router.navigate(['userinfo',user]);
+  userInfo(user: any) {
+    this.router.navigate(['userinfo', user]);
   }
 
   // Calculo de la edad respecto a la fecha de nacimiento
@@ -161,6 +174,6 @@ export class HomeCoachComponent implements OnInit{
     this.mes = meses[fechaHoy.getMonth()];
 
     // Obtener año con cuatro cifras
-    this.ano  = fechaHoy.getFullYear().toString();
+    this.ano = fechaHoy.getFullYear().toString();
   }
 }

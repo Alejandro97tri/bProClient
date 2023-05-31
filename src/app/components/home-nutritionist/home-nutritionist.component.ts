@@ -50,11 +50,9 @@ export class HomeNutritionistComponent {
 
   async getUser() {
     for (const element of this.listaPeticiones) {
-      console.log(element.id_enviado);
       const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': element.id_enviado }) });
       const userInfo = await response.json();
       this.infoUserEnvia.push(userInfo);
-      console.log(this.infoUserEnvia);
     }
   }
 
@@ -69,7 +67,6 @@ export class HomeNutritionistComponent {
     } else{
       this.peticiones = false;
     }
-    console.log(this.listaPeticiones, 'Peticiones');
   }
 
   // Consulta a la bd para obtener las dietas de hoy
@@ -88,8 +85,6 @@ export class HomeNutritionistComponent {
       return 0;
     });
 
-    console.log(this.listaNutrisAtletas)
-    console.log(this.listaNutrisHoy, "sdfsd");
   }
 
   // Consulta a la bd para obtener los clientes del nutricionista
@@ -99,7 +94,6 @@ export class HomeNutritionistComponent {
     if(this.listaNutris.length == 0){
       this.clienteEmpty = true;
     }
-    console.log(this.listaNutris);
   }
 
   /// FUNCIONES ///

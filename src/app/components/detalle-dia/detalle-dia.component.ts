@@ -42,7 +42,6 @@ export class DetalleDiaComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    console.log(this.compareDates(this.date));
     this.getListaEntrenos();
     this.getListaDeportes();
     this.getListaNutricion();    
@@ -53,7 +52,6 @@ export class DetalleDiaComponent implements OnInit{
   async getListaDeportes(){
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST'});
     this.listaDeportes = await response.json();
-    console.log(this.listaDeportes);
   }
 
   async getListaEntrenos(){
@@ -63,7 +61,6 @@ export class DetalleDiaComponent implements OnInit{
         this.entrenosEmpty = true;
       }
 
-    console.log(this.listaEntrenosHoy);
   }
 
   async getListaNutricion(){
@@ -78,7 +75,6 @@ export class DetalleDiaComponent implements OnInit{
       if (a.hora > b.hora) return 1;
       return 0;
     });
-    console.log(this.listaNutrisHoy);
   }
 
   goToFormEnterno(){

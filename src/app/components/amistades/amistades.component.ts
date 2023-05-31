@@ -5,17 +5,23 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
   templateUrl: './amistades.component.html',
   styleUrls: ['./amistades.component.css']
 })
-export class AmistadesComponent implements OnInit{
+export class AmistadesComponent implements OnInit {
 
   userLoged: any;
 
   listaUsuarios: any;
   listaPeticiones: any;
-  entrenador: any;
-  nutricionista: any;
+  entrenador: any = [{
+    nombre: '',
+    apellidos: '',
+  }];
+  nutricionista: any = [{
+    nombre: '',
+    apellidos: '',
+  }];
 
   successAlert: boolean = false;
-  
+
   errorMismoRol: boolean = false;
   errorContactoExistente: boolean = false;
   errorUsuarioConProfesionales: boolean = false;
@@ -60,18 +66,16 @@ export class AmistadesComponent implements OnInit{
   async getEntrenador() {
     const response = await fetch('https://btop.es/server/selectContactos.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.trainer }) });
     this.entrenador = await response.json();
-    console.log(this.entrenador);
   }
 
   async getNutricionista() {
     const response = await fetch('https://btop.es/server/selectContactos.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.nutritionist }) });
-    this.nutricionista = await response.json();
+    this.nutricionista = await response.json()
   }
 
   async getPeticiones() {
     const response = await fetch('https://btop.es/server/selectPeticiones.php', { method: 'POST' });
     this.listaPeticiones = await response.json();
-    console.log(this.listaPeticiones);
   }
 
   async insertContacto() {
@@ -105,9 +109,9 @@ export class AmistadesComponent implements OnInit{
         break;
     }
     await fetch('https://btop.es/server/insertContacto.php', myInit)
-    .then(response => {
-      this.successAlert = true; 
-    });
+      .then(response => {
+        this.successAlert = true;
+      });
 
   }
 
@@ -115,25 +119,25 @@ export class AmistadesComponent implements OnInit{
   buscar() {
     let errores = 0;
     this.usuarioEncontrado = false;
-    this.errorMismoRol= false;
-    this.errorContactoExistente= false;
-    this.errorUsuarioConProfesionales= false;
-    this.errorEntrenadorExistente= false;
-    this.errorNutricionistaExistente= false;
-    this.errorSoloAtletas= false;
-    this.errorPeticionEnviada= false;
-    this.errorPeticionEsperando= false;
+    this.errorMismoRol = false;
+    this.errorContactoExistente = false;
+    this.errorUsuarioConProfesionales = false;
+    this.errorEntrenadorExistente = false;
+    this.errorNutricionistaExistente = false;
+    this.errorSoloAtletas = false;
+    this.errorPeticionEnviada = false;
+    this.errorPeticionEsperando = false;
     this.usuarioBuscado = this.listaUsuarios.find((usuario: { username: any; }) => usuario.username.toLowerCase() == this.busqueda.toLowerCase());
 
     if ((this.usuarioBuscado.trainer && this.userLoged.rol == "TRA") || (this.usuarioBuscado.nutritionist && this.userLoged.rol == "NUT")) {
       this.errorUsuarioConProfesionales = true;
     } else {
       for (let peticion of this.listaPeticiones) {
-        if(this.usuarioBuscado.id == peticion.id_recibido && peticion.id_enviado == this.userLoged.id) {
+        if (this.usuarioBuscado.id == peticion.id_recibido && peticion.id_enviado == this.userLoged.id) {
           this.errorPeticionEnviada = true;
           errores++;
         }
-        if(this.usuarioBuscado.id == peticion.id_enviado && peticion.id_recibido == this.userLoged.id) {
+        if (this.usuarioBuscado.id == peticion.id_enviado && peticion.id_recibido == this.userLoged.id) {
           this.errorPeticionEsperando = true;
           errores++;
         }
@@ -148,28 +152,26 @@ export class AmistadesComponent implements OnInit{
         if (this.usuarioBuscado.username == this.entrenador[0].username || this.usuarioBuscado.username == this.nutricionista[0].username) {
           this.errorContactoExistente = true;
           errores++;
+        } else if (this.usuarioBuscado.rol == 'TRA' && this.entrenador[0].username !== undefined) {
+          this.errorEntrenadorExistente = true;
+          errores++;
+        } else if (this.usuarioBuscado.rol == 'NUT' && this.nutricionista[0].username !== undefined) {
+          this.errorNutricionistaExistente = true;
+          errores++;
+        } else if (this.usuarioBuscado && errores == 0) {
+          switch (this.usuarioBuscado.rol) {
+            case 'ATH':
+              this.rol = 'Atleta';
+              break;
+            case 'TRA':
+              this.rol = 'Entrenador';
+              break;
+            case 'NUT':
+              this.rol = 'Nutricionista';
+          }
+          this.usuarioEncontrado = true;
         }
-
-      } else if (this.usuarioBuscado.rol == 'TRA' && this.entrenador) {
-        this.errorEntrenadorExistente = true;
-        errores++;
-      } else if (this.usuarioBuscado.rol == 'NUT' && this.nutricionista) {
-        this.errorNutricionistaExistente = true;
-        errores++;
-      } else if (this.usuarioBuscado && errores == 0) {
-        switch (this.usuarioBuscado.rol) {
-          case 'ATH':
-            this.rol = 'Atleta';
-            break;
-          case 'TRA':
-            this.rol = 'Entrenador';
-            break;
-          case 'NUT':
-            this.rol = 'Nutricionista';
-        }
-        this.usuarioEncontrado = true;
       }
-      console.log(this.usuarioBuscado);
     }
   }
 
@@ -183,7 +185,6 @@ export class AmistadesComponent implements OnInit{
         this.entrenador = null;
         this.userLoged = updatedUser[0];
         sessionStorage.setItem("auth", JSON.stringify(this.userLoged))
-        console.log(this.userLoged);
       });
   }
 
@@ -197,10 +198,9 @@ export class AmistadesComponent implements OnInit{
         this.nutricionista = null;
         this.userLoged = updatedUser[0];
         sessionStorage.setItem("auth", JSON.stringify(this.userLoged))
-        console.log(this.userLoged);
       });
   }
-  
+
 
   async enviarPeticion() {
     await this.insertContacto();
@@ -208,6 +208,6 @@ export class AmistadesComponent implements OnInit{
     this.usuarioBuscado = '';
     this.usuarioEncontrado = false;
   }
-  
+
 
 }

@@ -220,7 +220,6 @@ export class FormEntrenoComponent {
   async getListaDeportes() {
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
-    console.log(this.listaDeportes);
   }
 
   async updateEntreno() {
@@ -261,7 +260,6 @@ export class FormEntrenoComponent {
     this.successAlert= false;
     this.errorAlert= false;
     this.deleteAlert= false;
-    console.log(this.numeroErrores);
     this.checkErrores();
     if (this.numeroErrores == 0) {
       this.errorAlert = false;

@@ -18,7 +18,6 @@ export class UserInfoComponent {
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.params['id'];
     this.getUser();
-    console.log(this.idUser)
   }
 
   // Consulta de los clientes del entrenador
@@ -26,7 +25,6 @@ export class UserInfoComponent {
     const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': this.idUser }) });
     this.userInfo = await response.json();
     this.userInfo = this.userInfo[0];
-    console.log(this.userInfo);
   }
 
   /// FUNCIONES ///

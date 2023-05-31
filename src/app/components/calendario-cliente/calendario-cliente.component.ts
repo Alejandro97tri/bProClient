@@ -52,7 +52,6 @@ export class CalendarioClienteComponent {
   
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.params['id'];
-    console.log(this.idUser);
     
     this.generateCalendar();
     this.getListaEntrenos();
@@ -74,13 +73,11 @@ export class CalendarioClienteComponent {
   async getListaEntrenos(){
     const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.idUser})});
     this.listaEntrenos = await response.json();
-    console.log(this.listaEntrenos);
   }
 
   async getListaNutricion(){
     const response = await fetch('https://btop.es/server/homeListaNutricionAtleta.php', { method: 'POST', body: JSON.stringify({'id': this.idUser})});
     this.listaNutricion = await response.json();
-    console.log(this.listaNutricion);
   }
 
   /// FUNCIONES ///

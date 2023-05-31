@@ -52,11 +52,9 @@ export class HomeCoachComponent implements OnInit {
 
   async getUser() {
     for (const element of this.listaPeticiones) {
-      console.log(element.id_enviado);
       const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': element.id_enviado }) });
       const userInfo = await response.json();
       this.infoUserEnvia.push(userInfo);
-      console.log(this.infoUserEnvia);
     }
   }
 
@@ -71,7 +69,6 @@ export class HomeCoachComponent implements OnInit {
     } else {
       this.peticiones = false;
     }
-    console.log(this.listaPeticiones, 'Peticiones');
   }
 
   // Consulta de los clientes del entrenador
@@ -81,7 +78,6 @@ export class HomeCoachComponent implements OnInit {
     if (this.listaAtletas.length == 0) {
       this.clientesEmpty = true;
     }
-    console.log(this.listaAtletas);
   }
 
   // Consulta de las actividades de hoy de los clientes del entrenador
@@ -94,15 +90,12 @@ export class HomeCoachComponent implements OnInit {
     if (this.listaActividades.length == 0) {
       this.actividadesEmpty = true;
     }
-    console.log(this.listaActividadesAtletas)
-    console.log(this.listaActividades.length);
   }
 
   // Consulta de la lista de deportes
   async getListaDeportes() {
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
-    console.log(this.listaDeportes);
   }
 
   /// FUNCIONES ///

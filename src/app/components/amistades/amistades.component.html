@@ -11,14 +11,14 @@
         </div>
         <div class="row bg-dark mb-3 rounded-2">
             <div class="col-lg-12 my-3">
-                <div *ngIf="!entrenador && !nutricionista" class="row">
+                <div *ngIf="entrenador[0].nombre === ''  && nutricionista[0].nombre === ''" class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 py-3">
                         <p class="text-white">Todavía no tienes contactos</p>
                     </div>
                 </div>
                 <div *ngIf="entrenador || nutricionista"
                     class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
-                    <div *ngIf="entrenador"
+                    <div *ngIf="entrenador[0].nombre !== ''"
                         class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
                         <div class="col-lg-2 my-2">
                             <div class="icono-cliente rounded-2">
@@ -37,7 +37,7 @@
                             <button class="btn btn-danger rounded-1" type="button" (click)="eliminarEntrenador()">Eliminar entrenador</button>
                         </div>
                     </div>
-                    <div *ngIf="nutricionista"
+                    <div *ngIf="nutricionista[0].nombre !== ''"
                         class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
                         <div class="col-lg-2 my-2">
                             <div class="icono-cliente rounded-2">
@@ -85,7 +85,7 @@
                         <div class="col-lg-6 my-2 pt-3">
                             <p class="text-white">{{usuarioBuscado.nombre}} {{usuarioBuscado.apellidos}} - {{rol}}
                             </p>
-                            <!-- <p class="text-white">{{calcularEdad(user.fecha_nacimiento)}} años</p> -->
+
                         </div>
                         <div class="col-lg-4 d-grid gap-2 my-2">
                             <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar petición</button>

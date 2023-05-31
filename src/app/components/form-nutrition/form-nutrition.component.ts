@@ -423,10 +423,6 @@ export class FormNutritionComponent {
     this.successAlert= false;
     this.deleteAlert= false;
     this.errorAlert= false;
-    console.log(this.hora);
-    console.log(this.kcal);
-    console.log(this.descripcion);
-    console.log(this.fecha);
     this.checkErrores();
     if (this.numeroErrores == 0) {
       this.errorAlert = false;
@@ -531,7 +527,6 @@ export class FormNutritionComponent {
     }
 
     if (this.kcal !== undefined && this.kcal !== '' && !regexNumeros.test(this.kcal)) {
-      console.log(this.kcal);
         this.errores.kcalErrorFormato = 'Las calorías deben ser un números';
         this.numeroErrores++;
     

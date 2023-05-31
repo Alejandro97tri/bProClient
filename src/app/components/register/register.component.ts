@@ -60,7 +60,6 @@ export class RegisterComponent {
   async getListaDeportes() {
     const response = await fetch('https://btop.es/server/listaDeportes.php', { method: 'POST' });
     this.listaDeportes = await response.json();
-    console.log(this.listaDeportes);
     
   }
   

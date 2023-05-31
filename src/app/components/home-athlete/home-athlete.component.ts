@@ -69,11 +69,9 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
 
   async getUser() {
     for (const element of this.listaPeticiones) {
-      console.log(element.id_enviado);
       const response = await fetch('https://btop.es/server/userInfo.php', { method: 'POST', body: JSON.stringify({ 'id': element.id_enviado }) });
       const userInfo = await response.json();
       this.infoUserEnvia.push(userInfo);
-      console.log(this.infoUserEnvia);
     }
   }
 
@@ -88,20 +86,17 @@ export class HomeAthleteComponent implements OnInit, OnChanges {
     } else{
       this.peticiones = false;
     }
-    console.log(this.listaPeticiones, 'Peticiones');
   }
 
 
   async getListaEntrenos() {
     const response = await fetch('https://btop.es/server/homeListaActividadesAtleta.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaEntrenos = await response.json();
-    console.log(this.listaEntrenos);
   }
 
   async getListaNutricion() {
     const response = await fetch('https://btop.es/server/homeListaNutricionAtleta.php', { method: 'POST', body: JSON.stringify({ 'id': this.userLoged.id }) });
     this.listaNutricion = await response.json();
-    console.log(this.listaNutricion);
   }
 
   /// FUNCIONES ///

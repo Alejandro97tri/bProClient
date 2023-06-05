@@ -17,44 +17,51 @@
                     </div>
                 </div>
                 <div *ngIf="entrenador || nutricionista"
-                    class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-2">
+                    class="row bg-dark d-flex rounded-3 mt-2">
                     <div *ngIf="entrenador[0].nombre !== ''"
-                        class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
-                        <div class="col-lg-2 my-2">
-                            <div class="icono-cliente rounded-2">
-                                <span class="d-flex align-items-center justify-content-center pt-2">
-                                    <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path
-                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                                    </svg>
-                                </span>
+                        class="col-lg-6 col-md-12 col-sm-12 my-2  rounded-3 mt-2">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-4 col-sm-2 my-2">
+                                <div class="icono-cliente rounded-2">
+                                    <span class="d-flex align-items-center justify-content-center pt-2">
+                                        <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                            <path
+                                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7 my-2 pt-3">
-                            <p class="text-white">{{entrenador[0].nombre}} {{entrenador[0].apellidos}} - Entrenador</p>
-                        </div>
-                        <div class="col-lg-3 d-grid gap-2 my-2">
-                            <button class="btn btn-danger rounded-1" type="button" (click)="eliminarEntrenador()">Eliminar entrenador</button>
+                            <div class="col-lg-7 col-md-8 col-sm-10 my-2 pt-3">
+                                <p class="text-white">{{entrenador[0].nombre}} {{entrenador[0].apellidos}} - Entrenador
+                                </p>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 d-grid gap-2 my-2">
+                                <button class="btn btn-danger rounded-1" type="button"
+                                    (click)="eliminarEntrenador()">Eliminar entrenador</button>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="nutricionista[0].nombre !== ''"
-                        class="col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
-                        <div class="col-lg-2 my-2">
-                            <div class="icono-cliente rounded-2">
-                                <span class="d-flex align-items-center justify-content-center pt-2">
-                                    <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path
-                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                                    </svg>
-                                </span>
+                        class="col-lg-6 col-md-12 col-sm-12 my-2  rounded-3 mt-2">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-4 col-sm-2 my-2">
+                                <div class="icono-cliente rounded-2">
+                                    <span class="d-flex align-items-center justify-content-center pt-2">
+                                        <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                            <path
+                                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7 my-2 pt-3">
-                            <p class="text-white">{{nutricionista[0].nombre}} {{nutricionista[0].apellidos}} -
-                                Nutricionista</p>
-                        </div>
-                        <div class="col-lg-3 d-grid gap-2 my-2">
-                            <button class="btn btn-lg btn-danger rounded-1" type="button" (click)="eliminarNutricionista()">Eliminar nutricionista</button>
+                            <div class="col-lg-7 col-md-8 col-sm-10 my-2 pt-3">
+                                <p class="text-white">{{nutricionista[0].nombre}} {{nutricionista[0].apellidos}} -
+                                    Nutricionista</p>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 d-grid gap-2 my-2">
+                                <button class="btn btn-lg btn-danger rounded-1" type="button"
+                                    (click)="eliminarNutricionista()">Eliminar nutricionista</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +95,8 @@
 
                         </div>
                         <div class="col-lg-4 d-grid gap-2 my-2">
-                            <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar petición</button>
+                            <button class="btn btn-success rounded-1" type="button" (click)="enviarPeticion()">Enviar
+                                petición</button>
                         </div>
                     </div>
                     <div *ngIf="errorMismoRol || 
@@ -101,14 +109,21 @@
                                 errorPeticionEsperando"
                         class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-5">
                         <div class="col-lg-12 my-2">
-                            <p *ngIf="errorMismoRol" class="text-white">No puedes añadir un usuario de tu mismo rol (Atleta, Entrenador o Nutricionista)</p>
-                            <p *ngIf="errorContactoExistente" class="text-white">No puedes añadir un contacto que ya tienes</p>
-                            <p *ngIf="errorEntrenadorExistente" class="text-white">No puedes añadir un entrenador si ya tienes uno, elimina el actual previamente</p>
-                            <p *ngIf="errorNutricionistaExistente" class="text-white">No puedes añadir un nutricionista si ya tienes uno, elimina el actual previamente</p>
-                            <p *ngIf="errorUsuarioConProfesionales" class="text-white">No puedes añadir un deportista si que ya dispone de entrenador o nutricionista, debe eliminarlo previamente</p>
+                            <p *ngIf="errorMismoRol" class="text-white">No puedes añadir un usuario de tu mismo rol
+                                (Atleta, Entrenador o Nutricionista)</p>
+                            <p *ngIf="errorContactoExistente" class="text-white">No puedes añadir un contacto que ya
+                                tienes</p>
+                            <p *ngIf="errorEntrenadorExistente" class="text-white">No puedes añadir un entrenador si ya
+                                tienes uno, elimina el actual previamente</p>
+                            <p *ngIf="errorNutricionistaExistente" class="text-white">No puedes añadir un nutricionista
+                                si ya tienes uno, elimina el actual previamente</p>
+                            <p *ngIf="errorUsuarioConProfesionales" class="text-white">No puedes añadir un deportista si
+                                que ya dispone de entrenador o nutricionista, debe eliminarlo previamente</p>
                             <p *ngIf="errorSoloAtletas" class="text-white">Solo puedes añadir deportistas</p>
-                            <p *ngIf="errorPeticionEnviada" class="text-white">No puedes volver a mandar la petición al mismo usuario, espera que la acepte o deniegue</p>
-                            <p *ngIf="errorPeticionEsperando" class="text-white">El usuario que buscas ya te ha mandado la petición</p>
+                            <p *ngIf="errorPeticionEnviada" class="text-white">No puedes volver a mandar la petición al
+                                mismo usuario, espera que la acepte o deniegue</p>
+                            <p *ngIf="errorPeticionEsperando" class="text-white">El usuario que buscas ya te ha mandado
+                                la petición</p>
                         </div>
                     </div>
                 </div>

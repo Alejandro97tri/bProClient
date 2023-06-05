@@ -34,6 +34,8 @@ export class DetalleDiaComponent implements OnInit{
     if (session !== null) {
       this.userLoged = JSON.parse(session);
     }
+    console.log(this.userLoged.rol);
+    
     this.id = this.rutaActiva.snapshot.params['id'];
     this.day = this.rutaActiva.snapshot.params['dia'];
     this.mes = this.rutaActiva.snapshot.params['mes'];
@@ -44,7 +46,9 @@ export class DetalleDiaComponent implements OnInit{
   ngOnInit(): void {
     this.getListaEntrenos();
     this.getListaDeportes();
-    this.getListaNutricion();    
+    this.getListaNutricion();   
+    this.compareDates(this.date);
+    console.log(this.userLoged.rol); 
   }
   
 

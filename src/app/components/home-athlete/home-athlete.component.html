@@ -1,11 +1,12 @@
 <div class="row mx-4 mt-4">
-    <div class="col-lg-12 bg-light rounded-2">
-        <div *ngIf="peticiones" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 m-3 fadeIn">
+    <div class="col-lg-12 bg-light pb-3">
+        <div *ngIf="peticiones" class="row bg-dark d-flex align-items-center justify-content-center rounded-3 mt-3 fadeIn">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12 pt-3">
                 <p class="text-white">Tienes peticiones de amistad</p>
             </div>
-            <div *ngFor="let user of infoUserEnvia" class=" col-lg-6 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
-                <div class="col-lg-2 my-2">
+            <div *ngFor="let user of infoUserEnvia" class=" col-lg-6 col-md-12 col-sm-12 my-2 my-2 d-flex align-items-center justify-content-center rounded-3 mt-2">
+                <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-2 my-2">
                     <div class="icono-cliente rounded-2">
                         <span class="d-flex align-items-center justify-content-center pt-2">
                             <svg class="svg-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -15,18 +16,19 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-lg-6 my-2 pt-3">
+                <div class="col-lg-6 col-md-8 col-sm-10 my-2 pt-3">
                      <p class="text-white">{{user[0].nombre}} {{user[0].apellidos}} - 
                         <ng-container *ngIf="user[0].rol == 'TRA'"> Entrenador</ng-container> 
                         <ng-container *ngIf="user[0].rol == 'ATH'"> Atleta</ng-container>
                         <ng-container *ngIf="user[0].rol == 'NUT'"> Nutricionista</ng-container></p>
                 </div>
-                <div class="col-lg-2 d-grid gap-2 my-2">
+                <div class="col-lg-2 col-md-12 col-sm-12 d-grid gap-2 my-2">
                     <button class="btn btn-success rounded-1 me-2" type="button" (click)="aceptar(user[0].id, user[0].rol)">Aceptar</button>
                 </div>
-                <div class="col-lg-2 d-grid gap-2 my-2">
+                <div class="col-lg-2 col-md-12 col-sm-12 d-grid gap-2 my-2">
                     <button class="btn btn-danger rounded-1" type="button" (click)="denegar(user[0].id)">Denegar</button>
                 </div>
+            </div>
             </div>
         </div>
     </div>
